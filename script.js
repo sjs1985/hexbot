@@ -403,22 +403,25 @@ function executeInstallSoftware(request){
 			if (request.ip.length > 0){
 
 				if (getSomeElement("a", "href", "?view=logout", 0) == null){
+					/* This code is slow.
 					getSomeElement("input", "class", "browser-bar", 0).value = request.ip.pop(); //Fill IP Adress bar
 					setNextStep(request, "goToServerTab");
 					getSomeElement("input", "type", "submit", 0).click(); //Click on Go button
+					*/
+					goToPage( "/internet?ip=request.ip.pop()" );
 		 		} else {
 		 			setNextStep(request, "fillIPOnInternetPage");
 		 			getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
 		 		}
 		 	} else {
-		 		window.alert("There is no a ip avaiable");
+		 		window.alert("There is not an ip avaiable");
 		 	}
 			break;
 		case "goToServerTab":
 		if ((getSomeElement("div", "class", "alert alert-error", 0) == null) &&
 			(getSomeElement("a", "href", "?action=login", 0) != null)){
 				setNextStep(request, "signInKnownServer");
-		 		getSomeElement("a", "href",	"?action=login", 0).click(); //Click on the server login tab
+		 		//getSomeElement("a", "href",	"?action=login", 0).click(); //Click on the server login tab
 		 	} else {
 		 		if (request.ip.length >= 1){
 		 			if (request.ip.length == 0){
@@ -530,7 +533,8 @@ function executeInstallSoftware(request){
 			if (getSomeElement("div", "class", "alert alert-error", 0) == null){
 				
 			} else {
-				getSomeElement("a", "href", "?view=logs", 0).click(); //Reload Page
+				//getSomeElement("a", "href", "?view=logs", 0).click(); //Reload Page
+				goToPage("/internet?view=logs");
 			}
 			break;
 		case "goToSoftwareTab":
@@ -544,7 +548,8 @@ function executeInstallSoftware(request){
 				goToPage("/internet?view=software&cmd=install&id=" + softwareId);
 			} else {
 				setNextStep(request, "finishCycle");
-				getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				goToPage('/internet?view=logout');
 			}
 			break;
 		case "waitForInstallSoftware":
@@ -552,16 +557,19 @@ function executeInstallSoftware(request){
 				setNextStep(request, "goToLog-3");
 			} else {
 				setNextStep(request, "finishCycle");
-				getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				goToPage("/internet?view=logout");
 			}
 			break;
 		case "goToLog-3":
 			if (getSomeElement("div", "class", "alert alert-error", 0) == null){
 				setNextStep(request, "clearLog-3");
-				getSomeElement("a", "href", "?view=logs", 0).click(); //Go to logs
+				//getSomeElement("a", "href", "?view=logs", 0).click(); //Go to logs
+				goToPage("/internet?view=logs");
 			} else {
 				setNextStep(request, "finishCycle");
-				getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				goToPage("/internet?view=logout");
 			}
 			break;
 		case "clearLog-3":
@@ -576,7 +584,8 @@ function executeInstallSoftware(request){
 			if (getSomeElement("div", "class", "alert alert-error", 0) == null){
 				
 			} else {
-				getSomeElement("a", "href", "?view=logs", 0).click(); //Reload Page
+				//getSomeElement("a", "href", "?view=logs", 0).click(); //Reload Page
+				goToPage("/internet?view=logs");
 			}
 			break;	
 		case "goToSoftwareTab2":
@@ -591,7 +600,8 @@ function executeInstallSoftware(request){
 				goToPage("/internet?view=software&cmd=hide&id=" + softwareId);
 			} else {
 				setNextStep(request, "finishCycle");
-				getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				goToPage("/internet?view=logout");
 			}
 			break;
 		case "waitForHideProcess":
@@ -599,16 +609,19 @@ function executeInstallSoftware(request){
 				setNextStep(request, "goToLog-2");
 			} else {
 				setNextStep(request, "finishCycle");
-				getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				goToPage("/internet?view=logout");
 			}
 			break;
 		case "goToLog-2":
 			if (getSomeElement("div", "class", "alert alert-error", 0) == null){
 				setNextStep(request, "clearLog-2");
-				getSomeElement("a", "href", "?view=logs", 0).click(); //Go to logs
+				//getSomeElement("a", "href", "?view=logs", 0).click(); //Go to logs
+				goToPage("/internet?view=logs");
 			} else {
 				setNextStep(request, "finishCycle");
-				getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+				goToPage("/internet?view=logout");
 			}
 			break;
 		case "clearLog-2":
@@ -628,7 +641,8 @@ function executeInstallSoftware(request){
 			break;
 		case "logOutServer":
 			setNextStep(request, "finishCycle");
-			getSomeElement("a", "href", "?view=logout", 0).click(); 
+			//getSomeElement("a", "href", "?view=logout", 0).click(); 
+			goToPage("/internet?view=logout");
 			break;
 		case "goToMyOwnLog":
 		 	setNextStep(request, "cleanOwnLog");
@@ -685,13 +699,15 @@ function executeCampingStep(request){
 				getSomeElement("input", "type", "submit", 0).click(); //Click on Go button
 		 	} else {
 		 		setNextStep(request, "fillIPOnInternetPage");
-		 		getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+		 		//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+		 		goToPage("/internet?view=logout");
 		 	}
 			break;
 		case "goToServerTab":
 			if (getSomeElement("div", "class", "alert alert-error", 0) == null){
 				setNextStep(request, "signInKnownServer");
-		 		getSomeElement("a", "href",	"?action=login", 0).click(); //Click on the server login tab
+		 		//getSomeElement("a", "href",	"?action=login", 0).click(); //Click on the server login tab
+		 		goToPage("/internet?view=login");
 		 	} else {
 		 		window.alert("Hey, it's a bad ip!");
 		 		request.job = defaultJob.checkBalance;
@@ -761,7 +777,8 @@ function executeCampingStep(request){
 			if (getSomeElement("div", "class", "alert alert-error", 0) == null){
 				//Do nothing
 			} else {
-				getSomeElement("a", "href", "?view=logs", 0).click(); //reload the log page
+				//getSomeElement("a", "href", "?view=logs", 0).click(); //reload the log page
+				goToPage("/internet?view=logs");
 			}
 			break;
 		case "listenForActivities":
@@ -789,7 +806,8 @@ function executeCampingStep(request){
 							getSomeElement("input", "type", "submit", 1).click(); //Click on the Edit Log Data ButtongoToPage("/missions");	
 						} else {
 							setNextStep(request, "listenForActivities");
-							getSomeElement("a", "href", "?view=logs", 0).click();
+							//getSomeElement("a", "href", "?view=logs", 0).click();
+							goToPage("/internet?view=logs");
 						}
 		 			}
 		 		}, 1000); //Wait the specified time on the page
@@ -805,12 +823,14 @@ function executeCampingStep(request){
 			if (getSomeElement("div", "class", "alert alert-error", 0) == null){
 				//Do nothing
 			} else {
-				getSomeElement("a", "href", "?view=logs", 0).click();
+				//getSomeElement("a", "href", "?view=logs", 0).click();
+				goToPage("/internet?view=logs");
 			}
 			break;
 		case "startExtractMoney":
 			setNextStep(request, "acessBankIP");
-			getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+			//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+			goToPage("/internet?view=logout");
 			break;
 		case "acessBankIP":
 			setNextStep(request, "accessHackAccountTab");
@@ -886,7 +906,8 @@ function executeCampingStep(request){
 		 		break;
 		 case "goOutToTheAccount":
 		 	setNextStep(request, "goToServerTab");
-		 	getSomeElement("a", "href", "?bAction=logout", 0).click(); //Click on the account logout button	
+		 	//getSomeElement("a", "href", "?bAction=logout", 0).click(); //Click on the account logout button	
+		 	goToPage("/internet?bAction=logout");
 		 	break;
 		 case "goToMyOwnLog":
 		 	setNextStep(request, "cleanOwnLog");
@@ -1084,7 +1105,8 @@ function executeMissionStep(request){
 				getSomeElement("input", "type", "submit", 0).click(); //Click on Go button
 		 	} else {
 		 		setNextStep(request, "fillIPOnInternetPage");
-		 		getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+		 		//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout Button
+		 		goToPage("/internet?view=logout");
 		 	}
 			break;
 		 case "accessHackAccountTab":
@@ -1127,7 +1149,8 @@ function executeMissionStep(request){
 		 case "getTheAccountBalance":
 		 	request.amount = getSomeElement("strong", null, null, 0).childNodes[0].nodeValue; //Get the account balance
 			setNextStep(request, "goToServerTab");
-			getSomeElement("a", "href", "?bAction=logout", 0).click(); //Click on the account logout button
+			//getSomeElement("a", "href", "?bAction=logout", 0).click(); //Click on the account logout button
+			goToPage("/internet?bAction=logout");
 		 	break;
 		 case "transferMoney":
 		 	counterDelay = 0;
@@ -1207,7 +1230,8 @@ function executeMissionStep(request){
 
 		 		default: break;	
 		 	}
-		 	getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout button	
+		 	//getSomeElement("a", "href", "?view=logout", 0).click(); //Click on the Logout button	
+		 	goToPage("/internet?view=logOut");
 		 	
 		 	break;
 		 case "fillIPOnInternetPage-SecondServer":

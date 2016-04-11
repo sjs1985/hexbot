@@ -29,7 +29,7 @@
 	//Recommended
 	"content_scripts":[
 		{
-			"matches": ["https://br.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
+			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
 			"js": ["script.js"]
 		}
 	],

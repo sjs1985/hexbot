@@ -1,11 +1,10 @@
 # hexbot
-HEx Bot - Hacker Experience BOT
-It runs over pure javascript. JQuery is NOT required.
+HEx Bot - Hacker Experience BOT It runs over pure javascript. JQuery is NOT required.
 
-This must be installed as a Chrome Extension. 
+This must be installed as a Chrome Extension.
 
-Funcionalities.
+Funcionalities:
 * Solve all riddles/puzzles (NEW);
 * Performs game missions;
 * Intercepts bank transactions;
-* Performs broadcast uploads. 
+* Performs broadcast uploads.

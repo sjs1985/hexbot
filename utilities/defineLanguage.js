@@ -1,8 +1,16 @@
+
 //This analyses the url and defines the language
-function defineLanguage(request) {
-    //Should make it redirect to the desired language? idek
-    //This semi fix works around it though.
-    request.language = 1;
-    request.act = defaultAct.setRequestData;
-    sendRequest(request);
+function defineLanguage(request){
+	switch(window.location.href.split("/")[2].split(".")[0]){
+		case "br":
+			request.language = 0;
+			break;
+		case "en":
+			request.language = 1;
+			break;
+		default:
+			request.language = 1;
+	}
+	request.act = defaultAct.setRequestData;
+	sendRequest(request);
 }

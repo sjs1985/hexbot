@@ -36,15 +36,15 @@
 						"bank/executeCampingStep.js",
 						"elements/getSomeElement.js",
 						"logs/extractDataFromLogs.js",
-						"missions/executeMissionStep.js"
-						"missions/getMissionInformation.js"
-						"missions/getSomeMission.js"
-						"missions/setNextStep.js"
-						"request/handleRequest.js"
-						"request/resetRequestDada.js"
-						"request/sendRequest.js"
-						"request/showRequest.js"
-						"softwares/executeInstallSoftware.js"
+						"missions/executeMissionStep.js",
+						"missions/getMissionInformation.js",
+						"missions/getSomeMission.js",
+						"missions/setNextStep.js",
+						"request/handleRequest.js",
+						"request/resetRequestDada.js",
+						"request/sendRequest.js",
+						"request/showRequest.js",
+						"softwares/executeInstallSoftware.js",
 						"softwares/getSoftwareId.js"
 					]
 		}

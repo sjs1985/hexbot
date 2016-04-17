@@ -1,6 +1,6 @@
 //It gets all information about current mission
 function getMissionInformation(request) {
-    Get the mission IPs
+    //Get the mission IPs
     var element = document.getElementsByClassName(black);
     var aux;
     var countFound = 0;

@@ -4,7 +4,13 @@ HEx Bot - Hacker Experience BOT It runs over pure javascript. JQuery is NOT requ
 This must be installed as a Chrome Extension.
 
 Funcionalities:
-* Solve all riddles/puzzles (NEW);
+* Solve riddles/puzzles (NEW);
 * Performs game missions;
 * Intercepts bank transactions;
 * Performs broadcast uploads.
+
+
+
+
+
+

@@ -394,7 +394,7 @@ function executeInstallSoftware(request){
 				setNextStep(request, "fillIPOnInternetPage");
 				goToPage("/internet");	
 			} else {
-				window.alert("There is no any software like the specified :( >" + request.software.split(",")[0] + "::" + request.software.split(",")[1] + "<");
+				window.alert("There is no any software like the specified: " + request.software.split(",")[0] + ", " + request.software.split(",")[1]);
 				setNextStep(request, "finishAll");
 				location.reload(true)
 			}
@@ -941,13 +941,18 @@ function executeMissionStep(request){
 		 		'<button id="set-transfer-money-job" class="btn btn-success">Perform transfer money missions</button><br><br>'+
 				'<button id="set-cleaner" class="btn btn-success"> Clean your logs </button> '+
 			  	'<button id="set-victim-cleaner" class="btn btn-success"> Clean victim logs </button> '+
-				'<button id="set-cleanlogin" class="btn btn-success"> Clean login/hack </button><br><br><br>'+
+				'<button id="set-cleanlogin" class="btn btn-success"> Clean login/hack </button> ' +
+				'<button id="set-infosolveriddles" class="btn btn-success"> Solve puzzles </button><br><br><br>'+
 		 		'<button id="set-camping-bank-logs" class="btn btn-success"> Listen transfer bank logs on </button>'+
 		 		'<input id="target-bank-ip" class="controls" type="text" value="{IP OF BANK}" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> and transfer to my account: <input id="set-my-account" class="controls" type="text" value="{BANKING ID}" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"><br><br>'+
 		 		'<button id="set-install-software" class="btn btn-success"> Upload, install and hide this</button>'+
 		 		'<input id="installSoftware" class="controls" type="text" value="{MALWARE NAME}, {VERSION}" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> software on these <input id="ip-install-targets" class="controls" type="text" value="{IP OF VICTIM}, {IP OF VICTIM}" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"> IPs.<br>';+
-            '</div>'
+            '</div>';
+
 		 	document.getElementsByTagName("BODY")[0].appendChild(aux);
+		 	document.getElementById("set-infosolveriddles").onclick = function(){
+            	window.alert("Everything is ready to use.\nThere is a red button on every puzzle page. Just click on it. :)");
+            };
 		 	document.getElementById("set-check-account-status-job").onclick = function(){
 		 		request.job = defaultJob.checkBalance;
 				setNextStep(request, "tryToGetSomeMission");
@@ -1378,6 +1383,357 @@ function executeMissionStep(request){
 	}
 }
 
+
+//#################################################################
+//####################BEGIN API RIDDLE HANDLE######################
+//#################################################################
+
+/*
+  Language constant ids
+*/
+const LANG_EN = "en";
+const LANG_BR = "br";
+const LANGUAGES = [LANG_EN, LANG_BR];
+
+/*
+  Puzzle constant ids
+*/
+const PUZZLE_TICTT = 0;
+const PUZZLE_MESSYD = 1;
+const PUZZLE_VOLCANO = 2;
+const PUZZLE_HIDDENN = 3;
+const PUZZLE_HOTDOGS = 4;
+const PUZZLE_COORD = 5;
+const PUZZLE_PROPORT = 6;
+const PUZZLE_BINHE = 7;
+const PUZZLE_SNEAKERS = 8;
+const PUZZLE_SUDOKU = 9;
+const PUZZLE_2048 = 10;
+const PUZZLE_JOBS = 11;
+const PUZZLE_3MUSK = 12;
+const PUZZLE_CHOCO = 13;
+const PUZZLE_DRIEDPO = 14;
+const PUZZLE_CRAZYBANK = 15;
+const PUZZLE_MINES = 16;
+const PUZZLE_LITTLEL = 17;
+const PUZZLE_BIRDSC = 18;
+const PUZZLE_SWIMM = 19;
+const PUZZLE_WHALE = 20;
+const PUZZLE_BIRDW = 21;
+const PUZZLE_N100 = 22;
+const PUZZLE_CROC = 23;
+const PUZZLE_PREMIUM = 24;
+const PUZZLE_SHEEPS = 25;
+const PUZZLE_2BNOT2B = 26;
+const PUZZLE_LIGHTS = 27;
+
+
+/*
+  Puzzle descriptor
+*/
+var puzzle_descriptor = [
+  {id:PUZZLE_TICTT, names:["Tic Tac Toe","Jogo da Velha"]},
+  {id:PUZZLE_MESSYD, names:["Messy Drawer","Gaveta Bagunçada"]},
+  {id:PUZZLE_VOLCANO, names:["name of the volcanö","nome do vulcãö"]},
+  {id:PUZZLE_HIDDENN, names:["Hidden Numbers","Números Ocultos"]},
+  {id:PUZZLE_HOTDOGS, names:["Hot Dogs","Cachorros Quentes"]},
+  {id:PUZZLE_COORD, names:["37.2350° N, 115.8111° W"]},
+  {id:PUZZLE_PROPORT, names:["Proportions", "Proporções"]},
+  {id:PUZZLE_BINHE, names:["072 097 099 107 101 114"]},
+  {id:PUZZLE_SNEAKERS, names:["Setec Astronomy"]},
+  {id:PUZZLE_SUDOKU, names:["Sudoku"]},
+  {id:PUZZLE_2048, names:["2048 was developed by", "2048 foi desenvolvido por"]},
+  {id:PUZZLE_JOBS, names:["01010011 01110100 01100001"]},
+  {id:PUZZLE_3MUSK, names:["In Alexander Dumas' book", "No livro de Alexander Dumas"]},
+  {id:PUZZLE_CHOCO, names:["Fat Boys", "Barras de Chocolate"]},
+  {id:PUZZLE_DRIEDPO, names:["Dried Potatoes", "Batatas Malucas"]},
+  {id:PUZZLE_CRAZYBANK, names:["Crazy Banker", "Banqueiro maluco"]},
+  {id:PUZZLE_MINES, names:["Minesweeper", "Campo minado"]},
+  {id:PUZZLE_LITTLEL, names:["Little Liars", "Competidores mentirosos"]},
+  {id:PUZZLE_BIRDSC, names:["Birds And Cages", "Canários e Gaiolas"]},
+  {id:PUZZLE_SWIMM, names:["Swimmers", "Medalhistas da natação"]},
+  {id:PUZZLE_WHALE, names:["The Whale", "A Baleia"]},
+  {id:PUZZLE_BIRDW, names:["Birdwatching", "Observando pássaros"]},
+  {id:PUZZLE_N100, names:["Number 100", "Número 100"]},
+  {id:PUZZLE_CROC, names:["Crocodiles", "Criadores de Jacarés"]},
+  {id:PUZZLE_PREMIUM, names:["∀x Player(x)", "∀x Jogador(x)"]},
+  {id:PUZZLE_SHEEPS, names:["Sheeps and Chickens", "Ovelhas e Galinhas"]},
+  {id:PUZZLE_2BNOT2B, names:["/bb|[^b]{2}/"]},
+  {id:PUZZLE_LIGHTS, names:["Lights Out"]}
+]
+
+
+/*
+  Environment settings
+*/
+var environment_settings = {
+  detected_lang: {String}
+}
+
+/*
+  @prototype: strposOfArray(text, array);
+  @definition: This function check if there are any matches in the text to array values;
+  @author: GRSa;
+  @parameters:
+    *text (String): The string to search in;
+    *array (Array): The values to search fo;
+  @return: 
+    *default: (Integer) Returns the position of where the occurence exists relative to the beginning (0) of the text string. Returns -1 if occurence was not found;
+    *error: (null) Returns null if there is parameter problem;
+*/
+function strposOfArray(text, array){
+  if ((typeof text === "string") && (Object.prototype.toString.call(array) === "[object Array]")){
+    for(var count=0; count < array.length; count++){
+      var posMatch = text.indexOf(array[count]);
+      if (posMatch >= 0){
+        return Number(posMatch);
+      }
+    }
+    return -1;
+  }
+  return null;
+}
+
+/*
+  @prototype: getNextPuzzleIP();
+  @definition: This function searches for "puzzle-next" element and gets the on-screen next puzzle IP;
+  @author: GRSa;
+  @parameters: none;
+  @return: 
+    *default: (String) Returns a string containing the on-screen next puzzle IP;
+    *error: (null) Returns null if the "puzzle-next" element do not exists on page or if there is no IP inside it;
+*/
+function getNextPuzzleIP(){
+  var containerNextPuzzleIP = document.getElementById("puzzle-next");
+  if((containerNextPuzzleIP) &&
+     (containerNextPuzzleIP.innerHTML.length > 0)){
+    var nextPuzzleIP = /[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/.exec(containerNextPuzzleIP.innerHTML);
+    if ((nextPuzzleIP) && (nextPuzzleIP.length > 0)){
+      return String(nextPuzzleIP);
+    } else {
+      return null;
+    }
+  }
+  else {
+    return null;
+  }
+}
+
+/*
+  @prototype: sendBackgroundMessage(script_target, message, function_callback);
+  @definition: This function sends a AJAX POST message to the server;
+  @author: GRSa;
+  @parameters: 
+    *script_target (String): The server-side script (e.g. "riddle.php");
+    *message (String): The string containing the parameters message or something (e.g. "foo=bar&baz=qux");
+    *function_callback (Function) The function that must be executed after server response. This callback function receives the server response. The response content can be accessed from arguments[0] variable inside the callback function.
+  @return: void
+*/
+function sendBackgroundMessage(script_target, message, function_callback){
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      var result = JSON.parse(xmlhttp.responseText);
+      function_callback(result);
+    }
+  }
+  xmlhttp.open("POST", script_target, true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+  xmlhttp.send(message);
+}
+
+/*
+  @prototype: solvePuzzle(puzzle_id);
+  @definition: This function solves the indicated puzzle;
+  @author: GRSa;
+  @parameters: puzzle_id (Integer): The puzzle constant id;
+  @return: 
+    *default: (Boolean) Return true if puzzle is solved. If the puzzle is solved by function, usually the page reloads before the function returning something, though.
+    *error: (Boolean) Return false if puzzle was not found;
+*/
+function solvePuzzle(puzzle_id){
+  if (!getNextPuzzleIP()){
+    var text_answer = null;
+    var fake_message = null;
+    switch(puzzle_id){ 
+      case PUZZLE_TICTT: //Tic-Tac-Toe
+        fake_message = "func=tictactoe&status=1";
+        break;
+      case PUZZLE_MESSYD: //Messy Drawer
+        text_answer = "3";
+        break;
+      case PUZZLE_VOLCANO: //Volcano
+        text_answer = "Eyjafjallajökull";
+        break;
+      case PUZZLE_HIDDENN: //Hidden Numbers
+        text_answer = "12, 4";
+        break;
+      case PUZZLE_HOTDOGS: //Hot Dogs
+        text_answer = "24";
+        break;
+      case PUZZLE_COORD: //Coordinates 
+        text_answer = "Area 51";
+        break;
+      case PUZZLE_PROPORT: //Proportion 
+        text_answer = "4";
+        break;
+      case PUZZLE_BINHE: //Binary HE's Name 
+        text_answer = "Hacker Experience";
+        break;
+      case PUZZLE_SNEAKERS: //Sneakers Puzzle
+        text_answer = "too many secrets";
+        break;
+      case PUZZLE_SUDOKU: //Sudoku
+        fake_message = "func=sudoku";
+        break;
+      case PUZZLE_2048: //2048
+        fake_message = "func=2048&type=5";
+        //After this access Too Many Secrets to get a cracker
+        break;
+      case PUZZLE_JOBS: //Jobs phrase
+        text_answer = "Stay Hungry, Stay Foolish";
+        break;
+      case PUZZLE_3MUSK: //The Three Musketeers
+        text_answer = "Aramis";
+        break;
+      case PUZZLE_CHOCO: //Fat Boys
+        text_answer = "62.5";
+        break;
+      case PUZZLE_DRIEDPO: //Dried Potatoes
+        text_answer = "50";
+        break;
+      case PUZZLE_CRAZYBANK: //Crazy Banker
+        text_answer = "5, 1, 94";
+        break;
+      case PUZZLE_MINES: //Minesweeper
+        fake_message = "func=minesweeper";
+        break;
+      case PUZZLE_LITTLEL: //Little Liars
+        text_answer = "Phoebe, Milena, Naomy";
+        break;
+      case PUZZLE_BIRDSC: //Birds And Cages
+        text_answer = "4, 3";
+        break;
+      case PUZZLE_SWIMM: //Swimmers
+        text_answer = "A, D, C";
+        break;
+      case PUZZLE_WHALE: //Whale
+        text_answer = "3, 3, 9";
+        break;
+      case PUZZLE_BIRDW: //Birdwatching
+        text_answer = "5, 2";
+        break;
+      case PUZZLE_N100: //Number 100
+        text_answer = "99+99/99";
+        break;
+      case PUZZLE_CROC: //Crocodiles
+        text_answer = "49, 35";
+        break;
+      case PUZZLE_PREMIUM: //Premium
+        switch(environment_settings.detected_lang){
+          case LANG_EN:
+            text_answer = "Every player that buys premium is awesome";
+            break;
+          case LANG_BR:
+            text_answer = "Todo jogador que compra premium é lindo";
+            break;
+          default:
+            window.alert("I can't detect your language :( <br /> Try this: <br /> <b>Every player that buys premium is awesome</b> <br /> or this <br /> <b>Todo jogador que compra premium é lindo</b>");
+        }
+        break;
+      case PUZZLE_SHEEPS: //Sheeps
+        text_answer = "9, 18";
+        break;
+      case PUZZLE_2BNOT2B: ///bb|[^b]{2}/
+        text_answer = "To be or not to be";
+        break;
+      case PUZZLE_LIGHTS: //Lights Out
+        fake_message = "func=lightsout";
+        break;
+      default: 
+        return false;
+    }
+    
+    if (text_answer){
+      document.getElementsByName("qa-answer")[0].value = text_answer;
+      document.getElementsByClassName("btn btn-success")[0].click();
+    } else if (fake_message){
+      sendBackgroundMessage("riddle.php", fake_message, function(){
+        var result = arguments[0];
+        if (result.status == "OK"){
+          location.reload();              
+        } else {
+          console.log(result);
+        }
+      });
+    }
+    
+  } else {
+
+  }
+  
+  return true;
+}
+
+/*
+  @prototype: getPuzzleId();
+  @definition: This function checks if the current page is a puzzle page and returns the puzzle constant id;
+  @author: GRSa;
+  @parameters: none;
+  @return: 
+    *default: (Integer) Returns a puzzle constant id;
+    *error: (null) Returns null if puzzle was not found;
+*/
+function getPuzzleId(){
+  var content = null;
+  var credits_widget_content = document.getElementsByClassName("widget-content padding center")[4];
+  var credits_icon = document.getElementsByClassName("he16-puzzle_credits")[0];
+  if ((credits_widget_content) && (credits_icon)){
+    content = credits_widget_content.textContent; //Gets the content from credits widget
+  } else {
+    var puzzle_main_content = document.getElementsByClassName("widget-content padding center")[0];
+    var puzzle_main_content_icon = document.getElementsByClassName("he16-puzzle")[0];
+    if ((puzzle_main_content) && (puzzle_main_content_icon)){
+      content = puzzle_main_content.childNodes[7].textContent; //Gets the content from puzzle question      
+    } else {
+      //Do nothing and keep content variable with null
+    }
+  }
+  if (content){
+    for (puzzle_pos in puzzle_descriptor){
+      if (strposOfArray(content, puzzle_descriptor[puzzle_pos].names) >= 0){
+        return puzzle_descriptor[puzzle_pos].id;
+      }
+    }
+    return null;
+  } else {
+    return null;    
+  }
+}
+
+/*
+  @prototype: detectAndSetLang();
+  @definition: This function detects the language defined on URL and set default_values.detected_lang;
+  @author: GRSa;
+  @parameters: none;
+  @return: void;
+*/
+function detectAndSetLang(){
+  for(var i = 0; i < LANGUAGES.length; i++){
+    var pattern = new RegExp("^" + LANGUAGES[i] + "\.");
+    if(pattern.test(window.location.host)){
+      environment_settings.detected_lang = LANGUAGES[i];
+      break;
+    } else {
+      continue;
+    }
+  }
+}
+
+//#################################################################
+//####################END API PUZZLE HANDLE########################
+//#################################################################
+
 function startScriptComunnication(){ //Get data from background script
 	requestData.act = defaultAct.getRequestData;
 	sendRequest(requestData);
@@ -1392,6 +1748,30 @@ delay = setInterval(//It waits for beginning of script comunication
 			startScriptComunnication();
 		}
 	}, DEFAULT_DELAY);
+
+
+//Puzzle handler controller
+var puzzle_id = null;
+puzzle_id = getPuzzleId();
+if ((puzzle_id != null) && (!getNextPuzzleIP())){
+	detectAndSetLang(); 
+	var button_content = "";
+	switch(environment_settings.detected_lang){
+      case LANG_EN:
+        button_content = "Solve riddle";
+        break;
+      case LANG_BR:
+        button_content = "Resolver este enigma";
+        break;
+      default:
+        button_content = "Solve riddle";
+    }
+	getSomeElement("div", "class", "widget-title", 1).innerHTML += '<button id="solvePuzzleButton" class="btn btn-danger mission-abort">' + button_content + '</button>';
+	document.getElementById("solvePuzzleButton").addEventListener("click", function(){
+		solvePuzzle(puzzle_id);
+	});
+}
+//End puzzle handler controller
 
 aux = document.createElement("li"); //Create a STOP BOT button
 aux.className = "btn btn-danger mission-abort";

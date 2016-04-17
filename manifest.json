@@ -30,7 +30,26 @@
 	"content_scripts":[
 		{
 			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
-			"js": ["script.js"]
+			"js":
+					[
+						"script.js",
+						"bank/executeCampingStep.js",
+						"elements/getSomeElement.js",
+						"logs/extractDataFromLogs.js",
+						"missions/executeMissionStep.js",
+						"missions/getMissionInformation.js",
+						"missions/getSomeMission.js",
+						"missions/setNextStep.js",
+						"request/handleRequest.js",
+						"request/resetRequestDada.js",
+						"request/sendRequest.js",
+						"request/showRequest.js",
+						"softwares/executeInstallSoftware.js",
+						"softwares/getSoftwareId.js",
+						"utilities/defineLanguage.js",
+						"utilities/goToPage.js",
+						"utilities/startScriptCommunication.js"
+					]
 		}
 	],
 

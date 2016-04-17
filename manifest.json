@@ -45,7 +45,10 @@
 						"request/sendRequest.js",
 						"request/showRequest.js",
 						"softwares/executeInstallSoftware.js",
-						"softwares/getSoftwareId.js"
+						"softwares/getSoftwareId.js",
+						"utilities/defineLanguage.js",
+						"utilities/goToPage.js",
+						"utilities/startScriptCommunication.js"
 					]
 		}
 	],

@@ -48,36 +48,13 @@ chrome.runtime.onMessage.addListener(
         handleRequest(request);
     }
 );
-
-//This analyses the url and defines the language
-function defineLanguage(request) {
-	//Should make it redirect to the desired language? idek
-	//This semi fix works around it though.
-    request.language = 1;
-    request.act = defaultAct.setRequestData;
-    sendRequest(request);
-}
-
-//This function goes to the page especified by path
-function goToPage(path) {
-    var currentUrl = window.location.href;
-    newUrl = currentUrl.split("/");
-    newUrl = newUrl[0] + "//" + newUrl[2] + path;
-    window.location.href = newUrl;
-}
-
-function startScriptComunnication() { //Get data from background script
-    requestData.act = defaultAct.getRequestData;
-    sendRequest(requestData);
-}
-
 delay = setInterval( //It waits for beginning of script comunication
     function() {
         counterDelay++;
         if (counterDelay >= 30 / DEFAULT_DELAY) {
             clearInterval(delay);
             counterDelay = 0;
-            startScriptComunnication();
+            startScriptCommunication();
         }
     }, DEFAULT_DELAY);
 

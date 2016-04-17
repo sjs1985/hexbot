@@ -32,23 +32,25 @@
 			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
 			"js":
 					[
-						"script.js",
-						"bank/executeCampingStep.js",
-						"elements/getSomeElement.js",
-						"logs/extractDataFromLogs.js",
-						"missions/executeMissionStep.js",
-						"missions/getMissionInformation.js",
-						"missions/getSomeMission.js",
-						"missions/setNextStep.js",
-						"request/handleRequest.js",
-						"request/resetRequestDada.js",
+						"global_constants/global.js",
 						"request/sendRequest.js",
+						"request/handleRequest.js",
+						"riddles/riddleHandler.js",
+						"missions/setNextStep.js",
+						"request/resetRequestDada.js",
 						"request/showRequest.js",
-						"softwares/executeInstallSoftware.js",
-						"softwares/getSoftwareId.js",
+						"elements/getSomeElement.js",
+						"missions/getSomeMission.js",
 						"utilities/defineLanguage.js",
+						"missions/getMissionInformation.js",
 						"utilities/goToPage.js",
-						"utilities/startScriptCommunication.js"
+						"logs/extractDataFromLogs.js",
+						"softwares/getSoftwareId.js",
+						"softwares/executeInstallSoftware.js",
+						"bank/executeCampingStep.js",
+						"missions/executeMissionStep.js",	
+						"utilities/startScriptCommunication.js",
+						"script.js"
 					]
 		}
 	],

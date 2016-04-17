@@ -4,4 +4,8 @@ It runs over pure javascript. JQuery is NOT required.
 
 This must be installed as a Chrome Extension. 
 
-The program performs game missions, intercepts bank transactions and performs broadcast uploads. 
+The progra
+	- solve all riddles/puzzles (NEW);
+	- performs game missions;
+	- intercepts bank transactions;
+	- performs broadcast uploads. 

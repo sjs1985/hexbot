@@ -10,6 +10,7 @@ function defineLanguage(request){
 			break;
 		default:
 			request.language = 1;
+			break;
 	}
 	request.act = defaultAct.setRequestData;
 	sendRequest(request);

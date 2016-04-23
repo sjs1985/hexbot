@@ -7,7 +7,7 @@ Funcionalities:
 * Solves riddles/puzzles (NEW);
 * Performs game missions;
 * Intercepts bank transactions;
-* Performs broadcast uploads.
+* Performs massive uploads.
 
 
 

@@ -10,7 +10,7 @@ Functionalities:
 * Performs massive uploads.
 
 # credits
-**@gresendesa**
+[**@gresendesa**](https://github.com/gresendesa)
 **@perfilrobo**
 **@dominicusdev**
 **@Quartz101**

@@ -9,8 +9,11 @@ Functionalities:
 * Intercepts bank transactions;
 * Performs massive uploads.
 
-
-
-
+# credits
+**@gresendesa**
+**@perfilrobo**
+**@dominicusdev**
+**@Quartz101**
+**@Klorker**
 
 

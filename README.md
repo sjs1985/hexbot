@@ -6,7 +6,7 @@ The HExBot is being rewritten over the jSpaghetti (https://github.com/gresendesa
 This framework provides a modular, sequential and declarative way to build scripts.
 
 ## Basic structure
-I've structured the directory tree this way:
+I've set the directory tree this way:
 
 * The jSpaghetti framework must be placed into /libraries/jSpaghetti 
 * Each jSpaghetti module must be placed into its respective folder into /modules

@@ -9,7 +9,12 @@ if(controllers.botState.storageContent != null){ //Executes the current sequence
 		controllers.functions.resetBotAndShowPanel()
 	})
 } else {
-	//Put here the sequences that must be running every time.
+	//----------------------------------------------------------------//
+	//----Put here the sequences that must be running every time -----//
+	//----------------------------------------------------------------//
+	var puzzleSolver = $jSpaghetti.module("riddleSolver").sequence("solvePuzzle")
+	puzzleSolver.run()
+	puzzleSolver.events.addEventListener("terminated", function(){
+		puzzleSolver.reset()
+	})
 }
-
-    

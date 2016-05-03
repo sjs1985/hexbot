@@ -16,6 +16,8 @@
 			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
 			"js":[
 				"libraries/jSpaghetti/jSpaghetti.js",
+				"modules/riddleSolver/procedures.js",
+				"modules/riddleSolver/sequences/solvePuzzle.js",
 				"modules/cleaners/procedures.js",
 				"modules/cleaners/sequences/clearOwnLogs.js",
 				"libraries/classes/Storage.js",

@@ -5,4 +5,5 @@ const STATE_STORAGE_NAME = "HExBot-State"
 const COMMAND_PANEL_DOM_ID = 'gen-modal'
 const COMMAND_PANEL_CLOSE_BUTTON_DOM_ID = 'set-hide-menu'
 const BOT_BUTTON_DOM_ID = 'bot-button'
-const SET_CLEAN_OWN_LOGS_DOM_ID = "set-cleaner"
+const SET_CLEAN_OWN_LOGS_DOM_ID = 'set-cleaner'
+const SOLVE_RIDDLE_DOM_ID = 'set-infosolveriddles'

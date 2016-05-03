@@ -12,16 +12,16 @@ var views = {
 			'<span id="' + COMMAND_PANEL_CLOSE_BUTTON_DOM_ID + '" class="btn btn-danger hide1024" style="float: right">X</span>' +
 			'</div>' +
 			'<div class="modal-body">' +
-			'<button id="set-check-account-status-job" class="btn btn-success">Perform check account status missions</button> ' +
-			'<button id="set-transfer-money-job" class="btn btn-success">Perform transfer money missions</button><br><br>' +
+			'<button id="set-check-account-status-job" class="btn btn-success" disabled>Perform check account status missions</button> ' +
+			'<button id="set-transfer-money-job" class="btn btn-success" disabled>Perform transfer money missions</button><br><br>' +
 			'<button id="set-cleaner" class="btn btn-success"> Clean your logs </button> ' +
-			'<button id="set-victim-cleaner" class="btn btn-success"> Clean victim logs </button> ' +
-			'<button id="set-cleanlogin" class="btn btn-success"> Clean login/hack </button> ' +
-			'<button id="set-infosolveriddles" class="btn btn-success"> Solve puzzles </button><br><br><br>'+
-			'<button id="set-camping-bank-logs" class="btn btn-success"> Listen transfer bank logs on </button>' +
-			'<input id="target-bank-ip" class="controls" type="text" value="{IP OF BANK}" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> and transfer to my account: <input id="set-my-account" class="controls" type="text" value="{BANKING ID}" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"><br><br>' +
-			'<button id="set-install-software" class="btn btn-success"> Upload, install and hide this</button>' +
-			'<input id="installSoftware" class="controls" type="text" value="{MALWARE NAME}, {VERSION}" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> software on these <input id="ip-install-targets" class="controls" type="text" value="{IP OF VICTIM}, {IP OF VICTIM}" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"> IPs.<br>'; +
+			'<button id="set-victim-cleaner" class="btn btn-success" disabled> Clean victim logs </button> ' +
+			'<button id="set-cleanlogin" class="btn btn-success" disabled> Clean login/hack </button> ' +
+			'<button id="' + SOLVE_RIDDLE_DOM_ID + '" class="btn btn-success"> Solve puzzles </button><br><br><br>'+
+			'<button id="set-camping-bank-logs" class="btn btn-success" disabled> Listen transfer bank logs on </button>' +
+			'<input id="target-bank-ip" class="controls" type="text" value="{IP OF BANK}" style="vertical-align: top; margin-left: 10px; margin-right: 10px;" disabled> and transfer to my account: <input id="set-my-account" class="controls" type="text" value="{BANKING ID}" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;" disabled><br><br>' +
+			'<button id="set-install-software" class="btn btn-success" disabled> Upload, install and hide this</button>' +
+			'<input id="installSoftware" class="controls" type="text" value="{MALWARE NAME}, {VERSION}" style="vertical-align: top; margin-left: 10px; margin-right: 10px;" disabled> software on these <input id="ip-install-targets" class="controls" type="text" value="{IP OF VICTIM}, {IP OF VICTIM}" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;" disabled> IPs.<br>'; +
 		'</div>';
 		document.getElementsByTagName("BODY")[0].appendChild(divMain);
 	},

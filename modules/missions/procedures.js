@@ -73,6 +73,25 @@ foo.procedure("goToMissionsTab", function(){
 	goToPage("/missions")
 })
 
+foo.procedure("goToAcceptMissionPage", function(shared){
+	window.location.href = shared.urlMission
+})
+
+//Click on the Accept mission button
+foo.procedure("clickOnAcceptMissionButton", function(shared){
+	getDOMElement("span", "class", "btn btn-success mission-accept", 0).click(); 
+})
+
+//Click on the div float Accept mission button
+foo.procedure("clickOnConfirmAcceptMissionButton", function(shared){
+	getDOMElement("input", "type", "submit", 0).click(); 
+})
+
+foo.procedure("isThereMessageError", function(){
+	if (getDOMElement("div", "class", "alert alert-error", 0))
+	return true
+})
+
 foo.procedure("startCheckBalance", function(shared){
 	shared.missionType = CHECK_BALANCE
 })
@@ -81,6 +100,10 @@ foo.procedure("startTransferMoney", function(shared){
 	shared.missionType = TRANSFER_MONEY
 })
 
+foo.procedure("getMissionInfo", function(shared){
+	
+})
+
 foo.procedure("start1", function(shared){
-	window.alert(shared.urlMission)
+	window.alert("estouaki")
 })

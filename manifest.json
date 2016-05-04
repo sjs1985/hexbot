@@ -17,6 +17,8 @@
 			"js":[
 				"libraries/jSpaghetti/jSpaghetti.js",
 
+				"constants.js",
+
 				"modules/riddleSolver/procedures.js",
 				"modules/riddleSolver/sequences/solvePuzzle.js",
 				"modules/cleaners/procedures.js",
@@ -28,15 +30,14 @@
 
 				//"libraries/setNextStep.js",
 				//"libraries/showRequest.js",
+				"libraries/functions/strposOfArray.js",
+				"libraries/functions/getURLMission.js",
 				"libraries/functions/getDOMElement.js",
-				//"libraries/getSomeMission.js",
 				"libraries/functions/defineLanguage.js",
 				//"libraries/getMissionInformation.js",
 				"libraries/functions/goToPage.js",
 				//"libraries/extractDataFromLogs.js",
 				//"libraries/getSoftwareId.js",
-
-				"constants.js",
 
 				"views.js",
 

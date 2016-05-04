@@ -7,3 +7,11 @@ const COMMAND_PANEL_CLOSE_BUTTON_DOM_ID = 'set-hide-menu'
 const BOT_BUTTON_DOM_ID = 'bot-button'
 const SET_CLEAN_OWN_LOGS_DOM_ID = 'set-cleaner'
 const SOLVE_RIDDLE_DOM_ID = 'set-infosolveriddles'
+
+//Language constants
+const LANG_BR = "br"
+const LANG_EN = "en"
+
+//Missions type
+const CHECK_BALANCE = "checkBalance"
+const TRANSFER_MONEY = "transferMoney"

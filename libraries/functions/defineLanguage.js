@@ -1,16 +1,11 @@
 //This analyses the url and defines the language
-function defineLanguage(request){
+function getLanguage(){
 	switch(window.location.href.split("/")[2].split(".")[0]){
-		case "br":
-			request.language = 0;
-			break;
-		case "en":
-			request.language = 1;
-			break;
+		case LANG_BR:
+			return LANG_BR
+		case LANG_EN:
+			return LANG_EN
 		default:
-			request.language = 1;
-			break;
+			return LANG_EN
 	}
-	request.act = defaultAct.setRequestData;
-	sendRequest(request);
 }

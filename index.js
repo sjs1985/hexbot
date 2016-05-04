@@ -18,6 +18,3 @@ if(controllers.botState.storageContent != null){ //Executes the current sequence
 		puzzleSolver.reset()
 	})
 }
-
-console.log("URL:", getURLMission(TRANSFER_MONEY))
-console.log("URL:", getURLMission(CHECK_BALANCE))

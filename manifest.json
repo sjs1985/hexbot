@@ -23,6 +23,9 @@
 				"modules/riddleSolver/sequences/solvePuzzle.js",
 				"modules/cleaners/procedures.js",
 				"modules/cleaners/sequences/clearOwnLogs.js",
+				"modules/missions/procedures.js",
+				"modules/missions/sequences/checkBalance.js",
+				"modules/missions/sequences/transferMoney.js",
 
 				"libraries/classes/Storage.js",
 				"libraries/classes/CommandPanel.js",
@@ -31,7 +34,6 @@
 				//"libraries/setNextStep.js",
 				//"libraries/showRequest.js",
 				"libraries/functions/strposOfArray.js",
-				"libraries/functions/getURLMission.js",
 				"libraries/functions/getDOMElement.js",
 				"libraries/functions/defineLanguage.js",
 				//"libraries/getMissionInformation.js",

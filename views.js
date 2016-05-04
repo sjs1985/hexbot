@@ -12,7 +12,7 @@ var views = {
 			'<span id="' + COMMAND_PANEL_CLOSE_BUTTON_DOM_ID + '" class="btn btn-danger hide1024" style="float: right">X</span>' +
 			'</div>' +
 			'<div class="modal-body">' +
-			'<button id="set-check-account-status-job" class="btn btn-success" disabled>Perform check account status missions</button> ' +
+			'<button id="' + PERFORM_CHECK_BALANCE_ID + '" class="btn btn-success">Perform check account status missions</button> ' +
 			'<button id="set-transfer-money-job" class="btn btn-success" disabled>Perform transfer money missions</button><br><br>' +
 			'<button id="set-cleaner" class="btn btn-success"> Clean your logs </button> ' +
 			'<button id="set-victim-cleaner" class="btn btn-success" disabled> Clean victim logs </button> ' +

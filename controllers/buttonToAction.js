@@ -11,3 +11,7 @@ document.getElementById(SOLVE_RIDDLE_DOM_ID).onclick = function(){
     window.alert("Everything is ready to use.\nThere is a red button on every puzzle page. Just click on it. :)");
 };
 
+document.getElementById(PERFORM_CHECK_BALANCE_ID).addEventListener("click", function(){
+	controllers.functions.executeSequence("missions", "checkBalance")
+})
+

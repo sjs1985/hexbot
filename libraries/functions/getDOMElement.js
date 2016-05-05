@@ -2,30 +2,31 @@
 //Next it gets one element from specified position on the elements array and returns it 
 function getDOMElement(tagName, attribName, attribValue, position) {
     if (tagName != null) {
-        element = document.getElementsByTagName(tagName);
+        element = document.getElementsByTagName(tagName)
     } else {
-        element = document.getElementsByTagName("*");
+        element = document.getElementsByTagName("*")
     }
-    resultElements = [];
+    resultElements = []
     var count;
     if (attribName != null) {
         for (count = 0; count <= element.length - 1; count++) {
             if (element[count].getAttribute(attribName) == attribValue) {
-                resultElements.push(element[count]);
+                resultElements.push(element[count])
             }
         }
     } else {
-        resultElements = element;
-    };
+        resultElements = element
+    }
     if (resultElements.length > 0) {
+        if (position == "last") position = resultElements.length - 1
         try {
-            resultElements[position].style.fontSize = "15px";
-            resultElements[position].style.color = "red";
+            resultElements[position].style.fontSize = "15px"
+            resultElements[position].style.color = "red"
         } catch (error) {
-            console.log(error.message);
+            console.log(error.message)
         }
-        return resultElements[position];
+        return resultElements[position]
     } else {
-        return null;
+        return null
     }
 }

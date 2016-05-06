@@ -26,6 +26,8 @@
 				"modules/missions/procedures.js",
 				"modules/missions/sequences/checkBalance.js",
 				"modules/missions/sequences/transferMoney.js",
+				"modules/adRemover/procedures.js",
+				"modules/adRemover/sequences/removeAds.js",
 
 				"libraries/classes/Storage.js",
 				"libraries/classes/CommandPanel.js",

@@ -15,3 +15,7 @@ document.getElementById(PERFORM_CHECK_BALANCE_ID).addEventListener("click", func
 	controllers.functions.executeSequence("missions", "checkBalance")
 })
 
+document.getElementById(PERFORM_TRANSFER_MONEY_ID).addEventListener("click", function(){
+	controllers.functions.executeSequence("missions", "transferMoney")
+})
+

@@ -9,12 +9,18 @@ if(controllers.botState.storageContent != null){ //Executes the current sequence
 		controllers.functions.resetBotAndShowPanel()
 	})
 } else {
-	//----------------------------------------------------------------//
-	//----Put here the sequences that must be running every time -----//
-	//----------------------------------------------------------------//
+	//------------------------------------------------------------------------------------------//
+	//----Put here the sequences that must be running while other sequences is not running -----//
+	//------------------------------------------------------------------------------------------//
 	var puzzleSolver = $jSpaghetti.module("riddleSolver").sequence("solvePuzzle")
 	puzzleSolver.run()
 	puzzleSolver.events.addEventListener("terminated", function(){
 		puzzleSolver.reset()
 	})
 }
+
+var adRemover = $jSpaghetti.module("adRemover").sequence("removeAds")
+adRemover.run()
+adRemover.events.addEventListener("terminated", function(){
+	adRemover.reset()
+})

@@ -2,13 +2,15 @@ var foo = $jSpaghetti.module("missions")
 foo.config.debugMode = true
 
 foo.procedure("getURLMission", function(shared, internalFunctions){
-	function getURL(missionType) { //It returns a mission url by mission type
-		var labels = {
+
+	var labels = {
 				checkBalance: ["Verificar balanço bancário", "Check bank status"],
 				transferMoney: ["Transferir dinheiro", "Transfer money"],
 				stealSoftware: ["Roubar software", "Steal software"],
 				deleteSoftware: ["Deletar software", "Delete software"]
-		}
+			 }
+
+	function getURL(missionType) { //It returns a mission url by mission type
 		//Get the URL mission
 		var element = document.getElementsByTagName("a")
 		var urlMission = null
@@ -86,8 +88,13 @@ foo.procedure("goToAcceptMissionPage", function(shared){
 	window.location.href = shared.urlMission
 })
 
-foo.procedure("goToIp", function(shared){
-	goToPage("/internet?ip=" + shared.ips[0])
+foo.procedure("goToNextIp", function(shared){
+	if (shared.nextIp){
+		shared.nextIp++
+	} else {
+		shared.nextIp = 0
+	}
+	goToPage("/internet?ip=" + shared.ips[shared.nextIp])
 })
 
 foo.procedure("goToBankAccountHacker", function(shared){
@@ -99,8 +106,13 @@ foo.procedure("goToBankAccountHacker", function(shared){
 })
 
 foo.procedure("hackAccount", function(shared){
-	getDOMElement("input", "name", "acc", 0).value = shared.accounts[0] //Fill Account to hack bar
-	getDOMElement("button", "type", "submit", 0).click() //Click on Hack button
+	goToPage("/internet?action=hack&acc=" + shared.accounts[0])
+})
+
+foo.procedure("transferMoneyToTarget", function(shared){
+	getDOMElement("input", "name", "acc", 0).value = shared.accounts[1]; //Fill the To field
+	getDOMElement("input", "name", "ip", 1).value = shared.ips[1]; //Fill the Bank IP field
+	getDOMElement("button", "class", "btn btn-success", 0).click(); //Click on the Transfer Money button
 })
 
 foo.procedure("signInAccount", function(shared){
@@ -126,6 +138,16 @@ foo.procedure("clickOnAcceptMissionButton", function(shared){
 	getDOMElement("span", "class", "btn btn-success mission-accept", 0).click(); 
 })
 
+//Click on the Accept mission button
+foo.procedure("clickOnAbortMissionButton", function(shared){
+	getDOMElement("span", "class", "btn btn-danger mission-abort", 0).click()
+})
+
+//Click on the Accept mission button
+foo.procedure("clickOnConfirmAbortMissionButton", function(shared){
+	getDOMElement("input", "type", "submit", 0).click();
+})
+
 //Click on the div float Accept mission button
 foo.procedure("clickOnConfirmAcceptMissionButton", function(shared){
 	getDOMElement("input", "type", "submit", 0).click(); 
@@ -138,10 +160,12 @@ foo.procedure("isThereMessageError", function(){
 
 foo.procedure("startCheckBalance", function(shared){
 	shared.missionType = CHECK_BALANCE
+	shared.abortMissionAllowed = false
 })
 
 foo.procedure("startTransferMoney", function(shared){
 	shared.missionType = TRANSFER_MONEY
+	shared.abortMissionAllowed = false
 })
 
 foo.procedure("getMissionInfo", function(shared){
@@ -190,12 +214,48 @@ foo.procedure("cleanTextAreaContent", function(data){
 	} else {
 		data.isEmpty = true
 	}
+	if (data.cleanerCount){
+		data.cleanerCount++
+	} else {
+		data.cleanerCount = 1
+	}
 })
 
 foo.procedure("informBadCracker", function(){
-	alert("Your cracker is not strong enough to access that host")
+	alert("Your cracker is not strong enough to continue")
 })
 
 foo.procedure("goToOwnLogTab", function(){
 	goToPage("/log")
+})
+
+foo.procedure("checkSameTypeAcceptedMission", function(shared){
+	var labels = {
+			checkBalance: ["balance", "balanço"],
+			transferMoney: ["transfer", "transferir"]
+			//stealSoftware: ["Roubar software", "Steal software"],
+			//deleteSoftware: ["Deletar software", "Delete software"]
+		 }
+	var missionDescription = getDOMElement("div", "class", "article-post", 0)
+	if ((missionDescription) && (strposOfArray(missionDescription.innerHTML, labels[shared.missionType]) >= 0)){
+		return true
+	}
+})
+
+foo.procedure("isAvailableMissionsPage", function(){
+	labels = ["Missões disponíveis", "Available missions"]
+	var titleElement = getDOMElement("h5", null, null, 0)
+	if (titleElement){
+		if(strposOfArray(titleElement.childNodes[0].nodeValue, labels) >= 0){
+			return true
+		}
+	}
+})
+
+foo.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
+	alert("It seems there is another mission of another type already accepted. Finish it or abort it before trying again.")
+})
+
+foo.procedure("clickOnTransferMoneyFinishButton", function(){
+	 getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
 })

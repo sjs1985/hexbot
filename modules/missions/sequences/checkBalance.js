@@ -2,20 +2,17 @@ var foo = $jSpaghetti.module("missions").sequence("checkBalance")
 
 foo.instructions = [
 	{"@init": "startCheckBalance"},
-	{"@tryToGetMission": ["goToMissionsTab", "getURLMission", {"wait": "_forTheSignal"}, {"gotoif":["*.urlMission == null", "@tryToGetMission"]}]},
-	{"@tryToAcceptMission": ["goToAcceptMissionPage", "clickOnAcceptMissionButton", {"wait": 1000}, "clickOnConfirmAcceptMissionButton", "isThereMessageError", {"gotoif":["*.$", "@tryToGetMission"]}]},
-	{"@startMissionExecution": ["getMissionInfo", "logout", "goToIp", "goToBankAccountHacker"]},
-	{"@hackAccountProcess": ["hackAccount", "isThereMessageError", {"gotoif":["*.$", "@abortMission"]}, {"wait":"_forPageToReload"}, "signInAccount", "getAccountBalance", "getOutFromAccount"]},
-	{"@tryHostConnection": ["logout", "forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@abortMission"]}, {"wait":"_forPageToReload"}]},
+	{"@tryToGetMission": ["goToMissionsTab", "checkSameTypeAcceptedMission", {"gotoif":["*.$", "@startMissionExecution"]}, "isAvailableMissionsPage", {"gotoif":["!*.$", "@alertUnknownMissionKind"]}, "getURLMission", {"wait": "_forTheSignal"}, {"gotoif":["*.urlMission == null", "@tryToGetMission"]}]},
+	{"@tryToAcceptMission": ["goToAcceptMissionPage", "clickOnAcceptMissionButton", {"wait": 1500}, "clickOnConfirmAcceptMissionButton", "isThereMessageError", {"gotoif":["*.$", "@tryToGetMission"]}]},
+	{"@startMissionExecution": ["getMissionInfo", "logout", "goToNextIp"]},
+	{"@hackAccountProcess": ["hackAccount", "isThereMessageError", {"gotoif":["*.$", "@abortProcess"]}, {"wait":"_forPageToReload"}, "signInAccount", "getAccountBalance", "getOutFromAccount", "logout"]},
+	{"@tryHostConnection": ["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@cleanOwnLogs"]}, {"wait":"_forPageToReload"}]},
 	{"@accessTarget": "signInKnownTarget"},
 	{"@cleanTargetLogs": ["cleanTextAreaContent", {"gotoif": ["*.isEmpty == true", "@cleanOwnLogs"]}, {"wait": "_forPageToReload"}]},
 	{"@cleanOwnLogs": ["logout", "goToOwnLogTab", "cleanTextAreaContent", {"gotoif": ["*.isEmpty == true", "@finishMission"]}, {"wait": "_forPageToReload"}]},
 	{"@finishMission": ["goToMissionsTab", "informBalance", {"wait": 3000}, "confirmMissionCompleteButton", {"gotoif": ["true", "@tryToGetMission"]}]},
-	{"@abortMission": ["informBadCracker", "_exit"]}
+	{"@abortProcess": [{"gotoif":["*.abortMissionAllowed", "@abortMission"]}, "informBadCracker", "_exit"]},
+	{"@abortMission": ["goToMissionsTab", "clickOnAbortMissionButton", {"wait": 2000}, "clickOnConfirmAbortMissionButton", {"gotoif": ["true", "@tryToGetMission"]}]},
+	{"@alertUnknownMissionKind": ["alertAnotherMissionKindAlreadyAccepted", "_exit"]}
 ]
 
-/*foo.instructions = [
-	{"@tryConnection": ["logout", "forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@informAccessDenied"]}, {"wait":"_forPageToReload"}]},
-	{"@accessTarget": ["signInKnownTarget", "_exit"]},
-	{"@informAccessDenied": "informBadCracker"}
-]*/	

@@ -89,7 +89,7 @@ foo.procedure("goToAcceptMissionPage", function(shared){
 })
 
 foo.procedure("goToNextIp", function(shared){
-	if (shared.nextIp){
+	if (shared.nextIp >= 0){
 		shared.nextIp++
 	} else {
 		shared.nextIp = 0

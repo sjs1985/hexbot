@@ -89,12 +89,8 @@ foo.procedure("goToAcceptMissionPage", function(shared){
 })
 
 foo.procedure("goToNextIp", function(shared){
-	if (shared.nextIp >= 0){
-		shared.nextIp++
-	} else {
-		shared.nextIp = 0
-	}
 	goToPage("/internet?ip=" + shared.ips[shared.nextIp])
+	shared.nextIp++
 })
 
 foo.procedure("goToBankAccountHacker", function(shared){
@@ -161,16 +157,22 @@ foo.procedure("isThereMessageError", function(){
 foo.procedure("startCheckBalance", function(shared){
 	shared.missionType = CHECK_BALANCE
 	shared.abortMissionAllowed = false
+	shared.ips = []
+	shared.accounts = []
+	shared.cleanerCount = 0
+	shared.nextIp = 0
 })
 
 foo.procedure("startTransferMoney", function(shared){
 	shared.missionType = TRANSFER_MONEY
 	shared.abortMissionAllowed = false
+	shared.ips = []
+	shared.accounts = []
+	shared.cleanerCount = 0
+	shared.nextIp = 0
 })
 
 foo.procedure("getMissionInfo", function(shared){
-	shared.ips = []
-	shared.accounts = []
 	//Get ips
 	try{
 		shared.ips.push(getDOMElement("a", "class", "small", 0).childNodes[0].nodeValue)
@@ -190,7 +192,6 @@ foo.procedure("getMissionInfo", function(shared){
 			}   
 		}
 	}
-	console.log(shared)
 })
 
 foo.procedure("forceToAccessTarget", function(){
@@ -214,11 +215,7 @@ foo.procedure("cleanTextAreaContent", function(data){
 	} else {
 		data.isEmpty = true
 	}
-	if (data.cleanerCount){
-		data.cleanerCount++
-	} else {
-		data.cleanerCount = 1
-	}
+	data.cleanerCount++
 })
 
 foo.procedure("informBadCracker", function(){

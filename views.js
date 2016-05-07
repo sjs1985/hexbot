@@ -19,9 +19,9 @@ var views = {
 			'<button id="set-cleanlogin" class="btn btn-success" disabled> Clean login/hack </button> ' +
 			'<button id="' + SOLVE_RIDDLE_DOM_ID + '" class="btn btn-success"> Solve puzzles </button><br><br><br>'+
 			'<button id="set-camping-bank-logs" class="btn btn-success" disabled> Listen transfer bank logs on </button>' +
-			'<input id="target-bank-ip" class="controls" type="text" value="{IP OF BANK}" style="vertical-align: top; margin-left: 10px; margin-right: 10px;" disabled> and transfer to my account: <input id="set-my-account" class="controls" type="text" value="{BANKING ID}" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;" disabled><br><br>' +
+			'<input id="' + FIELD_BANK_IP_TARGET + '" class="controls" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;" disabled> and transfer to my account: <input id="' + FIELD_MY_ACCOUNT + '" class="controls" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;" disabled><br><br>' +
 			'<button id="set-install-software" class="btn btn-success" disabled> Upload, install and hide this</button>' +
-			'<input id="installSoftware" class="controls" type="text" value="{MALWARE NAME}, {VERSION}" style="vertical-align: top; margin-left: 10px; margin-right: 10px;" disabled> software on these <input id="ip-install-targets" class="controls" type="text" value="{IP OF VICTIM}, {IP OF VICTIM}" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;" disabled> IPs.<br>'; +
+			'<input id="' + FIELD_SOFTWARE_TO_INSTALL + '" class="controls" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;" disabled> software on these <input id="' + FIELD_IPS_INSTALL_TARGETS + '" class="controls" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;" disabled> IPs.<br>'; +
 		'</div>';
 		document.getElementsByTagName("BODY")[0].appendChild(divMain);
 	},

@@ -1,8 +1,8 @@
 //=========CONTENT SCRIPT============//
 
-if(controllers.botState.storageContent != null){ //Executes the current sequence
-	var moduleName = controllers.botState.storageContent.moduleName
-	var sequenceName = controllers.botState.storageContent.sequenceName
+if(controllers.bot.currentSequence != null){ //Executes the current sequence
+	var moduleName = controllers.bot.currentSequence.moduleName
+	var sequenceName = controllers.bot.currentSequence.sequenceName
 	var currentSequence = $jSpaghetti.module(moduleName).sequence(sequenceName)
 	currentSequence.run()
 	currentSequence.events.addEventListener("terminated", function(){

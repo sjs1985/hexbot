@@ -30,8 +30,8 @@
 				"modules/adRemover/sequences/removeAds.js",
 
 				"libraries/classes/Storage.js",
-				"libraries/classes/ControlPanel.js",
-				"libraries/classes/State.js",
+				"libraries/classes/Sequence.js",
+				"libraries/classes/Bot.js",
 
 				//"libraries/setNextStep.js",
 				//"libraries/showRequest.js",
@@ -46,6 +46,7 @@
 				"views.js",
 
 				"controllers/main.js",
+				"controllers/functions.js",
 				"controllers/controlPanel.js",
 				"controllers/buttonToAction.js",
 				"controllers/botButton.js",

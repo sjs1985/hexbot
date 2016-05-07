@@ -1,16 +1,12 @@
-var botStateStorage = new Storage(STATE_STORAGE_NAME)
+var controllers = {}
 
-var storageContent = botStateStorage.get()
+controllers.storage = new Storage(BOT_STORAGE_NAME)
+var storageContent = controllers.storage.get()
 
-var controllers = {
-	botState: {
-		storage: botStateStorage,
-		storageContent: storageContent
-	},
-	functions: {
-
-	}
+if (storageContent){
+	controllers.bot = storageContent
+} else { 
+	controllers.bot = new Bot()
 }
-
 
 

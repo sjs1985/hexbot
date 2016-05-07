@@ -30,6 +30,7 @@ controllers.functions.resetBotAndShowPanel = function (){
 		$jSpaghetti.module(moduleName).sequence(sequenceName).reset()
 	}
 	controllers.bot.currentSequence = null
+	controllers.bot.controlPanel.isHidden = false
 	controllers.storage.set(controllers.bot)
 	controllers.functions.showPanel()
 }

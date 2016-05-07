@@ -159,7 +159,6 @@ foo.procedure("startCheckBalance", function(shared){
 	shared.abortMissionAllowed = false
 	shared.ips = []
 	shared.accounts = []
-	shared.cleanerCount = 0
 	shared.nextIp = 0
 })
 
@@ -215,7 +214,7 @@ foo.procedure("cleanTextAreaContent", function(data){
 	} else {
 		data.isEmpty = true
 	}
-	data.cleanerCount++
+	if(data.cleanerCount != undefined) data.cleanerCount++
 })
 
 foo.procedure("informBadCracker", function(){

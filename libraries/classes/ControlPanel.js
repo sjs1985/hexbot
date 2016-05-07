@@ -1,4 +1,4 @@
 /*Main panel class*/
-function CommandPanel(isHidden){
+function ControlPanel(isHidden){
 	this.isHidden = isHidden
 }

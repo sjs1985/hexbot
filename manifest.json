@@ -30,7 +30,7 @@
 				"modules/adRemover/sequences/removeAds.js",
 
 				"libraries/classes/Storage.js",
-				"libraries/classes/CommandPanel.js",
+				"libraries/classes/ControlPanel.js",
 				"libraries/classes/State.js",
 
 				//"libraries/setNextStep.js",
@@ -46,7 +46,7 @@
 				"views.js",
 
 				"controllers/main.js",
-				"controllers/commandPanel.js",
+				"controllers/controlPanel.js",
 				"controllers/buttonToAction.js",
 				"controllers/botButton.js",
 				

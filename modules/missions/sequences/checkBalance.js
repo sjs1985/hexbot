@@ -12,7 +12,7 @@ foo.instructions = [
 	{"@cleanOwnLogs": ["logout", "goToOwnLogTab", "cleanTextAreaContent", {"gotoif": ["*.isEmpty == true", "@finishMission"]}, {"wait": "_forPageToReload"}]},
 	{"@finishMission": ["goToMissionsTab", "informBalance", {"wait": 3000}, "confirmMissionCompleteButton", {"gotoif": ["true", "@tryToGetMission"]}]},
 	{"@abortProcess": [{"gotoif":["*.abortMissionAllowed", "@abortMission"]}, "informBadCracker", "_exit"]},
-	{"@abortMission": ["goToMissionsTab", "clickOnAbortMissionButton", {"wait": 2000}, "clickOnConfirmAbortMissionButton", {"gotoif": ["true", "@tryToGetMission"]}]},
+	{"@abortMission": ["goToMissionsTab", "clickOnAbortMissionButton", {"wait": 1500}, "clickOnConfirmAbortMissionButton", {"gotoif": ["true", "@tryToGetMission"]}]},
 	{"@alertUnknownMissionKind": ["alertAnotherMissionKindAlreadyAccepted", "_exit"]}
 ]
 

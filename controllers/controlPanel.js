@@ -1,36 +1,36 @@
-views.appendCommandPanel()
+views.appendControlPanel()
 
-var commandPanelStateStorage = new Storage(COMMAND_PANEL_STORAGE_NAME) //It gets the data from storage
-var storageContent = commandPanelStateStorage.get()
+var controlPanelStateStorage = new Storage(COMMAND_PANEL_STORAGE_NAME) //It gets the data from storage
+var storageContent = controlPanelStateStorage.get()
 if(storageContent == null){
-	storageContent = new CommandPanel(false)
-	commandPanelStateStorage.set(storageContent)
-	views.showCommandPanel()
+	storageContent = new ControlPanel(false)
+	controlPanelStateStorage.set(storageContent)
+	views.showControlPanel()
 } else {
 	if(storageContent.isHidden){
-		views.hideCommandPanel()
+		views.hideControlPanel()
 	} else {
-		views.showCommandPanel()
+		views.showControlPanel()
 	}
 }
 
-controllers.commandPanel = {
-	storage: commandPanelStateStorage,
+controllers.controlPanel = {
+	storage: controlPanelStateStorage,
 	storageContent: storageContent
 }
 
 controllers.functions.hidePanel = function(){
-	views.hideCommandPanel()
-	var content = controllers.commandPanel.storageContent
+	views.hideControlPanel()
+	var content = controllers.controlPanel.storageContent
 	content.isHidden = true
-	controllers.commandPanel.storage.set(content)
+	controllers.controlPanel.storage.set(content)
 }
 
 controllers.functions.showPanel = function(){
-	views.showCommandPanel()
-	var content = controllers.commandPanel.storageContent
+	views.showControlPanel()
+	var content = controllers.controlPanel.storageContent
 	content.isHidden = false
-	controllers.commandPanel.storage.set(content)
+	controllers.controlPanel.storage.set(content)
 }
 
 controllers.functions.executeSequence = function(moduleName, sequenceName){

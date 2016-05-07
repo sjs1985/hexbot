@@ -1,5 +1,5 @@
 var views = {
-	appendCommandPanel: function(){
+	appendControlPanel: function(){
 		var divMain = document.createElement("div")
 		divMain.id = COMMAND_PANEL_DOM_ID
 		divMain.className = "modal hide in"
@@ -26,14 +26,14 @@ var views = {
 		document.getElementsByTagName("BODY")[0].appendChild(divMain);
 	},
 
-	showCommandPanel: function(){
+	showControlPanel: function(){
 		var element = document.getElementById(COMMAND_PANEL_DOM_ID)
 		if(element){
 			element.style.display = "block"
 		}
 	},
 
-	hideCommandPanel: function(){
+	hideControlPanel: function(){
 		var element = document.getElementById(COMMAND_PANEL_DOM_ID)
 		if(element){
 			element.style.display = "none"

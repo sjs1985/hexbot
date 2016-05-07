@@ -1,4 +1,4 @@
-const COMMAND_PANEL_STORAGE_NAME = "HExBot-CommandPanel"
+const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const STATE_STORAGE_NAME = "HExBot-State"
 
 //DOM IDs

@@ -1,4 +1,3 @@
-//It does something
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016)",
@@ -28,6 +27,10 @@
 				"modules/missions/sequences/transferMoney.js",
 				"modules/adRemover/procedures.js",
 				"modules/adRemover/sequences/removeAds.js",
+				"modules/camping/procedures.js",
+				"modules/camping/sequences/bankCamping.js",
+				"modules/uploader/procedures.js",
+				"modules/uploader/sequences/upload.js",
 
 				"libraries/classes/Storage.js",
 				"libraries/classes/Sequence.js",
@@ -37,9 +40,11 @@
 				//"libraries/showRequest.js",
 				"libraries/functions/strposOfArray.js",
 				"libraries/functions/getDOMElement.js",
-				"libraries/functions/defineLanguage.js",
 				//"libraries/getMissionInformation.js",
 				"libraries/functions/goToPage.js",
+				"libraries/functions/sendXMLHttpRequest.js",
+				"libraries/functions/getMyIp.js",
+				"libraries/functions/removeLinesFromText.js",
 				//"libraries/extractDataFromLogs.js",
 				//"libraries/getSoftwareId.js",
 

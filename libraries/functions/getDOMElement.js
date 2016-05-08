@@ -9,7 +9,7 @@ function getDOMElement(tagName, attribName, attribValue, position) {
     resultElements = []
     var count;
     if (attribName != null) {
-        for (count = 0; count <= element.length - 1; count++) {
+        for (count = 0; count < element.length; count++) {
             if (element[count].getAttribute(attribName) == attribValue) {
                 resultElements.push(element[count])
             }
@@ -20,9 +20,13 @@ function getDOMElement(tagName, attribName, attribValue, position) {
     if (resultElements.length > 0) {
         if (position == "last") position = resultElements.length - 1
         try {
-            resultElements[position].style.fontSize = "15px"
-            resultElements[position].style.color = "red"
+            
         } catch (error) {
+            console.log(error.message)
+        }
+        try{ //Color the element
+            resultElements[position].style.color = "red"
+        } catch(error){
             console.log(error.message)
         }
         return resultElements[position]

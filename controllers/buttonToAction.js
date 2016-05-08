@@ -19,3 +19,7 @@ document.getElementById(PERFORM_TRANSFER_MONEY_ID).addEventListener("click", fun
 	controllers.functions.executeSequence("missions", "transferMoney")
 })
 
+document.getElementById(PERFORM_BANK_CAMPING).addEventListener("click", function(){
+	controllers.functions.executeSequence("camping", "bankCamping")
+})
+

@@ -1,0 +1,1 @@
+var foo = $jSpaghetti.module("uploader").sequence("upload")

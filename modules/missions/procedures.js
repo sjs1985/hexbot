@@ -1,5 +1,5 @@
 var foo = $jSpaghetti.module("missions")
-foo.config.debugMode = true
+foo.config.debugMode = false
 
 foo.procedure("getURLMission", function(shared, internalFunctions){
 
@@ -203,6 +203,19 @@ foo.procedure("signInKnownTarget", function(){
 
 foo.procedure("hackTargetBruteForce", function(){
 	goToPage("/internet?action=hack&method=bf")
+})
+
+foo.procedure("cleanMyIpClues", function(data){
+	var textArea = getDOMElement("textarea", "class", "logarea", 0)
+	if (textArea.value.length > 0){
+		data.isEmpty = false
+		var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+		textArea.value = removeLinesFromText(textArea.value, pattern)
+		getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	} else {
+		data.isEmpty = true
+	}
+	if(data.cleanerCount != undefined) data.cleanerCount++
 })
 
 foo.procedure("cleanTextAreaContent", function(data){

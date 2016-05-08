@@ -110,29 +110,6 @@ foo.procedure("solvePuzzle", function(){
 	}
 
 	/*
-		@prototype: sendBackgroundMessage(script_target, message, function_callback);
-		@definition: This function sends a AJAX POST message to the server;
-		@author: GRSa;
-		@parameters: 
-			*script_target (String): The server-side script (e.g. "riddle.php");
-			*message (String): The string containing the parameters message or something (e.g. "foo=bar&baz=qux");
-			*function_callback (Function) The function that must be executed after server response. This callback function receives the server response. The response content can be accessed from arguments[0] variable inside the callback function.
-		@return: void
-	*/
-	function sendBackgroundMessage(script_target, message, function_callback){
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-			if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				var result = JSON.parse(xmlhttp.responseText);
-				function_callback(result);
-			}
-		}
-		xmlhttp.open("POST", script_target, true);
-		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
-		xmlhttp.send(message);
-	}
-
-	/*
 		@prototype: solvePuzzle(puzzle_id);
 		@definition: This function solves the indicated puzzle;
 		@author: GRSa;
@@ -248,14 +225,14 @@ foo.procedure("solvePuzzle", function(){
 				document.getElementsByName("qa-answer")[0].value = text_answer;
 				document.getElementsByClassName("btn btn-success")[0].click();
 			} else if (fake_message){
-				sendBackgroundMessage("riddle.php", fake_message, function(){
-					var result = arguments[0];
+				sendXMLHttpRequest("riddle.php", "POST", fake_message, true, function(data){
+					var result = JSON.parse(data)
 					if (result.status == "OK"){
-						location.reload();              
+						location.reload()
 					} else {
-						console.log(result);
+						console.log(result)
 					}
-				});
+				})
 			}
 			
 		} else {

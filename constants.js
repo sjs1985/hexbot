@@ -9,6 +9,7 @@ const SET_CLEAN_OWN_LOGS_DOM_ID = 'set-cleaner'
 const SOLVE_RIDDLE_DOM_ID = 'set-infosolveriddles'
 const PERFORM_CHECK_BALANCE_ID = 'set-check-account-status-job'
 const PERFORM_TRANSFER_MONEY_ID = 'set-transfer-money-status-job'
+const PERFORM_BANK_CAMPING = "set-camping-bank-logs"
 
 const FIELD_BANK_IP_TARGET = "target-bank-ip"
 const FIELD_MY_ACCOUNT = "set-my-account"

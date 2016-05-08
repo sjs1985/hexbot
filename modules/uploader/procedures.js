@@ -1,0 +1,1 @@
+var uploader = $jSpaghetti.module("uploader")

@@ -18,10 +18,10 @@ var views = {
 			'<button id="set-victim-cleaner" class="btn btn-success" disabled> Clean victim logs </button> ' +
 			'<button id="set-cleanlogin" class="btn btn-success" disabled> Clean login/hack </button> ' +
 			'<button id="' + SOLVE_RIDDLE_DOM_ID + '" class="btn btn-success"> Solve puzzles </button><br><br><br>'+
-			'<button id="set-camping-bank-logs" class="btn btn-success" disabled> Listen transfer bank logs on </button>' +
-			'<input id="' + FIELD_BANK_IP_TARGET + '" class="controls" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;" disabled> and transfer to my account: <input id="' + FIELD_MY_ACCOUNT + '" class="controls" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;" disabled><br><br>' +
+			'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-success"> Listen transfer bank logs on </button>' +
+			'<input id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> and transfer to my account: <input id="' + FIELD_MY_ACCOUNT + '" class="controls fieldsContent" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"><br><br>' +
 			'<button id="set-install-software" class="btn btn-success" disabled> Upload, install and hide this</button>' +
-			'<input id="' + FIELD_SOFTWARE_TO_INSTALL + '" class="controls" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;" disabled> software on these <input id="' + FIELD_IPS_INSTALL_TARGETS + '" class="controls" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;" disabled> IPs.<br>'; +
+			'<input id="' + FIELD_SOFTWARE_TO_INSTALL + '" class="controls fieldsContent" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;" disabled> software on these <input id="' + FIELD_IPS_INSTALL_TARGETS + '" class="controls fieldsContent" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;" disabled> IPs.<br>'; +
 		'</div>';
 		document.getElementsByTagName("BODY")[0].appendChild(divMain);
 	},

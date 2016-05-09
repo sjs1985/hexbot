@@ -25,4 +25,3 @@ adRemover.events.addEventListener("terminated", function(){
 	adRemover.reset()
 })
 
-console.log($jSpaghetti)

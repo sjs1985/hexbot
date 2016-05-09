@@ -3,7 +3,8 @@ camping.config.debugMode = true
 
 camping.procedure("startBankCamping", function(shared){
 	shared.ip = controllers.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET]
-	shared.account = controllers.bot.controlPanel.fieldsContent[FIELD_MY_ACCOUNT]
+	shared.myAccount = controllers.bot.controlPanel.fieldsContent[FIELD_MY_ACCOUNT]
+	shared.accounts = []
 })
 
 camping.procedure("goToIp", function(shared){
@@ -56,4 +57,33 @@ camping.procedure("cleanTextAreaContent", function(shared){
 	} else {
 		shared.isEmpty = true
 	}
+})
+
+camping.procedure("reloadPage", function(shared){
+	location.reload()
+})
+
+camping.procedure("extractTransferLogAccount", function(shared){
+	var textArea = getDOMElement("textarea", "class", "logarea", 0)
+	var lines = textArea.value.split(/[\n\r]/)
+	var outputLines = []
+	var accounts = []
+	var myIpPattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+	for (var i = 0; i < lines.length; i++) {
+		if ((/\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] transferred \$[0-9]+ from #[0-9]+.*to #[0-9]+ at localhost/.test(lines[i])) &&
+			(!myIpPattern.test(lines[i]))) {
+			var result = lines[i].match(/#[0-9]+/g)
+			accounts.push(result[1].replace("#", ""))
+		} else {
+			outputLines.push(lines[i])
+		}
+	}
+	shared.accounts = accounts.filter(function(value, pos) {
+    	return accounts.indexOf(value) == pos
+	})
+	textArea.value = outputLines.join("\n")
+})
+
+camping.procedure("showResult", function(shared){
+	console.log(shared.accounts)
 })

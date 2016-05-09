@@ -32,6 +32,20 @@ camping.procedure("hackTargetBruteForce", function(){
 	goToPage("/internet?action=hack&method=bf")
 })
 
+camping.procedure("hackAccount", function(shared){
+	goToPage("/internet?action=hack&acc=" + shared.accounts.shift())
+})
+
+camping.procedure("accessKnownAccount", function(shared){
+	getDOMElement("input", "name", "acc", 0).value = getDOMElement("div", "class", "alert alert-error", 0).value.match(/[0-9]+/)[0]
+	getDOMElement("input", "name", "pass", 0).value = getDOMElement("strong", null, null, 1).childNodes[0].nodeValue. //Fill the password field with the password on screen
+	getDOMElement("input", "type", "submit", 1).click() //Click on the Login button
+})
+
+camping.procedure("accessUnknownAccount", function(shared){
+	getDOMElement("input", "type", "submit", 1).click() //Click on the Login button
+})
+
 camping.procedure("goToOwnLogTab", function(){
 	goToPage("/log")
 })
@@ -59,8 +73,8 @@ camping.procedure("cleanTextAreaContent", function(shared){
 	}
 })
 
-camping.procedure("reloadPage", function(shared){
-	location.reload()
+camping.procedure("submitLogs", function(shared){
+	getDOMElement("input", "class", "btn btn-inverse", "last").click()
 })
 
 camping.procedure("extractTransferLogAccount", function(shared){
@@ -79,9 +93,13 @@ camping.procedure("extractTransferLogAccount", function(shared){
 		}
 	}
 	shared.accounts = accounts.filter(function(value, pos) {
-    	return accounts.indexOf(value) == pos
+		return accounts.indexOf(value) == pos
 	})
 	textArea.value = outputLines.join("\n")
+})
+
+camping.procedure("goToTargetLogs", function(){
+	goToPage("/internet?view=logs")
 })
 
 camping.procedure("showResult", function(shared){

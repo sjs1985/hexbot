@@ -1,5 +1,5 @@
 var camping = $jSpaghetti.module("camping")
-camping.config.debugMode = true
+camping.config.debugMode = false
 
 camping.procedure("startBankCamping", function(shared){
 	shared.ip = controllers.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET]
@@ -7,6 +7,8 @@ camping.procedure("startBankCamping", function(shared){
 	shared.accounts = []
 	shared.myCluesFound = false
 	shared.myIp = getMyIp(true)
+	shared.listenForTransferActivities = true
+	shared.listenForAccountAccessActivities = false
 })
 
 camping.procedure("goToIp", function(shared){
@@ -15,6 +17,10 @@ camping.procedure("goToIp", function(shared){
 
 camping.procedure("logout", function(){
 	goToPage("/internet?view=logout")
+})
+
+camping.procedure("logoutAccount", function(){
+	goToPage("/internet?bAction=logout")
 })
 
 camping.procedure("isThereMessageError", function(){
@@ -76,24 +82,32 @@ camping.procedure("cleanTextAreaContent", function(shared){
 
 camping.procedure("submitLogs", function(shared){
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
-})
+}) 
 
-camping.procedure("extractTransferLogAccount", function(shared){
+camping.procedure("extractDataFromLog", function(shared){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	var lines = textArea.value.split(/[\n\r]/)
 	var outputLines = []
-	var accounts = []
 	var myIpPattern = new RegExp("^.*" + shared.myIp + ".*$")
+	var myAccountPattern = new RegExp("^.*" + shared.myAccount + ".*$")
 	for (var i = 0; i < lines.length; i++) {
-		if (((/\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] transferred \$[0-9]+ from #[0-9]+.*to #[0-9]+ at localhost/.test(lines[i]))) &&
-			(!myIpPattern.test(lines[i]))) {
+		if ((shared.listenForTransferActivities) &&
+			((/\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] transferred \$[0-9]+ from #[0-9]+.*to #[0-9]+ at localhost/.test(lines[i]))) &&
+			(!myIpPattern.test(lines[i])) && (!myAccountPattern.test(lines[i]))) {
 			var result = lines[i].match(/#[0-9]+/g)
 			shared.accounts.push(result[1].replace("#", ""))
+		} else 
+		if ((shared.listenForAccountAccessActivities) &&
+			((/\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] logged on account #[0-9]+/.test(lines[i]))) &&
+			(!myIpPattern.test(lines[i])) && (!myAccountPattern.test(lines[i]))) {
+			var result = lines[i].match(/#[0-9]+/g)
+			shared.accounts.push(result[0].replace("#", ""))
 		} else {
 			outputLines.push(lines[i])
 		}
 	}
-	accounts = shared.accounts
+	console.log("Minhas contas:", shared.accounts)
+	var accounts = shared.accounts
 	shared.accounts = accounts.filter(function(value, pos) {
 		return accounts.indexOf(value) == pos
 	})

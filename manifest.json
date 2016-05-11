@@ -14,7 +14,7 @@
 		{
 			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
 			"js":[
-				"libraries/jSpaghetti/jSpaghetti.js",
+				"libraries/jSpaghetti/jSpaghetti.min.js",
 
 				"constants.js",
 

@@ -1,19 +1,20 @@
 var foo = $jSpaghetti.module("camping").sequence("bankCamping")
 
 foo.instructions = [
-	{"@init": "startBankCamping"},
-	{"@startProcess": ["logout", "goToIp", "isThereMessageError", {"gotoif":["*.$", "@abortProcess"]}]},
-	{"@tryHostConnection": ["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@abortProcess"]}, {"wait":"_forPageToReload"}]},
-	{"@accessTarget": "signInKnownTarget"},
-	{"@cleanMyClues": ["extractTransferLogAccount", "cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@cleanOwnLogs"]}, {"wait": "_forPageToReload"}]},
-	{"@cleanOwnLogs": ["goToOwnLogTab", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@startListener"]}, {"wait": "_forPageToReload"}]},
-	{"@startListener": ["goToTargetLogs", "extractTransferLogAccount", {"gotoif":["*.accounts.length > 0", "@submitChangedLogs"]}, {"wait":2000}, {"gotoif":[1, "@startListener"]}]},
-	{"@submitChangedLogs": ["submitLogs", "isThereMessageError", {"gotoif":["*.$", "@startTransfer"]}, {"wait": "_forPageToReload"}]},
-	{"@startTransfer": ["logout", "goToIp", "hackAccount", "isThereMessageError", {"gotoif":["*.$", "@accessKnownAccount"]}, {"wait": "_forPageToReload"}]},
-	{"@accessUnknownAccount": ["accessUnknownAccount", {"gotoif": [1, "@trasferMoney"]}]},
-	{"@accessKnownAccount": "accessKnownAccount"},
-	{"@trasferMoney": ["isThereMessageError", {"gotoif":["*.$", "@cleanOwnLogsAgain"]}, {"wait": 1000}, "transferMoneyToTarget"]},
-	{"@cleanMyTransferLog": ["logout", "goToIp", "isThereMessageError", {"gotoif":["*.$", "@cleanOwnLogsAgain"]}, "forceToAccessTarget", "signInKnownTarget", "cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@cleanOwnLogsAgain"]}, {"wait": "_forPageToReload"}]},
-	{"@cleanOwnLogsAgain": ["goToOwnLogTab", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@init"]}, {"wait": "_forPageToReload"}, {"gotoif": [1, "@init"]}]},
-	{"@abortProcess": "_exit"}
+	{1: "startBankCamping"},
+	{2: {"gotoif": ["*.accounts.length > 0", 11]}},
+	{3: ["logout", "goToIp", "isThereMessageError", {"gotoif":["*.$", 0]}]},
+	{4: ["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", 5]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", 0]}, {"wait":"_forPageToReload"}]},	
+	{5: "signInKnownTarget"},
+	{6: ["extractTransferLogAccount", "cleanMyIpClues", "submitLogs", "isThereMessageError", {"gotoif":["*.$", 8]}, {"wait": "_forPageToReload"}]},
+	{8: [{"gotoif": ["*.accounts.length > 0", 11]}, "goToTargetLogs", "extractTransferLogAccount", "cleanMyIpClues", {"gotoif":["((*.accounts.length > 0) || (*.myCluesFound))", 9]}, {"wait":3000}, {"gotoif":["true", 8]}]},
+	{9: ["submitLogs", "isThereMessageError", {"gotoif":["*.$", 10]}, {"wait": "_forPageToReload"}]},
+	{10: {"gotoif": ["*.accounts.length == 0", 8]}},
+	{11: [{"gotoif": ["*.accounts.length == 0", 16]}, "logout", "goToIp", "hackAccount", "isThereMessageError", {"gotoif":["*.$", 13]}, {"wait": "_forPageToReload"}]},
+	{12: ["accessUnknownAccount", {"gotoif": ["true", 14]}]},
+	{13: "accessKnownAccount"},
+	{14: ["isThereMessageError", {"gotoif":["*.$", 11]}, {"wait": 1000}, "transferMoneyToTarget"]},
+	{15: ["logout", "goToIp", "isThereMessageError", {"gotoif":["*.$", 16]}, "forceToAccessTarget", "signInKnownTarget", "cleanMyIpClues", "submitLogs", "isThereMessageError", {"gotoif":["*.$", 16]}, {"wait": "_forPageToReload"}]},
+	{16: ["goToOwnLogTab", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", 2]}, {"wait": "_forPageToReload"}, {"gotoif": ["true", 2]}]},
+	{0: "_exit"}
 ]

@@ -5,6 +5,8 @@ camping.procedure("startBankCamping", function(shared){
 	shared.ip = controllers.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET]
 	shared.myAccount = controllers.bot.controlPanel.fieldsContent[FIELD_MY_ACCOUNT]
 	shared.accounts = []
+	shared.myCluesFound = false
+	shared.myIp = getMyIp(true)
 })
 
 camping.procedure("goToIp", function(shared){
@@ -33,13 +35,18 @@ camping.procedure("hackTargetBruteForce", function(){
 })
 
 camping.procedure("hackAccount", function(shared){
+	console.log("contas:", shared.accounts)
 	goToPage("/internet?action=hack&acc=" + shared.accounts.shift())
 })
 
 camping.procedure("accessKnownAccount", function(shared){
-	getDOMElement("input", "name", "acc", 0).value = getDOMElement("div", "class", "alert alert-error", 0).innerHTML.match(/[0-9]+/)[0]
-	getDOMElement("input", "name", "pass", 0).value = getDOMElement("strong", null, null, 1).childNodes[0].nodeValue //Fill the password field with the password on screen
-	getDOMElement("input", "type", "submit", 1).click() //Click on the Login button
+	var labels = ["This bank account does not exists", "Invalid bank account", "Essa conta bancária não existe", "inválida"]
+	var errorMessageContainer = getDOMElement("div", "class", "alert alert-error", 0)
+	if (strposOfArray(errorMessageContainer.innerHTML, labels) == -1){
+		getDOMElement("input", "name", "acc", 0).value = getDOMElement("div", "class", "alert alert-error", 0).innerHTML.match(/[0-9]+/)[0]
+		getDOMElement("input", "name", "pass", 0).value = getDOMElement("strong", null, null, 1).childNodes[0].nodeValue //Fill the password field with the password on screen
+		getDOMElement("input", "type", "submit", 1).click() //Click on the Login button
+	}
 })
 
 camping.procedure("accessUnknownAccount", function(shared){
@@ -52,9 +59,14 @@ camping.procedure("goToOwnLogTab", function(){
 
 camping.procedure("cleanMyIpClues", function(shared){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
-	var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
-	textArea.value = removeLinesFromText(textArea.value, pattern)
-	getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	var pattern = new RegExp("^.*" + shared.myIp + ".*$")
+	var textFiltered = removeLinesFromText(textArea.value, pattern)
+	if (textArea.value != textFiltered){
+		shared.myCluesFound = true
+		textArea.value = textFiltered
+	} else {
+		shared.myCluesFound = false
+	}
 })
 
 camping.procedure("cleanTextAreaContent", function(shared){
@@ -72,7 +84,7 @@ camping.procedure("extractTransferLogAccount", function(shared){
 	var lines = textArea.value.split(/[\n\r]/)
 	var outputLines = []
 	var accounts = []
-	var myIpPattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+	var myIpPattern = new RegExp("^.*" + shared.myIp + ".*$")
 	for (var i = 0; i < lines.length; i++) {
 		if (((/\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] transferred \$[0-9]+ from #[0-9]+.*to #[0-9]+ at localhost/.test(lines[i]))) &&
 			(!myIpPattern.test(lines[i]))) {

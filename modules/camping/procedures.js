@@ -35,7 +35,6 @@ camping.procedure("hackTargetBruteForce", function(){
 })
 
 camping.procedure("hackAccount", function(shared){
-	console.log("contas:", shared.accounts)
 	goToPage("/internet?action=hack&acc=" + shared.accounts.shift())
 })
 
@@ -103,10 +102,6 @@ camping.procedure("extractTransferLogAccount", function(shared){
 
 camping.procedure("goToTargetLogs", function(){
 	goToPage("/internet?view=logs")
-})
-
-camping.procedure("showResult", function(shared){
-	console.log(shared.accounts)
 })
 
 camping.procedure("transferMoneyToTarget", function(shared){

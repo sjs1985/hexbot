@@ -106,7 +106,7 @@ camping.procedure("extractDataFromLog", function(shared){
 			outputLines.push(lines[i])
 		}
 	}
-	console.log("Minhas contas:", shared.accounts)
+	console.log("Caught accounts:", shared.accounts)
 	var accounts = shared.accounts
 	shared.accounts = accounts.filter(function(value, pos) {
 		return accounts.indexOf(value) == pos

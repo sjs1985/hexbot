@@ -1,20 +1,19 @@
 var foo = $jSpaghetti.module("camping").sequence("bankCamping")
 
 foo.instructions = [
-	{1: ["startBankCamping", "logout"]},
-	{2: {"gotoif": ["*.accounts.length > 0", 11]}},
-	{3: ["goToIp", "isThereMessageError", {"gotoif":["*.$", 0]}]},
-	{4: ["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", 5]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", 0]}, {"wait":"_forPageToReload"}]},	
-	{5: "signInKnownTarget"},
-	{6: ["goToTargetLogs", "cleanMyIpClues", "extractDataFromLog", "submitLogs", "isThereMessageError", {"gotoif":["*.$", 8]}, {"wait": "_forPageToReload"}]},
-	{8: [{"gotoif": ["*.accounts.length > 0", 11]}, "goToTargetLogs", "cleanMyIpClues", "extractDataFromLog", {"gotoif":["((*.accounts.length > 0) || (*.myCluesFound))", 9]}, {"wait":3000}, {"gotoif":["true", 8]}]},
-	{9: ["submitLogs", "isThereMessageError", {"gotoif":["*.$", 10]}, {"wait": "_forPageToReload"}]},
-	{10: [{"gotoif": ["*.accounts.length == 0", 8]}, "logout"]},
-	{11: [{"gotoif": ["*.accounts.length == 0", 16]}, "goToIp", "hackAccount", "isThereMessageError", {"gotoif":["*.$", 13]}, {"wait": "_forPageToReload"}]},
-	{12: ["accessUnknownAccount", {"gotoif": ["true", 14]}]},
-	{13: "accessKnownAccount"},
-	{14: ["isThereMessageError", {"gotoif":["*.$", 11]}, {"wait": 1000}, "transferMoneyToTarget"]},
-	{15: ["logoutAccount", "goToIp", "isThereMessageError", {"gotoif":["*.$", 16]}, "forceToAccessTarget", "signInKnownTarget", "cleanMyIpClues", "extractDataFromLog", "submitLogs", "isThereMessageError", {"gotoif":["*.$", 16]}, {"wait": "_forPageToReload"}]},
-	{16: [{"gotoif": ["*.accounts.length > 0", 11]}, "goToOwnLogTab", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", 6]}, {"wait": "_forPageToReload"}, {"gotoif": ["true", 6]}]},
-	{0: "_exit"}
+	{"@init": 						["startBankCamping", "logout"]},
+	{"@goToAccountHackIfAvaiable": 	{"gotoif": ["*.accounts.length > 0", "@startAccountAtack"]}},
+	{"@checkIpTarget": 				["goToIp", "isThereMessageError", {"gotoif":["*.$", "@finishProcess"]}]},
+	{"@tryToInvadeTarget": 			[{"gotoif": ["*.isLogged", "@checkForCaughtAccounts"]}, "forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessKnownTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@finishProcess"]}, {"wait":"_forPageToReload"}]},
+	{"@accessKnownTarget": 			"signInTarget"},
+	{"@cleanMyCluesAndAnalizeLogs": ["goToTargetLogs", "cleanMyIpClues", "extractDataFromLog", "submitLogs", "isThereMessageError", {"gotoif":["*.$", "@checkForCaughtAccounts"]}, {"wait": "_forPageToReload"}]},
+	{"@checkForCaughtAccounts": 	{"gotoif": ["*.accounts.length > 0", "@startAccountAtack"]}},
+	{"@listen": 					["goToTargetLogs", "cleanMyIpClues", "extractDataFromLog", {"gotoif":["((*.accounts.length > 0) || (*.myCluesFound))", "@submitLogChanges"]}, {"wait":3000}, {"gotoif":["true", "@listen"]}]},
+	{"@submitLogChanges": 			["submitLogs", "isThereMessageError", {"gotoif":["*.$", "@checkForCaughtAccounts"]}, {"wait": "_forPageToReload"}]},
+	{"@startAccountAtack": 			[{"gotoif": ["*.accounts.length == 0", "@cleanMyOwnLogs"]}, "logout", "goToIp", "hackAccount", "isThereMessageError", {"gotoif":["*.$", "@accessKnownAccount"]}, {"wait": "_forPageToReload"}, "accessUnknownAccount", {"gotoif": ["true", "@transferMoney"]}]},
+	{"@accessKnownAccount": 		"accessKnownAccount"},
+	{"@transferMoney": 				["isThereMessageError", {"gotoif":["*.$", "@startAccountAtack"]}, {"wait": 1000}, "transferMoneyToTarget"]},
+	{"@cleanTransferLogs": 			["logoutAccount", "goToIp", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, "forceToAccessTarget", "signInTarget", "cleanMyIpClues", "extractDataFromLog", "submitLogs", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
+	{"@cleanMyOwnLogs": 			[{"gotoif": ["*.accounts.length > 0", "@startAccountAtack"]}, "goToOwnLogTab", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@tryToInvadeTarget"]}, {"wait": "_forPageToReload"}, {"gotoif": ["true", "@tryToInvadeTarget"]}]},
+	{"@finishProcess": 				"_exit"}
 ]

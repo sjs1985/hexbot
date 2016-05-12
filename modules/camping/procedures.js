@@ -1,5 +1,5 @@
 var camping = $jSpaghetti.module("camping")
-camping.config.debugMode = false
+camping.config.debugMode = true
 
 camping.procedure("startBankCamping", function(shared){
 	shared.ip = controllers.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET]
@@ -9,13 +9,15 @@ camping.procedure("startBankCamping", function(shared){
 	shared.myIp = getMyIp(true)
 	shared.listenForTransferActivities = true
 	shared.listenForAccountAccessActivities = false
+	shared.isLogged = false
 })
 
 camping.procedure("goToIp", function(shared){
 	goToPage("/internet?ip=" + shared.ip)
 })
 
-camping.procedure("logout", function(){
+camping.procedure("logout", function(shared){
+	shared.isLogged = false
 	goToPage("/internet?view=logout")
 })
 
@@ -32,7 +34,8 @@ camping.procedure("forceToAccessTarget", function(){
 	goToPage("/internet?action=hack")
 })
 
-camping.procedure("signInKnownTarget", function(){
+camping.procedure("signInTarget", function(shared){
+	shared.isLogged = true
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 })
 
@@ -89,7 +92,7 @@ camping.procedure("extractDataFromLog", function(shared){
 	var lines = textArea.value.split(/[\n\r]/)
 	var outputLines = []
 	var myIpPattern = new RegExp("^.*" + shared.myIp + ".*$")
-	var myAccountPattern = new RegExp("^.*" + shared.myAccount + ".*$")
+	var myAccountPattern = new RegExp("^.* to #" + shared.myAccount + ".*$")
 	for (var i = 0; i < lines.length; i++) {
 		if ((shared.listenForTransferActivities) &&
 			((/\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] transferred \$[0-9]+ from #[0-9]+.*to #[0-9]+ at localhost/.test(lines[i]))) &&

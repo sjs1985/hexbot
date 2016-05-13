@@ -36,17 +36,13 @@
 				"libraries/classes/Sequence.js",
 				"libraries/classes/Bot.js",
 
-				//"libraries/setNextStep.js",
-				//"libraries/showRequest.js",
 				"libraries/functions/strposOfArray.js",
 				"libraries/functions/getDOMElement.js",
-				//"libraries/getMissionInformation.js",
 				"libraries/functions/goToPage.js",
 				"libraries/functions/sendXMLHttpRequest.js",
 				"libraries/functions/getMyIp.js",
 				"libraries/functions/removeLinesFromText.js",
-				//"libraries/extractDataFromLogs.js",
-				//"libraries/getSoftwareId.js",
+				"libraries/functions/getSoftwareId.js",
 
 				"views.js",
 

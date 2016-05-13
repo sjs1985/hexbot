@@ -26,4 +26,5 @@ adRemover.run()
 adRemover.events.addEventListener("terminated", function(){
 	adRemover.reset()
 })
+console.log(getSoftwareId("webserver.exe", "1.0"))
 

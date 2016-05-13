@@ -1,5 +1,5 @@
 var foo = $jSpaghetti.module("missions")
-foo.config.debugMode = false
+foo.config.debugMode = true
 
 foo.procedure("getURLMission", function(shared, internalFunctions){
 
@@ -151,6 +151,16 @@ foo.procedure("clickOnConfirmAcceptMissionButton", function(shared){
 
 foo.procedure("isThereMessageError", function(){
 	if (getDOMElement("div", "class", "alert alert-error", 0))
+	return true
+})
+
+foo.procedure("isCrackerStrongEnough", function(){
+	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+	var labels = ["You do not have the needed software to perform this action", "Vocẽ não tem o software necessário para realizar essa ação", "your cracker is not good enough", "seu cracker não é bom o suficiente"]
+	if (errorContainer){
+		if(strposOfArray(errorContainer.innerHTML, labels) >= 0)
+		return false
+	}
 	return true
 })
 

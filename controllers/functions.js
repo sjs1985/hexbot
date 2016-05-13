@@ -20,10 +20,13 @@ controllers.functions.executeSequence = function(moduleName, sequenceName){
 	controllers.bot.currentSequence = sequence
 	controllers.storage.set(controllers.bot)
 	var currentSequence = $jSpaghetti.module(moduleName).sequence(sequenceName)
-	currentSequence.events.addEventListener("terminated", function(){
-		controllers.functions.resetBotAndShowPanel()
+	currentSequence.reset()
+	currentSequence.events.addEventListener("reset", function(){
+		currentSequence.run()
+		currentSequence.events.addEventListener("terminated", function(){
+			controllers.functions.resetBotAndShowPanel()
+		})
 	})
-	currentSequence.run()
 }
 
 controllers.functions.resetBotAndShowPanel = function (){

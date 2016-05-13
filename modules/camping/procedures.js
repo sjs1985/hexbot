@@ -92,17 +92,18 @@ camping.procedure("extractDataFromLog", function(shared){
 	var lines = textArea.value.split(/[\n\r]/)
 	var outputLines = []
 	var myIpPattern = new RegExp("^.*" + shared.myIp + ".*$")
-	var myAccountPattern = new RegExp("^.* to #" + shared.myAccount + ".*$")
+	var myAccounttTransferPattern = new RegExp("^.* to #" + shared.myAccount + ".*$")
+	var myAccounttAccessPattern = new RegExp("^.* on account #" + shared.myAccount + ".*$")
 	for (var i = 0; i < lines.length; i++) {
 		if ((shared.listenForTransferActivities) &&
-			((/\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] transferred \$[0-9]+ from #[0-9]+.*to #[0-9]+ at localhost/.test(lines[i]))) &&
-			(!myIpPattern.test(lines[i])) && (!myAccountPattern.test(lines[i]))) {
+			((/^.*transferred \$[0-9]+ from #[0-9]+.*to #[0-9]+ at localhost$/.test(lines[i]))) &&
+			(!myIpPattern.test(lines[i])) && (!myAccounttTransferPattern.test(lines[i]))) {
 			var result = lines[i].match(/#[0-9]+/g)
 			shared.accounts.push(result[1].replace("#", ""))
 		} else 
 		if ((shared.listenForAccountAccessActivities) &&
-			((/\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] logged on account #[0-9]+/.test(lines[i]))) &&
-			(!myIpPattern.test(lines[i])) && (!myAccountPattern.test(lines[i]))) {
+			((/^.*logged on account #[0-9]+$/.test(lines[i]))) &&
+			(!myIpPattern.test(lines[i])) && (!myAccounttAccessPattern.test(lines[i]))) {
 			var result = lines[i].match(/#[0-9]+/g)
 			shared.accounts.push(result[0].replace("#", ""))
 		} else {

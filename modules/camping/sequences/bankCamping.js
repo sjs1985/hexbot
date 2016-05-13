@@ -12,7 +12,7 @@ foo.instructions = [
 	{"@submitLogChanges": 			["submitLogs", "isThereMessageError", {"gotoif":["*.$", "@checkForCaughtAccounts"]}, {"wait": "_forPageToReload"}]},
 	{"@startAccountAtack": 			[{"gotoif": ["*.accounts.length == 0", "@cleanMyOwnLogs"]}, "logout", "goToIp", "hackAccount", "isThereMessageError", {"gotoif":["*.$", "@accessKnownAccount"]}, {"wait": "_forPageToReload"}, "accessUnknownAccount", {"gotoif": ["true", "@transferMoney"]}]},
 	{"@accessKnownAccount": 		"accessKnownAccount"},
-	{"@transferMoney": 				["isThereMessageError", {"gotoif":["*.$", "@startAccountAtack"]}, {"wait": 1000}, "transferMoneyToTarget"]},
+	{"@transferMoney": 				["isThereMessageError", {"gotoif":["*.$", "@startAccountAtack"]}, {"wait": 2000}, "transferMoneyToTarget"]},
 	{"@cleanTransferLogs": 			["logoutAccount", "goToIp", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, "forceToAccessTarget", "signInTarget", "cleanMyIpClues", "extractDataFromLog", "submitLogs", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
 	{"@cleanMyOwnLogs": 			[{"gotoif": ["*.accounts.length > 0", "@startAccountAtack"]}, "goToOwnLogTab", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@tryToInvadeTarget"]}, {"wait": "_forPageToReload"}, {"gotoif": ["true", "@tryToInvadeTarget"]}]},
 	{"@finishProcess": 				"_exit"}

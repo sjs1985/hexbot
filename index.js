@@ -13,6 +13,7 @@ if(controllers.bot.currentSequence != null){ //Executes the current sequence
 	//----Put here the sequences that must be running while other sequences is not running -----//
 	//------------------------------------------------------------------------------------------//
 	var puzzleSolver = $jSpaghetti.module("riddleSolver").sequence("solvePuzzle")
+	puzzleSolver.reset()
 	puzzleSolver.run()
 	puzzleSolver.events.addEventListener("terminated", function(){
 		puzzleSolver.reset()
@@ -20,6 +21,7 @@ if(controllers.bot.currentSequence != null){ //Executes the current sequence
 }
 
 var adRemover = $jSpaghetti.module("adRemover").sequence("removeAds")
+adRemover.reset()
 adRemover.run()
 adRemover.events.addEventListener("terminated", function(){
 	adRemover.reset()

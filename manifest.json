@@ -10,6 +10,7 @@
 	"permissions": [
 		"tabs"
 	],
+	"icons": {"256": "icon.png"},
 	"content_scripts":[
 		{
 			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],

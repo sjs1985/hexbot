@@ -21,8 +21,11 @@ var views = {
 			'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-success"> Listen transfer bank logs on </button>' +
 			'<input id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> and transfer to my account: <input id="' + FIELD_MY_ACCOUNT + '" class="controls fieldsContent" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"><br><br>' +
 			'<button id="' + PERFORM_INSTALL_SOFTWARE + '" class="btn btn-success"> Upload, install and hide this</button>' +
-			'<input id="' + FIELD_SOFTWARE_TO_INSTALL + '" class="controls fieldsContent" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> software on these <input id="' + FIELD_IPS_INSTALL_TARGETS + '" class="controls fieldsContent" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"> IPs.<br>'; +
-		'</div>';
+			'<input id="' + FIELD_SOFTWARE_TO_INSTALL + '" class="controls fieldsContent" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> software on these <input id="' + FIELD_IPS_INSTALL_TARGETS + '" class="controls fieldsContent" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"> IPs.<br>' +
+			'</div>' + 
+			'<div class="modal-footer">' +
+			'<b>version ' + VERSION_BOT + '</b> check for new releases on <a href="https://github.com/perfilrobo/hexbot">official repository</a>' +
+			'</div>';
 		document.getElementsByTagName("BODY")[0].appendChild(divMain);
 	},
 

@@ -11,7 +11,7 @@ foo.instructions = [
 	{"@intallSoftware": 			["goToTargetSoftwares", "installSoftware", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
 	{"@cleanMyInstallingClues": 	["goToTargetLogs", "cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@hideSoftware"]}, {"wait": "_forPageToReload"}]},
 	{"@hideSoftware": 				["goToTargetSoftwares", "hideSoftware", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
-	{"@cleanMyInstallingClues": 	["goToTargetLogs", "cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
+	{"@cleanMyHiddingClues":  		["goToTargetLogs", "cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
 	{"@cleanMyOwnLogs": 			["goToOwnLogTab", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}, {"wait": "_forPageToReload"}, {"gotoif": ["true", "@goToTarget"]}]},
 	{"@finishProcess": 				"_exit"}
 ]

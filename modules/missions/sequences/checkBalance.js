@@ -1,6 +1,7 @@
 var foo = $jSpaghetti.module("missions").sequence("checkBalance")
 
 foo.instructions = [
+	{"@askForPermission": 			"askPermissionToAbort"},
 	{"@init": "startCheckBalance"},
 	{"@tryToGetMission": 			["goToMissionsTab", "checkSameTypeAcceptedMission", {"gotoif":["*.$", "@startMissionExecution"]}, "isAvailableMissionsPage", {"gotoif":["!*.$", "@alertUnknownMissionKind"]}, "getURLMission", {"wait": "_forTheSignal"}, {"gotoif":["*.urlMission == null", "@init"]}]},
 	{"@tryToAcceptMission": 		["goToAcceptMissionPage", "clickOnAcceptMissionButton", {"wait": 2000}, "clickOnConfirmAcceptMissionButton", "isThereMessageError", {"gotoif":["*.$", "@init"]}]},

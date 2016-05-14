@@ -33,7 +33,6 @@ foo.procedure("getURLMission", function(shared, internalFunctions){
 						break
 					}
 				}
-
 			}
 		}
 		return urlMission
@@ -164,9 +163,12 @@ foo.procedure("isCrackerStrongEnough", function(){
 	return true
 })
 
+foo.procedure("askPermissionToAbort", function(shared){
+	shared.abortMissionAllowed = window.confirm("Allow bot to abort missions if necessary (Cancel to NO)?")
+})
+
 foo.procedure("startCheckBalance", function(shared){
 	shared.missionType = CHECK_BALANCE
-	shared.abortMissionAllowed = false
 	shared.ips = []
 	shared.accounts = []
 	shared.nextIp = 0
@@ -174,7 +176,6 @@ foo.procedure("startCheckBalance", function(shared){
 
 foo.procedure("startTransferMoney", function(shared){
 	shared.missionType = TRANSFER_MONEY
-	shared.abortMissionAllowed = false
 	shared.ips = []
 	shared.accounts = []
 	shared.cleanerCount = 0

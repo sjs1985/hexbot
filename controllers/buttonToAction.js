@@ -23,3 +23,7 @@ document.getElementById(PERFORM_BANK_CAMPING).addEventListener("click", function
 	controllers.functions.executeSequence("camping", "bankCamping")
 })
 
+document.getElementById(PERFORM_INSTALL_SOFTWARE).addEventListener("click", function(){
+	controllers.functions.executeSequence("uploader", "upload")
+})
+

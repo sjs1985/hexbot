@@ -1,5 +1,5 @@
 var cleanersMod = $jSpaghetti.module("cleaners")
-//cleanersMod.config.debugMode = true
+cleanersMod.config.debugMode = true
 
 cleanersMod.procedure("goToOwnLogTab", function(){
 	goToPage("/log")

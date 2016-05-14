@@ -14,16 +14,15 @@ if(controllers.bot.currentSequence != null){ //Executes the current sequence
 	//------------------------------------------------------------------------------------------//
 	var puzzleSolver = $jSpaghetti.module("riddleSolver").sequence("solvePuzzle")
 	puzzleSolver.reset()
-	puzzleSolver.run()
-	puzzleSolver.events.addEventListener("terminated", function(){
-		puzzleSolver.reset()
+	puzzleSolver.events.addEventListener("reset", function(){
+		puzzleSolver.run()
 	})
 }
 
 var adRemover = $jSpaghetti.module("adRemover").sequence("removeAds")
 adRemover.reset()
-adRemover.run()
-adRemover.events.addEventListener("terminated", function(){
-	adRemover.reset()
+adRemover.events.addEventListener("reset", function(){
+	adRemover.run()
 })
+
 

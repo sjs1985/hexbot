@@ -1,5 +1,5 @@
 var foo = $jSpaghetti.module("riddleSolver")
-foo.config.debugMode = false
+foo.config.debugMode = true
 
 foo.procedure("solvePuzzle", function(){
 	/*

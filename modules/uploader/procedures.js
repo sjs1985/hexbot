@@ -3,14 +3,24 @@ uploader.config.debugMode = true
 
 uploader.procedure("startUpload", function(shared){
 	var softwareField = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARE_TO_INSTALL].split(",")
-	shared.softwareId = getSoftwareId(softwareField[0].trim(), softwareField[1].trim())
+	if (softwareField[0]){
+		shared.softwareName = softwareField[0].trim()
+	} else {
+		shared.softwareName = ""
+	}
+
+	if (softwareField[1]){
+		shared.softwareVersion = softwareField[1].trim()
+	} else {
+		shared.softwareVersion = ""
+	}
+	shared.softwareId = getSoftwareId(shared.softwareName, shared.softwareVersion)
 	if(shared.softwareId == null){
 		window.alert("Software not found :(")
 		return false
 	}
 	shared.ips = []
 	var ipsField = controllers.bot.controlPanel.fieldsContent[FIELD_IPS_INSTALL_TARGETS].split(",")
-	console.log(ipsField)
 	for (var i = 0; i < ipsField.length; i++) {
 		if (ipsField[i].length > 0)
 		shared.ips.push(ipsField[i].trim())
@@ -20,7 +30,6 @@ uploader.procedure("startUpload", function(shared){
 		return false
 	}
 	shared.myIp = getMyIp(true)
-	console.log(shared)
 	return true
 })
 
@@ -79,7 +88,7 @@ uploader.procedure("runUploadSoftware", function(shared){
 
 uploader.procedure("installSoftware", function(shared){
 	var softwareField = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARE_TO_INSTALL].split(",")
-	var softwareId = getSoftwareId(softwareField[0].trim(), softwareField[1].trim())
+	var softwareId = getSoftwareId(shared.softwareName, shared.softwareVersion)
 	goToPage("/internet?view=software&cmd=install&id=" + softwareId)
 })
 
@@ -95,13 +104,13 @@ uploader.procedure("isSoftwareAlreadyThere", function(){
 
 uploader.procedure("installSoftware", function(shared){
 	var softwareField = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARE_TO_INSTALL].split(",")
-	var softwareId = getSoftwareId(softwareField[0].trim(), softwareField[1].trim())
+	var softwareId = getSoftwareId(shared.softwareName, shared.softwareVersion)
 	goToPage("/internet?view=software&cmd=install&id=" + softwareId)
 })
 
 uploader.procedure("hideSoftware", function(shared){
 	var softwareField = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARE_TO_INSTALL].split(",")
-	var softwareId = getSoftwareId(softwareField[0].trim(), softwareField[1].trim())
+	var softwareId = getSoftwareId(shared.softwareName, shared.softwareVersion)
 	goToPage("/internet?view=software&cmd=hide&id=" + softwareId)
 })
 
@@ -114,3 +123,22 @@ uploader.procedure("cleanTextAreaContent", function(shared){
 	textArea.value = ""
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
 })
+
+uploader.procedure("isThereProgressBar", function(){
+	var progressBar = getDOMElement("div", "role", "progressbar", 0)
+	if (progressBar){
+		return true
+	} else {
+		return false
+	}
+})
+
+uploader.procedure("isThereMessageSuccess", function(){
+	var messageContainer = getDOMElement("div", "class", "alert alert-success", 0)
+	var labels = ["Software successfully uploaded", "Upload do software realizado com sucesso"]
+	if (messageContainer){
+		if (strposOfArray(messageContainer.innerHTML, labels) >= 0) return true
+	}
+	return false
+})
+

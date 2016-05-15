@@ -8,7 +8,7 @@ Functionalities:
 * Performs game missions
 * Intercepts bank transactions
 * Performs massive uploads
-* Clean logs
+* Cleans logs
 
 # How to install
 1. Go to chrome://extensions/

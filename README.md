@@ -17,7 +17,7 @@ Functionalities:
 4. Load the uncompressed directory
 
 # How to contribute
-The bot is all written with [jSpaghetti](https://github.com/gresendesa/jSpaghetti) API. jSpaghetti provides a modular and declarative way to write scripts.
+The bot is entirely written with [jSpaghetti](https://github.com/gresendesa/jSpaghetti) API. jSpaghetti provides a modular and declarative way to write scripts.
 There are two ways to add new functionalities.
 * Creating a new sequence into a existing module to related functionality; or
 * Creating a module to build a new functionality.

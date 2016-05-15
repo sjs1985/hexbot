@@ -1,19 +1,33 @@
-# Hexbot
-Hacker Experience BOT
+# HExBot
+Suite of scripts to automate some processes on Hacker Experience game website.
 
-The HExBot is being rewritten over the jSpaghetti (https://github.com/gresendesa/jSpaghetti) framework that makes everything very easier.
+This must be installed as a Google Chrome extension.
 
-This framework provides a modular, sequential and declarative way to build scripts.
+Functionalities:
+* Solves riddles/puzzles
+* Performs game missions
+* Intercepts bank transactions
+* Performs massive uploads
 
-## Basic structure
-I've set the directory tree this way:
+# How to install
+1. Go to chrome://extensions/
+2. Check 'Developer mode' checkbox
+3. Click on 'Load unpacked extension...'
+4. Load the uncompressed directory
 
-* The jSpaghetti framework must be placed into /libraries/jSpaghetti 
-* Each jSpaghetti module must be placed into its respective folder into /modules
-* Every global function must be placed into /libraries/functions directory
-* Every global class must be placed into /libraries/classes
-* All global constants must be placed into constants.js
-* All HMLT content and funcions to handle it must be placed into views.js file
-* Controllers to handle user input and bot state must be placed into /controllers
-* Connect the respective button to the action (sequence) in /controllers/buttonToAction.js file
-* Follow the manifest.json structure
+# How to contribute
+The bot is all written with [jSpaghetti](https://github.com/gresendesa/jSpaghetti) API. jSpaghetti provides a modular and declarative way to write scripts.
+There are two ways to add new functionalities.
+* Creating a new sequence into a existing module to related functionality; or
+* Creating a module to build a new functionality.
+
+# credits
+[**@gresendesa**](https://github.com/gresendesa)
+
+[**@perfilrobo**](https://github.com/perfilrobo)
+
+[**@dominicusdev**](https://github.com/dominicusdev)
+
+[**@Quartz101**](https://github.com/Quartz101)
+
+[**@Klorker**](https://github.com/Klorker)

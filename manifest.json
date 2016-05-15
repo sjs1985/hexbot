@@ -1,63 +1,62 @@
-//It does something
 {
-	//Required
 	"manifest_version": 2,
-	"name": "HEx BOT (2015)",
-	"version": "1.1.1",
-
-	//Recommended
-	"description": "A bot to hurry easy things ;)",
-
-	//Required
+	"name": "HEx BOT (2016)",
+	"version": "0.1.9",
+	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
-		//"default_icon": "images/favicon.png",
  		"default_popup": "popup.html"
  	},
-
- 	//"icons": {
-      //"256": "images/favicon.png"
-  	//},
-
- 	//Optional
- 	"author":"G 2015",
-
- 	//Recommended
+ 	"author":"GRSa 2016",
 	"permissions": [
 		"tabs"
 	],
-
-	//Recommended
+	"icons": {"256": "icon.png"},
 	"content_scripts":[
 		{
 			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
-			"js":
-					[
-						"global_constants/global.js",
-						"request/sendRequest.js",
-						"request/handleRequest.js",
-						"riddles/riddleHandler.js",
-						"missions/setNextStep.js",
-						"request/resetRequestDada.js",
-						"request/showRequest.js",
-						"elements/getSomeElement.js",
-						"missions/getSomeMission.js",
-						"utilities/defineLanguage.js",
-						"missions/getMissionInformation.js",
-						"utilities/goToPage.js",
-						"logs/extractDataFromLogs.js",
-						"softwares/getSoftwareId.js",
-						"softwares/executeInstallSoftware.js",
-						"bank/executeCampingStep.js",
-						"missions/executeMissionStep.js",	
-						"utilities/startScriptCommunication.js",
-						"script.js"
-					]
+			"js":[
+				"libraries/jSpaghetti/jSpaghetti.min.js",
+
+				"constants.js",
+
+				"modules/riddleSolver/procedures.js",
+				"modules/riddleSolver/sequences/solvePuzzle.js",
+				"modules/cleaners/procedures.js",
+				"modules/cleaners/sequences/cleanOwnLogs.js",
+				"modules/cleaners/sequences/cleanTargetLogs.js",
+				"modules/cleaners/sequences/accessTargetAndCleanLogs.js",
+				"modules/missions/procedures.js",
+				"modules/missions/sequences/checkBalance.js",
+				"modules/missions/sequences/transferMoney.js",
+				"modules/adRemover/procedures.js",
+				"modules/adRemover/sequences/removeAds.js",
+				"modules/camping/procedures.js",
+				"modules/camping/sequences/bankCamping.js",
+				"modules/uploader/procedures.js",
+				"modules/uploader/sequences/upload.js",
+
+				"libraries/classes/Storage.js",
+				"libraries/classes/Sequence.js",
+				"libraries/classes/Bot.js",
+
+				"libraries/functions/strposOfArray.js",
+				"libraries/functions/getDOMElement.js",
+				"libraries/functions/goToPage.js",
+				"libraries/functions/sendXMLHttpRequest.js",
+				"libraries/functions/getMyIp.js",
+				"libraries/functions/removeLinesFromText.js",
+				"libraries/functions/getSoftwareId.js",
+
+				"views.js",
+
+				"controllers/main.js",
+				"controllers/functions.js",
+				"controllers/controlPanel.js",
+				"controllers/buttonToAction.js",
+				"controllers/botButton.js",
+				
+				"index.js"
+			]
 		}
-	],
-
-	"background":{
-		"scripts":["eventPageScript.js"],
-		"persistent": true
-	}
-
+	]
 }

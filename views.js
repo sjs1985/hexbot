@@ -52,7 +52,7 @@ var views = {
 		aux.innerHTML = '<a><span id="botButtonContent" class="text" style="color: white;">BOT</span></a>';
 		var containerElement = document.getElementsByClassName("nav btn-group")[0]
 		containerElement.insertBefore(aux, containerElement.firstChild)
-		setTimeout(function(){document.getElementById("botButtonContent").innerHTML = "BOT"}, 100) //Just bypassing a bug
+		containerElement.insertBefore(document.createElement("li"), containerElement.firstChild) //Just bypassing a bug
 	}
 
 }

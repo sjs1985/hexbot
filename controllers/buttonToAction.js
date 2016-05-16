@@ -35,7 +35,7 @@ document.getElementById(PERFORM_INSTALL_SOFTWARE).addEventListener("click", func
 })
 
 document.getElementById(SET_SEARCH_FOR_IPS).addEventListener("click", function(){
-	controllers.functions.executeSequence("webcrawler", "ipseacher")
+	controllers.functions.executeSequence("webcrawler", "browseWeb")
 })
 
 

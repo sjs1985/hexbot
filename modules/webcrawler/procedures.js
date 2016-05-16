@@ -14,6 +14,8 @@ webcrawler.procedure("startSearching", function(shared){
 		shared.accessCounter = 0
 		shared.currentIp = []
 		shared.newHostsList = []
+		shared.BTCAccountList = []
+		shared.shoppingLogList = []
 		shared.myIp = getMyIp(true)
 		console.log("Open list:", shared.myIp)
 		return true
@@ -24,7 +26,6 @@ webcrawler.procedure("startSearching", function(shared){
 
 webcrawler.procedure("getIpsFromLogs", function(shared){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
-	console.log(shared)
 	if(textArea){
 		var ips = textArea.value.match(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/gm)
 		if (ips){
@@ -38,6 +39,51 @@ webcrawler.procedure("getIpsFromLogs", function(shared){
 				}
 			}
 		}
+	}
+})
+
+webcrawler.procedure("updateCrawlerLogs", function(data){
+	controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] = ""
+	if(data.newHostsList.length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "NEW IPS FOUND: " + data.newHostsList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.newHostsList.join(", ") + "\n\n"
+	} 
+	if(data.accessibleHostsList.length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "ACCESSIBLE HOSTS: " + data.accessibleHostsList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.accessibleHostsList.join(", ") + "\n\n"
+	} 
+	if(data.inaccessibleHostsList.length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "INACCESSIBLE HOSTS: " + data.inaccessibleHostsList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.inaccessibleHostsList.join(", ") + "\n\n"
+	}
+	if(data.openList.length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "UNTESTED HOSTS: " + data.openList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.openList.join(", ") + "\n\n"	
+	}
+	if(data.BTCAccountList.length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "BTC LOGS: " + data.BTCAccountList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.BTCAccountList.join("\n") + "\n\n"		
+	}
+	if(data.shoppingLogList.length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "SHOPPING LOGS: " + data.shoppingLogList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.shoppingLogList.join("\n")	
+	}
+	controllers.storage.set(controllers.bot)
+})
+
+webcrawler.procedure("getBTCAccounts", function(shared){
+	var textArea = getDOMElement("textarea", "class", "logarea", 0)
+	if (textArea){
+		var BTCAccounts = textArea.value.match(/^.*\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] on account .* using key .*$/gm)
+		if ((BTCAccounts) && (BTCAccounts.length > 0)) shared.BTCAccountList = shared.BTCAccountList.concat(BTCAccounts)
+	}
+})
+
+webcrawler.procedure("getShoppingLogs", function(shared){
+	var textArea = getDOMElement("textarea", "class", "logarea", 0)
+	if (textArea){
+		var shoppingLogs = textArea.value.match(/^.*upgraded.*for \$[0-9].*Funds were transferred from account.*$/gm)
+		if ((shoppingLogs) && (shoppingLogs.length > 0)) shared.shoppingLogList = shared.shoppingLogList.concat(shoppingLogs)
 	}
 })
 
@@ -71,7 +117,6 @@ webcrawler.procedure("forceToAccessTarget", function(){
 webcrawler.procedure("signInTarget", function(shared){
 	shared.accessibleHostsList.push(shared.currentIp)
 	shared.accessCounter++
-	fillResultOutput(shared)
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 })
 
@@ -165,28 +210,5 @@ webcrawler.procedure("ipDoesNotExist", function(){
 
 webcrawler.procedure("registerInaccessible", function(shared){
 	shared.inaccessibleHostsList.push(shared.currentIp)
-	fillResultOutput(shared)
 })
-
-function fillResultOutput(data){
-	controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] = ""
-	if(data.newHostsList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "---New ips found---\n"
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.newHostsList.join(", ") + "\n\n"
-	} 
-	if(data.accessibleHostsList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "---Accessible hosts---\n"
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.accessibleHostsList.join(", ") + "\n\n"
-	} 
-	if(data.inaccessibleHostsList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "---Inaccessible hosts---\n"
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.inaccessibleHostsList.join(", ") + "\n\n"
-	}
-	if(data.openList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "---Untested hosts---\n"
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.openList.join(", ")		
-	}
-	controllers.storage.set(controllers.bot)
-	
-}
 

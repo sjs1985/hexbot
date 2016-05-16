@@ -35,7 +35,7 @@
 				"modules/uploader/procedures.js",
 				"modules/uploader/sequences/upload.js",
 				"modules/webcrawler/procedures.js",
-				"modules/webcrawler/sequences/ipsearcher.js",
+				"modules/webcrawler/sequences/browseWeb.js",
 
 				"libraries/classes/Storage.js",
 				"libraries/classes/Sequence.js",

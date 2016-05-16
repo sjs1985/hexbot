@@ -86,12 +86,6 @@ uploader.procedure("runUploadSoftware", function(shared){
 	goToPage("/internet?view=software&cmd=up&id=" + shared.softwareId)
 })
 
-uploader.procedure("installSoftware", function(shared){
-	var softwareField = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARE_TO_INSTALL].split(",")
-	var softwareId = getSoftwareId(shared.softwareName, shared.softwareVersion)
-	goToPage("/internet?view=software&cmd=install&id=" + softwareId)
-})
-
 uploader.procedure("isSoftwareAlreadyThere", function(){
 	var labels = ["O cliente remoto já tem esse software", "The remote client already have this software"]
 	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)

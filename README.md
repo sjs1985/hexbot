@@ -9,6 +9,7 @@ Functionalities:
 * Intercepts bank transactions
 * Performs massive uploads
 * Cleans logs
+* Search for ips on network (NEW)
 
 # How to install
 1. Go to chrome://extensions/

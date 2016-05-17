@@ -11,6 +11,7 @@ const SET_CLEAN_TARGET_LOGS_DOM_ID = 'set-victim-cleaner'
 const SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID = 'set-cleanlogin'
 const SOLVE_RIDDLE_DOM_ID = 'set-infosolveriddles'
 const REGEX_INPUT_DOM_ID = 'regex-input'
+const INFO_ALERT = "info-alert"
 const PERFORM_CHECK_BALANCE_ID = 'set-check-account-status-job'
 const PERFORM_TRANSFER_MONEY_ID = 'set-transfer-money-status-job'
 const PERFORM_BANK_CAMPING = "set-camping-bank-logs"

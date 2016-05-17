@@ -38,5 +38,9 @@ document.getElementById(SET_SEARCH_FOR_IPS).addEventListener("click", function()
 	controllers.functions.executeSequence("webcrawler", "browseWeb")
 })
 
+document.getElementById(INFO_ALERT).addEventListener("click", function(){
+	window.alert("IMPORTANT!\n\n * The bot doesn't work well when there are tasks running. So, before starting any action, make sure there is not any pending task.\n\n* Abort the bot anytime. Just click over BOT button. \n\n* If bot suddendly stops, just try to reload the page. If it does work, abort the bot. If you know how to access browser console, copy the error and/or jSpaghetti debug logs and report the problem on official repository.")
+})
+
 
 

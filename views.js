@@ -10,6 +10,7 @@ var views = {
 			'<div class="widget-title">' +
 			'<h5>Hacker Experience Bot</h5>' +
 			'<span id="' + COMMAND_PANEL_CLOSE_BUTTON_DOM_ID + '" class="btn btn-danger hide1024" style="float: right">X</span>' +
+			'<span id="' + INFO_ALERT + '" class="btn btn-warning hide1024" style="float: right">!</span>' +
 			'</div>' +
 			'<div class="modal-body">' +
 			'<button id="' + PERFORM_CHECK_BALANCE_ID + '" class="btn btn-success">Perform check account status missions</button> ' +

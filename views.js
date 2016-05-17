@@ -23,7 +23,8 @@ var views = {
 			'<button id="' + PERFORM_INSTALL_SOFTWARE + '" class="btn btn-success"> Upload, install and hide this</button>' +
 			'<input id="' + FIELD_SOFTWARE_TO_INSTALL + '" class="controls fieldsContent" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> software on these <input id="' + FIELD_IPS_INSTALL_TARGETS + '" class="controls fieldsContent" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"> IPs.<br>' +
 			'<button id="' + SET_SEARCH_FOR_IPS + '" class="btn btn-success">Run webcrawler</button> starting by these<input id="' + FIELD_IPS_START_SEARCHING + '" class="controls fieldsContent" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"> hosts' + 
-			'<textarea id="' + FIELD_IP_SEARCH_RESULT + '" class="controls fieldsContent" style="width: 95%;"></textarea>' + 
+			'<center><textarea id="' + FIELD_IP_SEARCH_RESULT + '" class="controls fieldsContent" style="width: 98%;"></textarea>' + 
+			'<input id="' + REGEX_INPUT_DOM_ID + '" class="controls fieldsContent" type="text" style="width: 98%;" placeholder="Filter content using regex (e.g.  .*\\.crc.*  or  .*\\.vcol.*  or  .*something.*)"></center>' +
 			'</div>' + 
 			'<div class="modal-footer">' +
 			'<b>version ' + VERSION_BOT + '</b> check for new releases on <a href="https://github.com/perfilrobo/hexbot">official repository</a>' +

@@ -8,6 +8,7 @@ webcrawler.procedure("startSearching", function(shared){
 		for (var i = 0; i < inputIps.length; i++) {
 			shared.openList.push(inputIps[i].trim())
 		}
+		shared.getSoftwareMode = true
 		shared.closedList = []
 		shared.inaccessibleHostsList = []
 		shared.accessibleHostsList = []
@@ -17,18 +18,25 @@ webcrawler.procedure("startSearching", function(shared){
 		shared.BTCAccountList = []
 		shared.shoppingLogList = []
 		shared.clanServerList = []
+		shared.softwareList = []
+		shared.isClanServer = false
 		shared.myIp = getMyIp(true)
-		console.log("Open list:", shared.myIp)
 		return true
 	} else {
 		return false
 	}	
 })
 
-webcrawler.procedure("isClanServer", function(){
+webcrawler.procedure("accountClanServer", function(shared){
 	var serverClanButton = getDOMElement("a", "href", "?view=clan", 0)
-	if (serverClanButton)
-	return true
+	if (serverClanButton){
+		shared.isClanServer = true
+		shared.clanServerList.push(shared.currentIp)
+		return true
+	} else {
+		shared.isClanServer = false
+	}
+	
 })
 
 webcrawler.procedure("getIpsFromLogs", function(shared){
@@ -78,6 +86,10 @@ webcrawler.procedure("updateCrawlerLogs", function(data){
 	if(data.shoppingLogList.length > 0){
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "SHOPPING LOGS: " + data.shoppingLogList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.shoppingLogList.join("\n")	
+	}
+	if(data.softwareList.length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "SOFTWARES FOUND: \n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.softwareList.join("\n")	
 	}
 	controllers.storage.set(controllers.bot)
 })
@@ -225,6 +237,21 @@ webcrawler.procedure("registerInaccessible", function(shared){
 	shared.inaccessibleHostsList.push(shared.currentIp)
 })
 
-webcrawler.procedure("registerClanServer", function(shared){
-	shared.clanServerList.push(shared.currentIp)
+webcrawler.procedure("getSoftwares", function(shared){
+	var softwareTable = getDOMElement("table", "class", "table table-cozy table-bordered table-striped table-software table-hover with-check", 0)
+	var rows = softwareTable.getElementsByTagName("tr")
+	for (var i = 0; i < rows.length; i++) {
+		var data = rows[i].getElementsByTagName("td")
+		var softwareMetaData = []
+		if ((data) && (data.length == 5) && (/(delete|=del)/.test(data[4].innerHTML))){
+			for (var z = 1; z < 5; z++) {
+				var metaData = data[z].innerHTML.replace(/(<([^>]+)>)/ig, "")
+				if (metaData){
+					metaData = metaData.replace(/[\n\r]+/g, '')
+					if (metaData.length > 0) softwareMetaData.push(metaData)
+				}
+			}
+			shared.softwareList.push(softwareMetaData.join(", ") + ": " + shared.currentIp)
+		}
+	}
 })

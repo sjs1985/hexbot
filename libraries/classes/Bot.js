@@ -11,6 +11,7 @@ function Bot(){
 	fieldsContent[FIELD_IPS_INSTALL_TARGETS] = "{IP OF TARGET}, {IP OF TARGET}"
 	fieldsContent[FIELD_IPS_START_SEARCHING] = "{IP}, {IP}"
 	fieldsContent[FIELD_IP_SEARCH_RESULT] = ""
+	fieldsContent[REGEX_INPUT_DOM_ID] = ""
 
 	this.controlPanel.fieldsContent = fieldsContent
 }

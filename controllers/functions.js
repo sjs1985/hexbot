@@ -26,6 +26,23 @@ controllers.functions.executeSequence = function(moduleName, sequenceName){
 	})
 }
 
+controllers.functions.filterCrawlerOutput = function(regex){
+	if (regex == "") regex = "^.*$"
+	var lines = controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT]
+	try{
+		var pattern = new RegExp(regex, "gmi")
+		var newContent = lines.match(pattern)
+		if (newContent){
+			document.getElementById(FIELD_IP_SEARCH_RESULT).value = newContent.join("\n")
+		} else {
+			document.getElementById(FIELD_IP_SEARCH_RESULT).value = ""
+		}
+		
+	}catch(error){
+		document.getElementById(FIELD_IP_SEARCH_RESULT).value = "Invalid regex (see https://en.wikipedia.org/wiki/Regular_expression)"
+	}
+}
+
 controllers.functions.resetBotAndShowPanel = function (){
 	if (controllers.bot.currentSequence != null){
 		var moduleName = controllers.bot.currentSequence.moduleName

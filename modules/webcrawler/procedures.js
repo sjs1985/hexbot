@@ -85,7 +85,7 @@ webcrawler.procedure("updateCrawlerLogs", function(data){
 	}
 	if(data.shoppingLogList.length > 0){
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "SHOPPING LOGS: " + data.shoppingLogList.length + "\n" 
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.shoppingLogList.join("\n")	
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.shoppingLogList.join("\n") + "\n\n"	
 	}
 	if(data.softwareList.length > 0){
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "SOFTWARES FOUND: \n" 

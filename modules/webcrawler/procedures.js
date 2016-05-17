@@ -253,19 +253,23 @@ webcrawler.procedure("registerInaccessible", function(shared){
 
 webcrawler.procedure("getSoftwares", function(shared){
 	var softwareTable = getDOMElement("table", "class", "table table-cozy table-bordered table-striped table-software table-hover with-check", 0)
-	var rows = softwareTable.getElementsByTagName("tr")
-	for (var i = 0; i < rows.length; i++) {
-		var data = rows[i].getElementsByTagName("td")
-		var softwareMetaData = []
-		if ((data) && (data.length == 5) && (/(delete|=del)/.test(data[4].innerHTML))){
-			for (var z = 1; z < 5; z++) {
-				var metaData = data[z].innerHTML.replace(/(<([^>]+)>)/ig, "")
-				if (metaData){
-					metaData = metaData.replace(/[\n\r]+/g, '')
-					if (metaData.length > 0) softwareMetaData.push(metaData)
+	if(softwareTable){
+		var rows = softwareTable.getElementsByTagName("tr")
+		if(rows){
+			for (var i = 0; i < rows.length; i++) {
+				var data = rows[i].getElementsByTagName("td")
+				var softwareMetaData = []
+				if ((data) && (data.length == 5) && (/(delete|=del)/.test(data[4].innerHTML))){
+					for (var z = 1; z < 5; z++) {
+						var metaData = data[z].innerHTML.replace(/(<([^>]+)>)/ig, "")
+						if (metaData){
+							metaData = metaData.replace(/[\n\r]+/g, '')
+							if (metaData.length > 0) softwareMetaData.push(metaData)
+						}
+					}
+					shared.softwareList.push(softwareMetaData.join(", ") + ": " + shared.currentIp)
 				}
 			}
-			shared.softwareList.push(softwareMetaData.join(", ") + ": " + shared.currentIp)
 		}
-	}
+	}	
 })

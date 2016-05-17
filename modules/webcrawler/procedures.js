@@ -27,6 +27,15 @@ webcrawler.procedure("startSearching", function(shared){
 	}	
 })
 
+webcrawler.procedure("isIpInvalid", function(){
+	var labels = ["invalid", "inválido"]
+	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+	if (errorContainer){
+		if (strposOfArray(errorContainer.innerHTML, labels) >= 0)
+		return true
+	}
+})
+
 webcrawler.procedure("accountClanServer", function(shared){
 	var serverClanButton = getDOMElement("a", "href", "?view=clan", 0)
 	if (serverClanButton){
@@ -105,7 +114,7 @@ webcrawler.procedure("getBTCAccounts", function(shared){
 webcrawler.procedure("getShoppingLogs", function(shared){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	if (textArea){
-		var shoppingLogs = textArea.value.match(/^.*upgraded.*for \$[0-9].*Funds were transferred from account.*$/gm)
+		var shoppingLogs = textArea.value.match(/^.*were transferred.*$/gm)
 		if ((shoppingLogs) && (shoppingLogs.length > 0)) shared.shoppingLogList = shared.shoppingLogList.concat(shoppingLogs)
 	}
 })
@@ -158,6 +167,11 @@ webcrawler.procedure("cleanMyIpClues", function(shared){
 		var textFiltered = removeLinesFromText(textArea.value, pattern)
 		if (textArea.value != textFiltered) textArea.value = textFiltered
 	}
+})
+
+webcrawler.procedure("isThereLogs", function(){
+	var textArea = getDOMElement("textarea", "class", "logarea", 0)
+	if (textArea) return true
 })
 
 webcrawler.procedure("goToTargetSoftwares", function(){

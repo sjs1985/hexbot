@@ -16,12 +16,19 @@ webcrawler.procedure("startSearching", function(shared){
 		shared.newHostsList = []
 		shared.BTCAccountList = []
 		shared.shoppingLogList = []
+		shared.clanServerList = []
 		shared.myIp = getMyIp(true)
 		console.log("Open list:", shared.myIp)
 		return true
 	} else {
 		return false
 	}	
+})
+
+webcrawler.procedure("isClanServer", function(){
+	var serverClanButton = getDOMElement("a", "href", "?view=clan", 0)
+	if (serverClanButton)
+	return true
 })
 
 webcrawler.procedure("getIpsFromLogs", function(shared){
@@ -59,6 +66,10 @@ webcrawler.procedure("updateCrawlerLogs", function(data){
 	if(data.openList.length > 0){
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "UNTESTED HOSTS: " + data.openList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.openList.join(", ") + "\n\n"	
+	}
+	if(data.clanServerList.length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "CLAN SERVERS: " + data.clanServerList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.clanServerList.join(", ") + "\n\n"	
 	}
 	if(data.BTCAccountList.length > 0){
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "BTC LOGS: " + data.BTCAccountList.length + "\n" 
@@ -130,9 +141,11 @@ webcrawler.procedure("goToTargetLogs", function(){
 
 webcrawler.procedure("cleanMyIpClues", function(shared){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
-	var pattern = new RegExp("^.*" + shared.myIp + ".*$")
-	var textFiltered = removeLinesFromText(textArea.value, pattern)
-	if (textArea.value != textFiltered) textArea.value = textFiltered
+	if (textArea){
+		var pattern = new RegExp("^.*" + shared.myIp + ".*$")
+		var textFiltered = removeLinesFromText(textArea.value, pattern)
+		if (textArea.value != textFiltered) textArea.value = textFiltered
+	}
 })
 
 webcrawler.procedure("goToTargetSoftwares", function(){
@@ -212,3 +225,6 @@ webcrawler.procedure("registerInaccessible", function(shared){
 	shared.inaccessibleHostsList.push(shared.currentIp)
 })
 
+webcrawler.procedure("registerClanServer", function(shared){
+	shared.clanServerList.push(shared.currentIp)
+})

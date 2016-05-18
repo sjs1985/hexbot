@@ -17,6 +17,7 @@ const PERFORM_TRANSFER_MONEY_ID = 'set-transfer-money-status-job'
 const PERFORM_BANK_CAMPING = "set-camping-bank-logs"
 const PERFORM_INSTALL_SOFTWARE = "set-install-software"
 const SET_SEARCH_FOR_IPS = "set-ip-search"
+const SET_UPLOAD_TIME_LIMIT = 'set-upload-time-limit'
 
 const FIELD_BANK_IP_TARGET = "target-bank-ip"
 const FIELD_MY_ACCOUNT = "set-my-account"

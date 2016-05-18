@@ -32,6 +32,13 @@ uploader.procedure("startUpload", function(shared){
 	shared.isThereLogsArea = false
 	shared.myIp = getMyIp(true)
 	shared.accessCounter = 0
+	shared.isUploadAborted = false
+	var timeLimit = controllers.bot.controlPanel.fieldsContent[SET_UPLOAD_TIME_LIMIT]
+	if ((timeLimit.length > 0) && (Number(timeLimit) > 0)){
+		shared.timeLimit = timeLimit
+	} else {
+		shared.timeLimit = 0
+	}
 	return true
 })
 
@@ -152,5 +159,39 @@ uploader.procedure("ipDoesNotExist", function(){
 		return true
 	}
 	return false
+})
+
+uploader.procedure("isWithinTimeLimit", function(shared){
+	var timeContainer = getDOMElement("div", "class", "elapsed", 0)
+	if (timeContainer){
+		var time = timeContainer.innerHTML.match(/[0-9]+/g)
+		if(time.length == 3){
+			var leftTime = (Number(time[0])*Math.pow(60, 2)) + (Number(time[1])*60) + (Number(time[2]))
+			if ((shared.timeLimit == 0) || (leftTime <= shared.timeLimit)){
+				return true
+			} else {	
+				return false
+			}
+		} else {
+			return true
+		}
+	} else {
+		return true
+	}
+})
+
+uploader.procedure("abortUpload", function(shared){
+	pidContainer = document.getElementsByClassName("span4")[0]
+	if (pidContainer){
+		var pid = pidContainer.className.match(/[0-9]+/g)[1]
+		if (pid){
+			shared.isUploadAborted = true
+			goToPage("/processes?pid=" + pid + "&del=1")
+		} else {
+			shared.isUploadAborted = false
+		}
+	} else {
+		shared.isUploadAborted = false
+	}
 })
 

@@ -39,7 +39,7 @@ document.getElementById(SET_SEARCH_FOR_IPS).addEventListener("click", function()
 })
 
 document.getElementById(INFO_ALERT).addEventListener("click", function(){
-	window.alert("IMPORTANT!\n\n * The bot doesn't work well when there are tasks running. So, before starting any action, make sure there is not any pending task.\n\n* Abort the bot anytime. Just click over BOT button. \n\n* If bot suddendly stops, just try to reload the page. If it does work, abort the bot. If you know how to access browser console, copy the error and/or jSpaghetti debug logs and report the problem on official repository.")
+	window.alert("IMPORTANT!\n\n *Avoid to run the bot into an inactive tab. There are some timing event limitations when tab is inactive in most browsers. So, the bot may break inadvertently.\n\n* The bot doesn't work well when there are tasks running. So, before starting any action, make sure there is not any pending task.\n\n* Abort the bot anytime. Just click over BOT button. \n\n* If bot suddendly stops, just try to reload the page. If it doesn't work, abort the bot. If you know how to access browser console, copy the error and/or jSpaghetti debug logs and report the problem on official repository.")
 })
 
 

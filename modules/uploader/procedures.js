@@ -29,7 +29,9 @@ uploader.procedure("startUpload", function(shared){
 		window.alert("Inform a ip target")
 		return false
 	}
+	shared.isThereLogsArea = false
 	shared.myIp = getMyIp(true)
+	shared.accessCounter = 0
 	return true
 })
 
@@ -54,7 +56,8 @@ uploader.procedure("forceToAccessTarget", function(){
 	goToPage("/internet?action=hack")
 })
 
-uploader.procedure("signInTarget", function(){
+uploader.procedure("signInTarget", function(shared){
+	shared.accessCounter++
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 })
 
@@ -68,10 +71,15 @@ uploader.procedure("goToTargetLogs", function(){
 
 uploader.procedure("cleanMyIpClues", function(shared){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
-	var pattern = new RegExp("^.*" + shared.myIp + ".*$")
-	var textFiltered = removeLinesFromText(textArea.value, pattern)
-	if (textArea.value != textFiltered) textArea.value = textFiltered
-	getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	if (textArea){
+		shared.isThereLogsArea = true
+		var pattern = new RegExp("^.*" + shared.myIp + ".*$")
+		var textFiltered = removeLinesFromText(textArea.value, pattern)
+		if (textArea.value != textFiltered) textArea.value = textFiltered
+		getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	} else {
+		shared.isThereLogsArea = false
+	}
 })
 
 uploader.procedure("goToTargetSoftwares", function(){

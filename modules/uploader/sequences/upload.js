@@ -5,14 +5,14 @@ foo.instructions = [
 	{"@goToTarget": 				["logout", {"gotoif": ["*.ips.length == 0", "@finishProcess"]}, "goToNextIp", "isThereMessageError", {"gotoif": ["*.$", "@goToTarget"]}]},
 	{"@tryToInvadeTarget": 			["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessKnownTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}, {"wait":"_forPageToReload"}]},
 	{"@accessKnownTarget": 			"signInTarget"},
-	{"@cleanMyAccessClues": 		["cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@uploadSoftware"]}, {"wait": "_forPageToReload"}]},
-	{"@uploadSoftware": 			["goToOwnSoftwareArea", "runUploadSoftware", "isSoftwareAlreadyThere", {"gotoif":["*.$", "@installSoftware"]}, "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}, "isThereMessageSuccess", {"gotoif": ["*.$", "@cleanMyUploadClues"]}, {"wait": "_forPageToReload"}]},
-	{"@cleanMyUploadClues": 		["goToTargetLogs", "cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@installSoftware"]}, {"wait": "_forPageToReload"}]},
+	{"@cleanMyAccessClues": 		["cleanMyIpClues", {"gotoif": ["!*.isThereLogsArea", "@uploadSoftware"]}, "isThereMessageError", {"gotoif":["*.$", "@uploadSoftware"]}, {"wait": "_forPageToReload"}]},
+	{"@uploadSoftware": 			["runUploadSoftware", "isSoftwareAlreadyThere", {"gotoif":["*.$", "@installSoftware"]}, "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}, "isThereMessageSuccess", {"gotoif": ["*.$", "@cleanMyUploadClues"]}, {"wait": "_forPageToReload"}]},
+	{"@cleanMyUploadClues": 		["goToTargetLogs", "cleanMyIpClues", {"gotoif": ["!*.isThereLogsArea", "@installSoftware"]}, "isThereMessageError", {"gotoif":["*.$", "@installSoftware"]}, {"wait": "_forPageToReload"}]},
 	{"@installSoftware": 			["goToTargetSoftwares", "installSoftware", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
-	{"@cleanMyInstallingClues": 	["goToTargetLogs", "cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@hideSoftware"]}, {"wait": "_forPageToReload"}]},
+	{"@cleanMyInstallingClues": 	["goToTargetLogs", "cleanMyIpClues", {"gotoif": ["!*.isThereLogsArea", "@hideSoftware"]}, "isThereMessageError", {"gotoif":["*.$", "@hideSoftware"]}, {"wait": "_forPageToReload"}]},
 	{"@hideSoftware": 				["goToTargetSoftwares", "hideSoftware", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
-	{"@cleanMyHiddingClues":  		["goToTargetLogs", "cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
-	{"@cleanMyOwnLogs": 			["goToOwnLogTab", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}, {"wait": "_forPageToReload"}, {"gotoif": ["true", "@goToTarget"]}]},
+	{"@cleanMyHiddingClues":  		["goToTargetLogs", "cleanMyIpClues", {"gotoif": ["!*.isThereLogsArea", "@cleanMyOwnLogs"]}, "isThereMessageError", {"gotoif":["*.$", "@cleanMyOwnLogs"]}, {"wait": "_forPageToReload"}]},
+	{"@cleanMyOwnLogs": 			[{"gotoif": ["((*.accessCounter < 5) && (*.ips.length > 0))", "@goToTarget"]}, "goToOwnLogTab", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}, {"wait": "_forPageToReload"}, {"gotoif": ["true", "@goToTarget"]}]},
 	{"@finishProcess": 				"_exit"}
 ]
 

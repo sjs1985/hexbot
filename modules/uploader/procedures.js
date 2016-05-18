@@ -144,3 +144,13 @@ uploader.procedure("isThereMessageSuccess", function(){
 	return false
 })
 
+uploader.procedure("ipDoesNotExist", function(){
+	var labels = ["Esse IP não existe", "This ip does not exists"]
+	var container = getDOMElement("div", "class", "widget-content padding noborder", 0)
+	if (container){
+		if(strposOfArray(container.innerHTML, labels) >= 0)
+		return true
+	}
+	return false
+})
+

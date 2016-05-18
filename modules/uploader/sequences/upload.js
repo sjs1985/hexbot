@@ -2,7 +2,7 @@ var foo = $jSpaghetti.module("uploader").sequence("upload")
 
 foo.instructions = [
 	{"@init": 						["goToSoftwarePage", "startUpload", {"gotoif":["!*.$", "@finishProcess"]}]},
-	{"@goToTarget": 				["logout", {"gotoif": ["*.ips.length == 0", "@finishProcess"]}, "goToNextIp", "isThereMessageError", {"gotoif": ["*.$", "@goToTarget"]}]},
+	{"@goToTarget": 				["logout", {"gotoif": ["*.ips.length == 0", "@finishProcess"]}, "goToNextIp", "ipDoesNotExist", {"gotoif": ["*.$", "@goToTarget"]}, "isThereMessageError", {"gotoif": ["*.$", "@goToTarget"]}]},
 	{"@tryToInvadeTarget": 			["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessKnownTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}, {"wait":"_forPageToReload"}]},
 	{"@accessKnownTarget": 			"signInTarget"},
 	{"@cleanMyAccessClues": 		["cleanMyIpClues", {"gotoif": ["!*.isThereLogsArea", "@uploadSoftware"]}, "isThereMessageError", {"gotoif":["*.$", "@uploadSoftware"]}, {"wait": "_forPageToReload"}]},

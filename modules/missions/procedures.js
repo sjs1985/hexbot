@@ -37,7 +37,6 @@ foo.procedure("getURLMission", function(shared, internalFunctions){
 		}
 		return urlMission
 	}
-
 	var urlMission = getURL(shared.missionType) //It catches the first available mission URL
 	shared.urlMission = urlMission
 
@@ -67,7 +66,6 @@ foo.procedure("getURLMission", function(shared, internalFunctions){
 			}, 3000)
 		} 
 	}
-
 })
 
 foo.procedure("goToMissionsTab", function(){
@@ -128,17 +126,14 @@ foo.procedure("logout", function(){
 	goToPage("/internet?view=logout")
 })
 
-//Click on the Accept mission button
 foo.procedure("clickOnAcceptMissionButton", function(shared){
-	getDOMElement("span", "class", "btn btn-success mission-accept", 0).click(); 
+	getDOMElement("span", "class", "btn btn-success mission-accept", 0).click()
 })
 
-//Click on the Accept mission button
 foo.procedure("clickOnAbortMissionButton", function(shared){
 	getDOMElement("span", "class", "btn btn-danger mission-abort", 0).click()
 })
 
-//Click on the Accept mission button
 foo.procedure("clickOnConfirmAbortMissionButton", function(shared){
 	getDOMElement("input", "type", "submit", 0).click();
 })

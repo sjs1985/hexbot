@@ -1,6 +1,6 @@
 //It searches for all elements with the specified tagName, then filter those elements that have the specified attribName valued as attribValue.
 //Next it gets one element from specified position on the elements array and returns it 
-function getDOMElement(tagName, attribName, attribValue, position) {
+function getDOMElement(tagName, attribName, attribValue, position, color) {
     if (tagName != null) {
         element = document.getElementsByTagName(tagName)
     } else {
@@ -25,6 +25,7 @@ function getDOMElement(tagName, attribName, attribValue, position) {
             console.log(error.message)
         }
         try{ //Color the element
+            if (color !== false)
             resultElements[position].style.color = "red"
         } catch(error){
             console.log(error.message)

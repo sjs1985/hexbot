@@ -36,6 +36,8 @@
 				"modules/uploader/sequences/upload.js",
 				"modules/webcrawler/procedures.js",
 				"modules/webcrawler/sequences/browseWeb.js",
+				"modules/monitor/procedures.js",
+				"modules/monitor/sequences/checkMission.js",
 
 				"libraries/classes/Storage.js",
 				"libraries/classes/Sequence.js",
@@ -48,6 +50,7 @@
 				"libraries/functions/getMyIp.js",
 				"libraries/functions/removeLinesFromText.js",
 				"libraries/functions/getSoftwareId.js",
+				"libraries/functions/loadScript.js",
 
 				"views.js",
 

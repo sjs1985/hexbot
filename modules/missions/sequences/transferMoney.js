@@ -4,7 +4,7 @@ foo.instructions = [
 	{"@askForPermission": 			"askPermissionToAbort"},
 	{"@init": "startTransferMoney"},
 	{"@tryToGetMission": 			["goToMissionsTab", "checkSameTypeAcceptedMission", {"gotoif":["*.$", "@startMissionExecution"]}, "isAvailableMissionsPage", {"gotoif":["!*.$", "@alertUnknownMissionKind"]}, "getURLMission", {"wait": "_forTheSignal"}, {"gotoif":["*.urlMission == null", "@init"]}]},
-	{"@tryToAcceptMission": 		["goToAcceptMissionPage", "clickOnAcceptMissionButton", {"wait": 2000}, "clickOnConfirmAcceptMissionButton", "isThereMessageError", {"gotoif":["*.$", "@init"]}]},
+	{"@tryToAcceptMission": 		["goToAcceptMissionPage", "isThereMessageError", {"gotoif": ["*.$", "@init"]}, "clickOnAcceptMissionButton", {"wait": 2000}, "clickOnConfirmAcceptMissionButton", "isThereMessageError", {"gotoif":["*.$", "@init"]}]},
 	{"@startMissionExecution": 		["getMissionInfo", "logout", "goToNextIp"]},
 	{"@hackAccountProcess": 		["hackAccount", "isCrackerStrongEnough", {"gotoif":["!*.$", "@abortProcess"]}, "isThereMessageError", {"gotoif":["*.$", "@signInAccountAndTransfer"]}, {"wait":"_forPageToReload"}]},
 	{"@signInAccountAndTransfer": 	["signInAccount", {"wait": 1000}, "transferMoneyToTarget", "getOutFromAccount", "logout"]},

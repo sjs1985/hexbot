@@ -10,7 +10,7 @@ Functionalities:
 * Performs massive uploads
 * Cleans logs
 * Collects ips and software information around the network
-* Notifies about new missions and strange logs activities (NEW)
+* Notifies about new missions and strange log activities (NEW)
 
 # How to install
 1. Go to chrome://extensions/

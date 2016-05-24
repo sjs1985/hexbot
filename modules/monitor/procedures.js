@@ -12,12 +12,14 @@ monitor.procedure("checkMyOwnLogs", function(shared){
 				var logArea = container[0]
 				if ((logArea.value) && (logArea.value.length > 0)){
 					var suspectLines = logArea.value.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2} - \[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\].*/gmi)
-					for (var i = 0; i < suspectLines.length; i++){ 
-						if(controllers.bot.controlPanel.lists[FIELD_SUSPECT_LOGS].indexOf(suspectLines[i]) == -1){
-							controllers.bot.controlPanel.lists[FIELD_SUSPECT_LOGS].unshift(suspectLines[i])
-							controllers.bot.showMissionAlert = true
-							controllers.storage.set(controllers.bot)
-							isActivityFound = true
+					if ((suspectLines) && (suspectLines.length > 0)){
+						for (var i = 0; i < suspectLines.length; i++){ 
+							if(controllers.bot.controlPanel.lists[FIELD_SUSPECT_LOGS].indexOf(suspectLines[i]) == -1){
+								controllers.bot.controlPanel.lists[FIELD_SUSPECT_LOGS].unshift(suspectLines[i])
+								controllers.bot.showMissionAlert = true
+								controllers.storage.set(controllers.bot)
+								isActivityFound = true
+							}
 						}
 					}
 				}

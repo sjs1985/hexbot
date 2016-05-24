@@ -4,7 +4,7 @@ foo.instructions = [
 	{"@init": 						["goToSoftwarePage", "startUpload", {"gotoif":["!*.$", "@finishProcess"]}]},
 	{"@goToTarget": 				["logout", {"gotoif": ["*.ips.length == 0", "@finishProcess"]}, "goToNextIp", "ipDoesNotExist", {"gotoif": ["*.$", "@goToTarget"]}, "isThereMessageError", {"gotoif": ["*.$", "@goToTarget"]}]},
 	{"@tryToInvadeTarget": 			["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessKnownTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}, {"wait":"_forPageToReload"}]},
-	{"@accessKnownTarget": 			"signInTarget"},
+	{"@accessKnownTarget": 			["signInTarget", "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}]},
 	{"@cleanMyAccessClues": 		["cleanMyIpClues", {"gotoif": ["!*.isThereLogsArea", "@uploadSoftware"]}, "isThereMessageError", {"gotoif":["*.$", "@uploadSoftware"]}, {"wait": "_forPageToReload"}]},
 	{"@uploadSoftware": 			["runUploadSoftware", "isSoftwareAlreadyThere", {"gotoif":["*.$", "@installSoftware"]}, "isThereMessageError", {"gotoif":["*.$", "@goToTarget"]}, "isThereMessageSuccess", {"gotoif": ["*.$", "@cleanMyUploadClues"]}, "isWithinTimeLimit", {"gotoif": ["!*.$", "@abortUpload"]}, {"wait": "_forPageToReload"}]},
 	{"@cleanMyUploadClues": 		["goToTargetLogs", "cleanMyIpClues", {"gotoif": ["!*.isThereLogsArea", "@installSoftware"]}, "isThereMessageError", {"gotoif":["*.$", "@installSoftware"]}, {"wait": "_forPageToReload"}]},

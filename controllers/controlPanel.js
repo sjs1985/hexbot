@@ -11,6 +11,14 @@ if (controllers.isRegularGamePage){
 		document.getElementById(fieldId).value = controllers.bot.controlPanel.fieldsContent[fieldId]
 	}
 
+	for(checkBoxId in controllers.bot.controlPanel.checkBoxes){
+		if(controllers.bot.controlPanel.checkBoxes[checkBoxId]){
+			document.getElementById(checkBoxId).checked = true
+		} else {
+			document.getElementById(checkBoxId).checked = false
+		}
+	}
+
 	var ipSearchResult = document.getElementById(FIELD_IP_SEARCH_RESULT)
 	var regexFilter = document.getElementById(REGEX_INPUT_DOM_ID)
 	if (ipSearchResult.value != ""){
@@ -30,6 +38,40 @@ if (controllers.isRegularGamePage){
 	for (var i = 0; i < fieldsContent.length; i++) {
 		fieldsContent[i].addEventListener("change", function(){
 			controllers.bot.controlPanel.fieldsContent[this.id] = this.value
+			controllers.storage.set(controllers.bot)
+		})
+	}
+
+	var checkBoxes = document.getElementsByClassName("checkBoxes")
+	for (var i = 0; i < checkBoxes.length; i++) {
+		checkBoxes[i].addEventListener("change", function(){
+			if(this.checked){
+				controllers.bot.controlPanel.checkBoxes[this.id] = true
+				switch(this.id){
+					case SET_LOGS_MONITOR:
+						$jSpaghetti.module("monitor").sequence("checkMyOwnLogs").run()
+						console.log("HExBot: Logs monitor is started")
+						break
+					case SET_MISSIONS_MONITOR:
+						$jSpaghetti.module("monitor").sequence("checkMission").run()
+						console.log("HExBot: Missions monitor is started")
+						break
+					default: break
+				}
+			} else {
+				controllers.bot.controlPanel.checkBoxes[this.id] = false
+				switch(this.id){
+					case SET_LOGS_MONITOR:
+						$jSpaghetti.module("monitor").sequence("checkMyOwnLogs").reset()
+						console.log("HExBot: Logs monitor is stopped")
+						break
+					case SET_MISSIONS_MONITOR:
+						$jSpaghetti.module("monitor").sequence("checkMission").reset()
+						console.log("HExBot: Missions monitor id stopped")
+						break
+					default: break
+				}
+			}
 			controllers.storage.set(controllers.bot)
 		})
 	}

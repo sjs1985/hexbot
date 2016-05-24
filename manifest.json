@@ -13,7 +13,7 @@
 	"icons": {"256": "icon.png"},
 	"content_scripts":[
 		{
-			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
+			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*", "http://localhost/*"],
 			"js":[
 				"libraries/jSpaghetti/jSpaghetti.min.js",
 
@@ -38,6 +38,7 @@
 				"modules/webcrawler/sequences/browseWeb.js",
 				"modules/monitor/procedures.js",
 				"modules/monitor/sequences/checkMission.js",
+				"modules/monitor/sequences/checkMyOwnLogs.js",
 
 				"libraries/classes/Storage.js",
 				"libraries/classes/Sequence.js",

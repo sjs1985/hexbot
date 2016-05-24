@@ -14,11 +14,13 @@ var views = {
 			'</div>' +
 			'<div class="modal-body">' +
 			'<button id="' + PERFORM_CHECK_BALANCE_ID + '" class="btn btn-warning">Perform check account status missions</button> ' +
-			'<button id="' + PERFORM_TRANSFER_MONEY_ID + '" class="btn btn-danger">Perform transfer money missions</button><br><br>' +
+			'<button id="' + PERFORM_TRANSFER_MONEY_ID + '" class="btn btn-danger">Perform transfer money missions</button>'+
+			'<label><input class="checkBoxes" type="checkbox" id=' + SET_MISSIONS_MONITOR + '><span data-toggle="tooltip" title="Use carefully. This MAY send GET requests every two seconds. Don\'t worry about \'X-Requested-With\' header: This header is not sent.">Notify about new missions</span></label>' +
 			'<button id="' + SET_CLEAN_OWN_LOGS_DOM_ID + '" class="btn btn-success"> Clean your logs </button> ' +
 			'<button id="' + SET_CLEAN_TARGET_LOGS_DOM_ID + '" class="btn btn-success" data-toggle="tooltip" title="Remove just your ip clues from the target"> Clean victim logs </button> ' +
 			'<button id="' + SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID + '" class="btn btn-success"> Access and clean </button> ' +
-			'<button id="' + SOLVE_RIDDLE_DOM_ID + '" class="btn btn-info"> Solve puzzles </button><br><br>'+
+			'<button id="' + SOLVE_RIDDLE_DOM_ID + '" class="btn btn-info"> Solve puzzles </button>'+
+			'<label><input class="checkBoxes" type="checkbox" id=' + SET_LOGS_MONITOR + '><span data-toggle="tooltip" title="Use carefully. This sends GET requests every second. Don\'t worry about \'X-Requested-With\' header: This header is not sent.">Notify about invasions on my host</span></label>' +
 			'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-success"> Listen transfer bank logs on </button>' +
 			'<input id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent" placeholder="{ip of bank}" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> and transfer to my account: <input id="' + FIELD_MY_ACCOUNT + '" class="controls fieldsContent" placeholder="{account of the same bank}" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"><br>' +
 			'<button id="' + PERFORM_INSTALL_SOFTWARE + '" class="btn btn-success"> Upload, install and hide this</button>' +
@@ -57,48 +59,23 @@ var views = {
 		containerElement.insertBefore(document.createElement("li"), containerElement.firstChild) //Just bypassing a bug
 	},
 
-	appendAlertMessage: function(message){
-		var cssGritter = document.createElement("link")
-		cssGritter.rel = "stylesheet"
-		cssGritter.type = "text/css"
-		cssGritter.href = "css/jquery.gritter.css"
-		document.getElementsByTagName("HEAD")[0].appendChild(cssGritter)
-		var divMain = document.createElement("div")
-		divMain.id = "gritter-notice-wrapper"
-		divMain.style.display = "block"
-		divMain.style.right = "25%"
-		divMain.style.opacity = "0.5"
-		divMain.innerHTML = 
-		   '<div id="gritter-item-1" class="gritter-item-wrapper">' +
-			  '<div class="gritter-top"></div>' +
-			  '<div class="gritter-item">' +
-				 '<div id="close-bot-alert" class="gritter-close" style="display: block;"></div>' +
-				 '<div class="gritter-without-image">' +
-					'<span class="gritter-title">HexBot Alert</span>' +
-					'<p>' + message + '</p>' +
-				 '</div>' +
-				 '<div style="clear:both"></div>' +
-			  '</div>' +
-			  '<div class="gritter-bottom"></div>' +
-		   '</div>';
-		document.getElementsByTagName("BODY")[0].appendChild(divMain)
-		document.getElementById("close-bot-alert").onclick = function(){
-			views.hideAlertMessage()
-		}
+	colorSideBarMenu: function(menu){
+		getDOMElement("a", "href", menu, 0, true).style.backgroundColor = "rgb(125, 52, 52)"
 	},
 
-	showAlertMessage: function(){
-		var element = document.getElementById("gritter-notice-wrapper")
-		if(element){
-			element.style.display = "block"
-		}
+	discolorSideBarMenu: function(menu){
+		getDOMElement("a", "href", menu, 0, false).style.backgroundColor = null
+		getDOMElement("a", "href", menu, 0, true).style.color = "#aaa"
 	},
 
-	hideAlertMessage: function(){
-		var element = document.getElementById("gritter-notice-wrapper")
-		if(element){
-			element.style.display = "none"
-		}
+	appendAndShowSuspectAccesses: function(logs){
+		var newTextArea = document.createElement("textarea")
+		newTextArea.disabled = true
+		newTextArea.value = logs
+		var container = getDOMElement("form", "action", "logEdit", 0, false)
+		container.appendChild(document.createElement("BR"))
+		container.appendChild(document.createElement("BR"))
+		container.appendChild(newTextArea)
 	}
 
 }

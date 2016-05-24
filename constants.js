@@ -11,13 +11,15 @@ const SET_CLEAN_TARGET_LOGS_DOM_ID = 'set-victim-cleaner'
 const SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID = 'set-cleanlogin'
 const SOLVE_RIDDLE_DOM_ID = 'set-infosolveriddles'
 const REGEX_INPUT_DOM_ID = 'regex-input'
-const INFO_ALERT = "info-alert"
+const INFO_ALERT = 'info-alert'
 const PERFORM_CHECK_BALANCE_ID = 'set-check-account-status-job'
 const PERFORM_TRANSFER_MONEY_ID = 'set-transfer-money-status-job'
 const PERFORM_BANK_CAMPING = "set-camping-bank-logs"
 const PERFORM_INSTALL_SOFTWARE = "set-install-software"
 const SET_SEARCH_FOR_IPS = "set-ip-search"
 const SET_UPLOAD_TIME_LIMIT = 'set-upload-time-limit'
+const SET_MISSIONS_MONITOR = 'set-missions-monitor'
+const SET_LOGS_MONITOR = 'set-logs-monitor'
 
 const FIELD_BANK_IP_TARGET = "target-bank-ip"
 const FIELD_MY_ACCOUNT = "set-my-account"
@@ -25,6 +27,7 @@ const FIELD_SOFTWARE_TO_INSTALL = "installSoftware"
 const FIELD_IPS_INSTALL_TARGETS = "ip-install-targets"
 const FIELD_IPS_START_SEARCHING = "ips-start-seaching"
 const FIELD_IP_SEARCH_RESULT = "search-resut"
+const FIELD_SUSPECT_LOGS = "suspect-logs"
 
 
 //Language constants

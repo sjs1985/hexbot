@@ -18,4 +18,3 @@ if ((regularPageId) && (regularPageId.innerHTML.indexOf('<a href="#">Hacker Expe
 }
 
 
-

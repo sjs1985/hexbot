@@ -1,5 +1,50 @@
 var monitor = $jSpaghetti.module("monitor")
-monitor.config.debugMode = true
+monitor.config.debugMode = false
+
+monitor.procedure("checkMyOwnLogs", function(shared){
+	function checkLogs(){
+		sendXMLHttpRequest("/log", "GET", "", true, function(data){
+			var parser = new DOMParser()
+			var requestContentDOM = parser.parseFromString(data, "text/html")
+			var container = requestContentDOM.getElementsByTagName("textarea")
+			var isActivityFound = false
+			if ((container) && (container.length > 0)){
+				var logArea = container[0]
+				if ((logArea.value) && (logArea.value.length > 0)){
+					var suspectLines = logArea.value.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2} - \[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\].*/gmi)
+					for (var i = 0; i < suspectLines.length; i++){ 
+						if(controllers.bot.controlPanel.lists[FIELD_SUSPECT_LOGS].indexOf(suspectLines[i]) == -1){
+							controllers.bot.controlPanel.lists[FIELD_SUSPECT_LOGS].unshift(suspectLines[i])
+							controllers.bot.showMissionAlert = true
+							controllers.storage.set(controllers.bot)
+							isActivityFound = true
+						}
+					}
+				}
+			}
+			if((isActivityFound) || (controllers.bot.showMissionAlert)){
+				views.colorSideBarMenu("log")
+				if(window.location.pathname == "/log"){
+					controllers.bot.showMissionAlert = false
+					controllers.storage.set(controllers.bot)
+				}
+			}
+		})
+	}
+	checkLogs()
+	if (window.location.pathname == "/log"){
+		if ((controllers.bot.controlPanel.lists[FIELD_SUSPECT_LOGS].length > 0) &&
+			(controllers.bot.controlPanel.checkBoxes[SET_LOGS_MONITOR]))
+		views.appendAndShowSuspectAccesses("--- SUSPECT ACTIVITIES ---\n" + controllers.bot.controlPanel.lists[FIELD_SUSPECT_LOGS].join("\n"))
+	}
+	var loop = setInterval(function(){
+		if (controllers.bot.controlPanel.checkBoxes[SET_LOGS_MONITOR]){	
+			checkLogs()
+		} else {
+			clearInterval(loop)
+		}
+	}, 1000)	
+})
 
 monitor.procedure("queryMissionPage", function(shared){
 	shared.isMissionPageGot = false
@@ -30,15 +75,13 @@ monitor.procedure("queryMissionPage", function(shared){
 monitor.procedure("checkTime", function(shared, func){
 	function showAlert(){
 		if (!shared.stopShowAlert){
-			getDOMElement("a", "href", "missions", 0).style.backgroundColor = "rgb(125, 52, 52)"
-			getDOMElement("a", "href", "missions", 0).style.color = "#aaa"
+			views.colorSideBarMenu("missions")
 			shared.isUserAlerted = true
 		}
 	}
 	function hideAlert(){
 		if(shared.isUserAlerted){
-			getDOMElement("a", "href", "missions", 0).style.backgroundColor = null
-			getDOMElement("a", "href", "missions", 0).style.color = "#aaa"
+			views.discolorSideBarMenu("missions")
 			shared.isUserAlerted = false
 		}
 	}
@@ -57,11 +100,15 @@ monitor.procedure("checkTime", function(shared, func){
 		} else {
 			var leftTime = shared.timeTarget - now
 			var loop = setInterval(function(){
-				leftTime--
-				if(leftTime <= 0){
+				if (controllers.bot.controlPanel.checkBoxes[SET_MISSIONS_MONITOR]){
+					leftTime--
+					if(leftTime <= 0){
+						clearInterval(loop)
+						showAlert()
+						func.sendSignal("ok, user is alerted")
+					}
+				} else {
 					clearInterval(loop)
-					showAlert()
-					func.sendSignal("ok, user is alerted")
 				}
 			}, 1000)
 		}

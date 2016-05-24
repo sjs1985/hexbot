@@ -1,22 +1,6 @@
 //=========CONTENT SCRIPT============//
 
 if(controllers.isRegularGamePage){
-	//------------------------------------------------------------------------------------------//
-	//----Put here the sequences that must be running every time-------------------------- -----//
-	//------------------------------------------------------------------------------------------//
-	/* -- THIS IS AN UNSECURE SEQUENCE. THIS MAY MAKE THE BOT DETECTABLE. REMOVE THE COMMENTS IF YOU TRUST IN IT --
-	var missionMonitor = $jSpaghetti.module("monitor").sequence("checkMission")
-	missionMonitor.run()
-	missionMonitor.events.addEventListener("terminated", function(){
-		missionMonitor.reset()
-	})
-	*/
-	var adRemover = $jSpaghetti.module("adRemover").sequence("removeAds")
-	adRemover.reset()
-	adRemover.events.addEventListener("reset", function(){
-		adRemover.run()
-	})
-
 	if(controllers.bot.currentSequence != null){ //Executes the current sequence
 		var moduleName = controllers.bot.currentSequence.moduleName
 		var sequenceName = controllers.bot.currentSequence.sequenceName
@@ -33,6 +17,28 @@ if(controllers.isRegularGamePage){
 		puzzleSolver.run()
 		puzzleSolver.events.addEventListener("terminated", function(){
 			puzzleSolver.reset()
+		})
+	}
+	//------------------------------------------------------------------------------------------//
+	//----Put here the sequences that must be running every time-------------------------- -----//
+	//------------------------------------------------------------------------------------------//
+	var adRemover = $jSpaghetti.module("adRemover").sequence("removeAds")
+	adRemover.reset()
+	adRemover.events.addEventListener("reset", function(){
+		adRemover.run()
+	})
+	if(controllers.bot.controlPanel.checkBoxes[SET_MISSIONS_MONITOR]){
+		var missionMonitor = $jSpaghetti.module("monitor").sequence("checkMission")
+		missionMonitor.run()
+		missionMonitor.events.addEventListener("terminated", function(){
+			missionMonitor.reset()
+		})
+	}
+	if(controllers.bot.controlPanel.checkBoxes[SET_LOGS_MONITOR]){
+		var logsMonitor = $jSpaghetti.module("monitor").sequence("checkMyOwnLogs")
+		logsMonitor.run()
+		logsMonitor.events.addEventListener("terminated", function(){
+			logsMonitor.reset()
 		})
 	}
 } else {

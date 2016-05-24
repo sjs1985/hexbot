@@ -9,7 +9,8 @@ Functionalities:
 * Intercepts bank transactions
 * Performs massive uploads
 * Cleans logs
-* Collects ips and software information around the network (NEW)
+* Collects ips and software information around the network
+* Notifies about new missions and strange logs activities (NEW)
 
 # How to install
 1. Go to chrome://extensions/

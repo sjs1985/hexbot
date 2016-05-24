@@ -15,12 +15,12 @@ var views = {
 			'<div class="modal-body">' +
 			'<button id="' + PERFORM_CHECK_BALANCE_ID + '" class="btn btn-warning">Perform check account status missions</button> ' +
 			'<button id="' + PERFORM_TRANSFER_MONEY_ID + '" class="btn btn-danger">Perform transfer money missions</button>'+
-			'<label><input class="checkBoxes" type="checkbox" id=' + SET_MISSIONS_MONITOR + '><span data-toggle="tooltip" title="Use carefully. This MAY send GET requests every two seconds. Don\'t worry about \'X-Requested-With\' header: This header is not sent.">Notify about new missions</span></label>' +
+			'<label><input class="checkBoxes" type="checkbox" id=' + SET_MISSIONS_MONITOR + '><span>Notify about new missions</span></label>' +
 			'<button id="' + SET_CLEAN_OWN_LOGS_DOM_ID + '" class="btn btn-success"> Clean your logs </button> ' +
 			'<button id="' + SET_CLEAN_TARGET_LOGS_DOM_ID + '" class="btn btn-success" data-toggle="tooltip" title="Remove just your ip clues from the target"> Clean victim logs </button> ' +
 			'<button id="' + SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID + '" class="btn btn-success"> Access and clean </button> ' +
 			'<button id="' + SOLVE_RIDDLE_DOM_ID + '" class="btn btn-info"> Solve puzzles </button>'+
-			'<label><input class="checkBoxes" type="checkbox" id=' + SET_LOGS_MONITOR + '><span data-toggle="tooltip" title="Use carefully. This sends GET requests every second. Don\'t worry about \'X-Requested-With\' header: This header is not sent.">Notify about invasions on my host</span></label>' +
+			'<label><input class="checkBoxes" type="checkbox" id=' + SET_LOGS_MONITOR + '><span>Notify about strange activity on my logs</span></label>' +
 			'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-success"> Listen transfer bank logs on </button>' +
 			'<input id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent" placeholder="{ip of bank}" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> and transfer to my account: <input id="' + FIELD_MY_ACCOUNT + '" class="controls fieldsContent" placeholder="{account of the same bank}" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"><br>' +
 			'<button id="' + PERFORM_INSTALL_SOFTWARE + '" class="btn btn-success"> Upload, install and hide this</button>' +

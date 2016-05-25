@@ -109,8 +109,10 @@ foo.procedure("transferMoneyToTarget", function(shared){
 })
 
 foo.procedure("signInAccount", function(shared){
-	getDOMElement("input", "name", "acc", 0).value = shared.accounts[0]; //Fill the account field
-	getDOMElement("input", "name", "pass", 0).value = getDOMElement("strong", null, null, 1).childNodes[0].nodeValue; //Fill the password field with the password on screen
+	if (getDOMElement("div", "class", "alert alert-error", 0)){
+		getDOMElement("input", "name", "acc", 0).value = shared.accounts[0]; //Fill the account field
+		getDOMElement("input", "name", "pass", 0).value = getDOMElement("strong", null, null, 1).childNodes[0].nodeValue; //Fill the password field with the password on screen
+	}
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 })
 

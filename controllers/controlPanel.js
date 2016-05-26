@@ -4,6 +4,7 @@ if (controllers.isRegularGamePage){
 	if (controllers.bot.controlPanel.isHidden){
 		views.hideControlPanel()
 	} else {
+		views.switchToMainScreen()
 		views.showControlPanel()
 	}
 

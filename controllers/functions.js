@@ -9,6 +9,7 @@ if (controllers.isRegularGamePage){
 	}
 
 	controllers.functions.showPanel = function(){
+		views.switchToMainScreen()
 		views.showControlPanel()
 		var content = controllers.bot.controlPanel
 		content.isHidden = false

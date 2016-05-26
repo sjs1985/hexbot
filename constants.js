@@ -20,6 +20,9 @@ const SET_SEARCH_FOR_IPS = "set-ip-search"
 const SET_UPLOAD_TIME_LIMIT = 'set-upload-time-limit'
 const SET_MISSIONS_MONITOR = 'set-missions-monitor'
 const SET_LOGS_MONITOR = 'set-logs-monitor'
+const CREDITS_INFO = 'credits-info'
+const MAIN_SCREEN_DOM_ID = 'control-panel-main'
+const CREDITS_SCREEN_DOM_ID = 'control-panel-credits'
 
 const FIELD_BANK_IP_TARGET = "target-bank-ip"
 const FIELD_MY_ACCOUNT = "set-my-account"

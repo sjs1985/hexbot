@@ -1,5 +1,5 @@
 var adRemover = $jSpaghetti.module("adRemover")
-adRemover.config.debugMode = true
+adRemover.config.debugMode = false
 
 adRemover.procedure("removeAds", function(){
 	function removeInsTags(){

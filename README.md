@@ -23,14 +23,3 @@ The bot is entirely written with [jSpaghetti](https://github.com/gresendesa/jSpa
 There are two ways to add new functionalities.
 * Creating a new sequence into a existing module to related functionality; or
 * Creating a module to build a new functionality.
-
-# credits
-[**@gresendesa**](https://github.com/gresendesa)
-
-[**@perfilrobo**](https://github.com/perfilrobo)
-
-[**@dominicusdev**](https://github.com/dominicusdev)
-
-[**@Quartz101**](https://github.com/Quartz101)
-
-[**@Klorker**](https://github.com/Klorker)

@@ -2,14 +2,20 @@ var camping = $jSpaghetti.module("camping")
 camping.config.debugMode = true
 
 camping.procedure("startBankCamping", function(shared){
+	shared.myAccountsInfo = getBankAccountsInfo()
 	shared.ip = controllers.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET]
-	shared.myAccount = controllers.bot.controlPanel.fieldsContent[FIELD_MY_ACCOUNT]
+	shared.myAccount = shared.myAccountsInfo[shared.ip]
+	if (shared.myAccount === undefined){
+		window.alert("There's no bank account vinculated to \"" + shared.ip + "\"")
+		return false
+	}
 	shared.accounts = []
 	shared.myCluesFound = false
 	shared.myIp = getMyIp(true)
 	shared.listenForTransferActivities = true
 	shared.listenForAccountAccessActivities = false
 	shared.isLogged = false
+	return true
 })
 
 camping.procedure("goToIp", function(shared){

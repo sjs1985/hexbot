@@ -56,5 +56,18 @@ if (controllers.isRegularGamePage){
 		controllers.storage.set(controllers.bot)
 		controllers.functions.showPanel()
 	}
+
+	controllers.functions.checkUploadSoftwareFields = function (){
+		var uploadModeCheckbox = document.getElementById(SET_UPLOAD_MODE)
+		var fieldSoftwares = document.getElementById(FIELD_SOFTWARES_TO_INSTALL)
+		var fieldTimeLimit = document.getElementById(SET_TIME_LIMIT) 
+		if (uploadModeCheckbox.checked){
+			fieldSoftwares.disabled = false
+			fieldTimeLimit.disabled = false
+		} else {
+			fieldSoftwares.disabled = true
+			fieldTimeLimit.disabled = true
+		}
+	}
 }
 	

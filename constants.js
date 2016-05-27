@@ -1,4 +1,4 @@
-const VERSION_BOT = "0.1.15"
+const VERSION_BOT = "0.1.16"
 const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const BOT_STORAGE_NAME = "HExBot-State"
 
@@ -17,20 +17,20 @@ const PERFORM_TRANSFER_MONEY_ID = 'set-transfer-money-status-job'
 const PERFORM_BANK_CAMPING = "set-camping-bank-logs"
 const PERFORM_INSTALL_SOFTWARE = "set-install-software"
 const SET_SEARCH_FOR_IPS = "set-ip-search"
-const SET_UPLOAD_TIME_LIMIT = 'set-upload-time-limit'
 const SET_MISSIONS_MONITOR = 'set-missions-monitor'
 const SET_LOGS_MONITOR = 'set-logs-monitor'
+const SET_UPLOAD_MODE = 'set-upload-mode'
 const CREDITS_INFO = 'credits-info'
 const MAIN_SCREEN_DOM_ID = 'control-panel-main'
 const CREDITS_SCREEN_DOM_ID = 'control-panel-credits'
 
 const FIELD_BANK_IP_TARGET = "target-bank-ip"
-const FIELD_MY_ACCOUNT = "set-my-account"
-const FIELD_SOFTWARE_TO_INSTALL = "installSoftware"
-const FIELD_IPS_INSTALL_TARGETS = "ip-install-targets"
 const FIELD_IPS_START_SEARCHING = "ips-start-seaching"
 const FIELD_IP_SEARCH_RESULT = "search-resut"
 const FIELD_SUSPECT_LOGS = "suspect-logs"
+
+const FIELD_SOFTWARES_TO_INSTALL = "set-softwares-to-install"
+const SET_TIME_LIMIT = "set-time-limit"
 
 
 //Language constants

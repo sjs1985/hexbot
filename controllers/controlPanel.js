@@ -43,6 +43,12 @@ if (controllers.isRegularGamePage){
 		})
 	}
 
+	var uploadModeCheckbox = document.getElementById(SET_UPLOAD_MODE)
+	controllers.functions.checkUploadSoftwareFields()
+	uploadModeCheckbox.addEventListener("click", function(){
+		controllers.functions.checkUploadSoftwareFields()
+	})
+
 	var checkBoxes = document.getElementsByClassName("checkBoxes")
 	for (var i = 0; i < checkBoxes.length; i++) {
 		checkBoxes[i].addEventListener("change", function(){

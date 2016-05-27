@@ -1,7 +1,7 @@
 var foo = $jSpaghetti.module("camping").sequence("bankCamping")
 
 foo.instructions = [
-	{"@init": 						["startBankCamping", "logout"]},
+	{"@init": 						["startBankCamping", {"gotoif":["!*.$", "@finishProcess"]}, "logout"]},
 	{"@goToAccountHackIfAvaiable": 	{"gotoif": ["*.accounts.length > 0", "@startAccountAtack"]}},
 	{"@checkIpTarget": 				["goToIp", "isThereMessageError", {"gotoif":["*.$", "@finishProcess"]}]},
 	{"@tryToInvadeTarget": 			[{"gotoif": ["*.isLogged", "@checkForCaughtAccounts"]}, "forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessKnownTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@finishProcess"]}, {"wait":"_forPageToReload"}]},

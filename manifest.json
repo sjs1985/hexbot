@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016)",
-	"version": "0.1.15",
+	"version": "0.1.16",
 	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
  		"default_popup": "popup.html"
@@ -32,8 +32,6 @@
 				"modules/adRemover/sequences/removeAds.js",
 				"modules/camping/procedures.js",
 				"modules/camping/sequences/bankCamping.js",
-				"modules/uploader/procedures.js",
-				"modules/uploader/sequences/upload.js",
 				"modules/webcrawler/procedures.js",
 				"modules/webcrawler/sequences/browseWeb.js",
 				"modules/monitor/procedures.js",
@@ -51,7 +49,7 @@
 				"libraries/functions/getMyIp.js",
 				"libraries/functions/removeLinesFromText.js",
 				"libraries/functions/getSoftwareId.js",
-				"libraries/functions/loadScript.js",
+				"libraries/functions/getBankAccountsInfo.js",
 
 				"views.js",
 

@@ -10,21 +10,160 @@ webcrawler.procedure("startSearching", function(shared){
 		}
 		shared.getSoftwareMode = true
 		shared.closedList = []
-		shared.inaccessibleHostsList = []
-		shared.accessibleHostsList = []
+		
+		shared.inaccessibleHostsList = {}
+		shared.accessibleHostsList = {}
+		shared.NPCList = []
+		
 		shared.accessCounter = 0
 		shared.currentIp = []
 		shared.newHostsList = []
 		shared.BTCAccountList = []
 		shared.shoppingLogList = []
-		shared.clanServerList = []
 		shared.softwareList = []
-		shared.isClanServer = false
+
+		shared.uploadMode = controllers.bot.controlPanel.checkBoxes[SET_UPLOAD_MODE]
+		
+		if(shared.uploadMode){
+			shared.softwaresToUpload = []
+			shared.currentSoftware = 0
+			shared.isUploadAborted = false
+			shared.uploadRegister = {}
+			var softwaresNotFound = []
+			var softwares = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARES_TO_INSTALL].split(",")
+			for (var i = 0; i < softwares.length; i++) {
+				var software = softwares[i].split(":")
+				if (software.length == 2){
+					var pid = getSoftwareId(software[0].trim(), software[1].trim(), "/software", "")
+					if (pid){
+						var softwareObj = {
+							pid: pid,
+							name: software[0].trim(),
+							version: software[1].trim()
+						}
+						shared.softwaresToUpload.push(softwareObj)
+					} else {
+						softwaresNotFound.push(software[0].trim() + " version " + software[1].trim())
+					}
+				} else {
+					window.alert("Ops. Check the softwares field. \nMake sure software name and software version is being separated with \":\". \nUse \",\" to separate different softwares.")
+					return false
+				}
+			}
+			if (softwaresNotFound.length > 0){
+				window.alert(softwaresNotFound.join(",\n") + "\nnot found")
+				return false
+			}
+			var timeLimit = controllers.bot.controlPanel.fieldsContent[SET_TIME_LIMIT]
+			if ((timeLimit.length > 0) && (Number(timeLimit) > 0)){
+				shared.timeLimit = timeLimit
+			} else {
+				shared.timeLimit = 0
+			}
+		}
+
 		shared.myIp = getMyIp(true)
 		return true
 	} else {
 		return false
 	}	
+})
+
+webcrawler.procedure("isWithinTimeLimit", function(shared){
+	var timeContainer = getDOMElement("div", "class", "elapsed", 0)
+	if (timeContainer){
+		var time = timeContainer.innerHTML.match(/[0-9]+/g)
+		if(time.length == 3){
+			var leftTime = (Number(time[0])*Math.pow(60, 2)) + (Number(time[1])*60) + (Number(time[2]))
+			if ((shared.timeLimit == 0) || (leftTime <= shared.timeLimit)){
+				return true
+			} else {	
+				return false
+			}
+		} else {
+			return true
+		}
+	} else {
+		return true
+	}
+})
+
+webcrawler.procedure("registerUploaded", function(shared){
+	var currentSoftware = shared.softwaresToUpload[shared.currentSoftware].name + ": " + shared.softwaresToUpload[shared.currentSoftware].version
+	if(shared.uploadRegister[currentSoftware] === undefined)
+		shared.uploadRegister[currentSoftware] = {}
+	if(shared.uploadRegister[currentSoftware][shared.currentIp] === undefined)
+		shared.uploadRegister[currentSoftware][shared.currentIp] = ""
+	shared.uploadRegister[currentSoftware][shared.currentIp] += "U"
+	console.log(shared.uploadRegister[currentSoftware]) 
+})
+
+webcrawler.procedure("registerInstalled", function(shared){
+	var currentSoftware = shared.softwaresToUpload[shared.currentSoftware].name + ": " + shared.softwaresToUpload[shared.currentSoftware].version
+	if(shared.uploadRegister[currentSoftware] === undefined)
+		shared.uploadRegister[currentSoftware] = {}
+	if(shared.uploadRegister[currentSoftware][shared.currentIp] === undefined)
+		shared.uploadRegister[currentSoftware][shared.currentIp] = ""
+	shared.uploadRegister[currentSoftware][shared.currentIp] += "I"
+	console.log(shared.uploadRegister[currentSoftware]) 
+})
+
+webcrawler.procedure("registerHidden", function(shared){
+	var currentSoftware = shared.softwaresToUpload[shared.currentSoftware].name + ": " + shared.softwaresToUpload[shared.currentSoftware].version
+	if(shared.uploadRegister[currentSoftware] === undefined)
+		shared.uploadRegister[currentSoftware] = {}
+	if(shared.uploadRegister[currentSoftware][shared.currentIp] === undefined)
+		shared.uploadRegister[currentSoftware][shared.currentIp] = ""
+	shared.uploadRegister[currentSoftware][shared.currentIp] += "H"
+	console.log(shared.uploadRegister[currentSoftware]) 
+})
+
+webcrawler.procedure("manageUploadCounter", function(shared){
+	if(shared.currentSoftware < shared.softwaresToUpload.length - 1){
+		shared.currentSoftware++
+	} else {
+		shared.currentSoftware = 0
+	}
+})
+
+webcrawler.procedure("isSoftwareAlreadyThere", function(){
+	var labels = ["O cliente remoto já tem esse software", "The remote client already have this software"]
+	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+	if (errorContainer){
+		if(strposOfArray(errorContainer.innerHTML, labels) >= 0)
+		return true
+	}
+	return false
+})
+
+webcrawler.procedure("abortUpload", function(shared){
+	pidContainer = document.getElementsByClassName("span4")[0]
+	if (pidContainer){
+		var pid = pidContainer.className.match(/[0-9]+/g)[1]
+		if (pid){
+			shared.isUploadAborted = true
+			goToPage("/processes?pid=" + pid + "&del=1")
+		} else {
+			shared.isUploadAborted = false
+		}
+	} else {
+		shared.isUploadAborted = false
+	}
+})
+
+webcrawler.procedure("runUploadSoftware", function(shared){
+	goToPage("/internet?view=software&cmd=up&id=" + shared.softwaresToUpload[shared.currentSoftware].pid)
+})
+
+webcrawler.procedure("installSoftware", function(shared){
+	var softwareId = getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software")
+	console.log(softwareId, shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version)
+	goToPage("/internet?view=software&cmd=install&id=" + softwareId)
+})
+
+webcrawler.procedure("hideSoftware", function(shared){
+	var softwareId = getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software")
+	goToPage("/internet?view=software&cmd=hide&id=" + softwareId)
 })
 
 webcrawler.procedure("isIpInvalid", function(){
@@ -36,16 +175,49 @@ webcrawler.procedure("isIpInvalid", function(){
 	}
 })
 
-webcrawler.procedure("accountClanServer", function(shared){
-	var serverClanButton = getDOMElement("a", "href", "?view=clan", 0)
-	if (serverClanButton){
-		shared.isClanServer = true
-		shared.clanServerList.push(shared.currentIp)
-		return true
-	} else {
-		shared.isClanServer = false
+webcrawler.procedure("registerInaccessible", function(shared){
+	if (shared.inaccessibleHostsList[shared.hostLabel] === undefined)
+		shared.inaccessibleHostsList[shared.hostLabel] = []
+	shared.inaccessibleHostsList[shared.hostLabel].push(shared.currentIp)	
+})
+
+webcrawler.procedure("registerAccessible", function(shared){
+	if (shared.accessibleHostsList[shared.hostLabel] === undefined)
+		shared.accessibleHostsList[shared.hostLabel] = []
+	shared.accessibleHostsList[shared.hostLabel].push(shared.currentIp)
+	shared.accessCounter++
+})
+
+webcrawler.procedure("registerNPCNamesList", function(shared){
+	if (shared.hostLabel != "VPC"){
+		var container = document.getElementsByClassName("widget-content padding noborder")
+		if((container) && (container.length > 0)){
+			var imageContainer = container[0].getElementsByTagName("img")
+			if((imageContainer) && (imageContainer.length > 0)){
+				var imageTitle = imageContainer[0].title
+				var imageSrc = imageContainer[0].src
+			}
+		}
+		if (imageTitle){
+			var name = imageTitle
+		} else if (imageSrc){
+			var name = imageSrc.replace(/^.*[\\\/]/, '')
+			name = name.replace(/\..*/, '')
+			name = name.replace(/^x/, '')
+		} else {
+			var name = null
+		}
+		var NPCObject = {
+			ip: shared.currentIp, 
+			label: shared.hostLabel,
+			name: name
+		}
+		shared.NPCList.push(NPCObject)
 	}
-	
+})
+
+webcrawler.procedure("signInTarget", function(shared){
+	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 })
 
 webcrawler.procedure("getIpsFromLogs", function(shared){
@@ -69,35 +241,66 @@ webcrawler.procedure("getIpsFromLogs", function(shared){
 webcrawler.procedure("updateCrawlerLogs", function(data){
 	controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] = ""
 	if(data.newHostsList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "NEW IPS FOUND: " + data.newHostsList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## NEW IPS FOUND ## " + data.newHostsList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.newHostsList.join(", ") + "\n\n"
 	} 
-	if(data.accessibleHostsList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "ACCESSIBLE HOSTS: " + data.accessibleHostsList.length + "\n" 
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.accessibleHostsList.join(", ") + "\n\n"
-	} 
-	if(data.inaccessibleHostsList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "INACCESSIBLE HOSTS: " + data.inaccessibleHostsList.length + "\n" 
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.inaccessibleHostsList.join(", ") + "\n\n"
+	if(Object.keys(data.accessibleHostsList).length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## ACCESSIBLE HOSTS ##" + "\n" 
+		for(var list in data.accessibleHostsList){
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += list + ": " + data.accessibleHostsList[list].length + "\n"
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.accessibleHostsList[list].join(", ") + "\n\n"
+		}
 	}
+
+	if(Object.keys(data.inaccessibleHostsList).length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## INACCESSIBLE HOSTS ##" + "\n" 
+		for(var list in data.inaccessibleHostsList){
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += list + ": " + data.inaccessibleHostsList[list].length + "\n"
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.inaccessibleHostsList[list].join(", ") + "\n\n"
+		}
+	}
+
+	if(data.NPCList.length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## noVPC LIST ## " + data.NPCList.length + "\n" 
+		for (var i = 0; i < data.NPCList.length; i++) {
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.NPCList[i].ip + ", " + data.NPCList[i].label
+			if (data.NPCList[i].name != null){
+				controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += ", " + data.NPCList[i].name + "\n"
+			} else {
+				controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "\n"
+			}
+		}
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "\n"
+	}
+
 	if(data.openList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "UNTESTED HOSTS: " + data.openList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## UNCHECKED HOSTS ## " + data.openList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.openList.join(", ") + "\n\n"	
 	}
-	if(data.clanServerList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "CLAN SERVERS: " + data.clanServerList.length + "\n" 
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.clanServerList.join(", ") + "\n\n"	
+
+	if(Object.keys(data.uploadRegister).length > 0){
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## UPLOADS ## \n" 
+		for(upload in data.uploadRegister){
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += upload + " " + Object.keys(data.uploadRegister[upload]).length + "\n"
+			var list = []
+			for(ip in data.uploadRegister[upload]){
+				list.push(ip + " " + data.uploadRegister[upload][ip])
+			}
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += list.join(", ") + "\n"
+		}
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "\n"
 	}
+
 	if(data.BTCAccountList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "BTC LOGS: " + data.BTCAccountList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## BTC LOGS ## " + data.BTCAccountList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.BTCAccountList.join("\n") + "\n\n"		
 	}
 	if(data.shoppingLogList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "SHOPPING LOGS: " + data.shoppingLogList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## SHOPPING LOGS ## " + data.shoppingLogList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.shoppingLogList.join("\n") + "\n\n"	
 	}
 	if(data.softwareList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "SOFTWARES FOUND: \n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## SOFTWARES FOUND ##\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.softwareList.join("\n")	
 	}
 	controllers.storage.set(controllers.bot)
@@ -146,12 +349,6 @@ webcrawler.procedure("forceToAccessTarget", function(){
 	goToPage("/internet?action=hack")
 })
 
-webcrawler.procedure("signInTarget", function(shared){
-	shared.accessibleHostsList.push(shared.currentIp)
-	shared.accessCounter++
-	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
-})
-
 webcrawler.procedure("hackTargetBruteForce", function(){
 	goToPage("/internet?action=hack&method=bf")
 })
@@ -171,7 +368,11 @@ webcrawler.procedure("cleanMyIpClues", function(shared){
 
 webcrawler.procedure("isThereLogs", function(){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
-	if (textArea) return true
+	if (textArea){
+		return true
+	} else {
+		return false
+	}
 })
 
 webcrawler.procedure("goToTargetSoftwares", function(){
@@ -182,16 +383,6 @@ webcrawler.procedure("goToOwnSoftwareArea", function(){
 	goToPage("/software")
 })
 
-webcrawler.procedure("runUploadSoftware", function(shared){
-	goToPage("/internet?view=software&cmd=up&id=" + shared.softwareId)
-})
-
-webcrawler.procedure("installSoftware", function(shared){
-	var softwareField = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARE_TO_INSTALL].split(",")
-	var softwareId = getSoftwareId(shared.softwareName, shared.softwareVersion)
-	goToPage("/internet?view=software&cmd=install&id=" + softwareId)
-})
-
 webcrawler.procedure("isSoftwareAlreadyThere", function(){
 	var labels = ["O cliente remoto já tem esse software", "The remote client already have this software"]
 	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
@@ -200,18 +391,6 @@ webcrawler.procedure("isSoftwareAlreadyThere", function(){
 		return true
 	}
 	return false
-})
-
-webcrawler.procedure("installSoftware", function(shared){
-	var softwareField = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARE_TO_INSTALL].split(",")
-	var softwareId = getSoftwareId(shared.softwareName, shared.softwareVersion)
-	goToPage("/internet?view=software&cmd=install&id=" + softwareId)
-})
-
-webcrawler.procedure("hideSoftware", function(shared){
-	var softwareField = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARE_TO_INSTALL].split(",")
-	var softwareId = getSoftwareId(shared.softwareName, shared.softwareVersion)
-	goToPage("/internet?view=software&cmd=hide&id=" + softwareId)
 })
 
 webcrawler.procedure("goToOwnLogTab", function(){
@@ -247,10 +426,6 @@ webcrawler.procedure("ipDoesNotExist", function(){
 	return false
 })
 
-webcrawler.procedure("registerInaccessible", function(shared){
-	shared.inaccessibleHostsList.push(shared.currentIp)
-})
-
 webcrawler.procedure("getSoftwares", function(shared){
 	var softwareTable = getDOMElement("table", "class", "table table-cozy table-bordered table-striped table-software table-hover with-check", 0)
 	if(softwareTable){
@@ -273,3 +448,47 @@ webcrawler.procedure("getSoftwares", function(shared){
 		}
 	}	
 })
+
+webcrawler.procedure("getHostLabel", function(shared){
+	var labelContainer = document.getElementsByClassName("label pull-right")
+	if (labelContainer){
+		shared.hostLabel = labelContainer[0].innerHTML
+	} else {
+		shared.hostLabel = null
+	}
+})
+
+webcrawler.procedure("cancelLogProcesses", function(shared){
+	var processesPage = sendXMLHttpRequest("/processes", "GET", "", false)
+	var parser = new DOMParser()
+	var requestContentDOM = parser.parseFromString(processesPage, "text/html")
+	var container = requestContentDOM.getElementsByClassName("widget-content padding noborder")
+	var processesId = []
+	if((container) && (container.length > 0)){
+		var processes = container[0].getElementsByTagName("LI")
+		if ((processes) && (processes.length > 0)){
+			var labels = ["Edit log at", "Editar log at"]
+			for (var i = 0; i < processes.length; i++) {
+				if(strposOfArray(processes[i].innerHTML, labels) >= 0){
+					var pidContainer = processes[i].innerHTML.match(/processBlock[0-9]+/)
+					var pid = pidContainer[0].match(/[0-9]+/)
+					processesId.push(pid[0])
+				}
+			}
+		}
+	}
+	for (var i = 0; i < processesId.length; i++) {
+		sendXMLHttpRequest("/processes", "GET", "pid=" + processesId[i] + "&del=1", false)
+		console.log("HExBot webcrawler: Process " + processesId[i] + " is terminated")
+	}
+})
+
+webcrawler.procedure("isThereMessageSuccess", function(){
+	var messageContainer = getDOMElement("div", "class", "alert alert-success", 0)
+	var labels = ["Software successfully uploaded", "Upload do software realizado com sucesso"]
+	if (messageContainer){
+		if (strposOfArray(messageContainer.innerHTML, labels) >= 0) return true
+	}
+	return false
+})
+

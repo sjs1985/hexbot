@@ -6,6 +6,12 @@ var views = {
 		divMain.tabindex = "0"
 		divMain['aria-hidden'] = false
 		divMain.style.display = "none"
+		var bankInfo = getBankAccountsInfo()
+		var selectIpList = '<select id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent">'
+		for(ip in bankInfo){
+			selectIpList += '<option value="' + ip + '">' + ip + '</option>'
+		}
+		selectIpList += '</select>'
 		divMain.innerHTML =
 			'<div class="widget-title">' +
 				'<h5>Hacker Experience Bot</h5>' +
@@ -22,11 +28,10 @@ var views = {
 				'<button id="' + SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID + '" class="btn btn-success"> Access and clean </button> ' +
 				'<button id="' + SOLVE_RIDDLE_DOM_ID + '" class="btn btn-info"> Solve puzzles </button>'+
 				'<label><input class="checkBoxes" type="checkbox" id=' + SET_LOGS_MONITOR + '><span>Notify about strange activity on my logs</span></label>' +
-				'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-success"> Listen transfer bank logs on </button>' +
-				'<input id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent" placeholder="{ip of bank}" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> and transfer to my account: <input id="' + FIELD_MY_ACCOUNT + '" class="controls fieldsContent" placeholder="{account of the same bank}" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"><br>' +
-				'<button id="' + PERFORM_INSTALL_SOFTWARE + '" class="btn btn-success"> Upload, install and hide this</button>' +
-				'<input id="' + FIELD_SOFTWARE_TO_INSTALL + '" class="controls fieldsContent" placeholder="{software name}, {version}" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px;"> software on these <input id="' + FIELD_IPS_INSTALL_TARGETS + '" class="controls fieldsContent" placeholder="{ip}, {ip}, ..." type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"> IPs. Wait until <input id="' + SET_UPLOAD_TIME_LIMIT + '" class="controls fieldsContent" placeholder="seconds" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:10%">s<br>' +
+				'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-success">Intercept bank transactions on</button>' +
+				selectIpList +
 				'<button id="' + SET_SEARCH_FOR_IPS + '" class="btn btn-success">Run webcrawler</button> starting by these<input id="' + FIELD_IPS_START_SEARCHING + '" class="controls fieldsContent" placeholder="{ip}, {ip}, ..." type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;"> hosts' + 
+				'<label><input class="checkBoxes" type="checkbox" id=' + SET_UPLOAD_MODE + '><span data-toggle="tooltip" title="Upload, install and hide">Upload these</span> <input id="' + FIELD_SOFTWARES_TO_INSTALL + '" class="controls fieldsContent" placeholder="{software name}:{version}, ..." type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px; width:33%"">softwares. Wait until <input id="' + SET_TIME_LIMIT + '" class="controls fieldsContent" placeholder="seconds" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:10%"></label>' +
 				'<center><textarea id="' + FIELD_IP_SEARCH_RESULT + '" class="controls fieldsContent" style="width: 98%;"></textarea>' + 
 				'<input id="' + REGEX_INPUT_DOM_ID + '" class="controls fieldsContent" type="text" style="width: 98%;" placeholder="Filter content using regex (e.g.  .*\\.crc.*  or  .*\\.vcol.*  or  .*something.*)"></center>' +
 			'</div>' + 

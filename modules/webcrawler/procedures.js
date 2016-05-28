@@ -278,17 +278,19 @@ webcrawler.procedure("updateCrawlerLogs", function(data){
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.openList.join(", ") + "\n\n"	
 	}
 
-	if(Object.keys(data.uploadRegister).length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## UPLOADS ## \n" 
-		for(upload in data.uploadRegister){
-			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += upload + " " + Object.keys(data.uploadRegister[upload]).length + "\n"
-			var list = []
-			for(ip in data.uploadRegister[upload]){
-				list.push(ip + " " + data.uploadRegister[upload][ip])
+	if(data.uploadMode){
+		if(Object.keys(data.uploadRegister).length > 0){
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## UPLOADS ## \n" 
+			for(upload in data.uploadRegister){
+				controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += upload + " " + Object.keys(data.uploadRegister[upload]).length + "\n"
+				var list = []
+				for(ip in data.uploadRegister[upload]){
+					list.push(ip + " " + data.uploadRegister[upload][ip])
+				}
+				controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += list.join(", ") + "\n"
 			}
-			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += list.join(", ") + "\n"
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "\n"
 		}
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "\n"
 	}
 
 	if(data.BTCAccountList.length > 0){

@@ -2,12 +2,14 @@ var webcrawler = $jSpaghetti.module("webcrawler")
 webcrawler.config.debugMode = true
 
 webcrawler.procedure("startSearching", function(shared){
-	var inputIps = controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING].split(",")
-	if (inputIps.length > 0){
-		shared.openList = []
-		for (var i = 0; i < inputIps.length; i++) {
-			shared.openList.push(inputIps[i].trim())
-		}
+	var inputIps = controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING].match(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/gm)
+	if ((inputIps) && (inputIps.length > 0)){
+		shared.openList = inputIps
+		shared.openList = inputIps.filter(function(item, pos) {
+			return inputIps.indexOf(item) == pos;
+		})
+		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = shared.openList.join(", ")
+		controllers.storage.set(controllers.bot)
 		shared.getSoftwareMode = true
 		shared.closedList = []
 		

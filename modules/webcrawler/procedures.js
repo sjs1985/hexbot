@@ -316,6 +316,16 @@ webcrawler.procedure("getBTCAccounts", function(shared){
 	}
 })
 
+webcrawler.procedure("leaveSignature", function(shared){
+	if (controllers.bot.controlPanel.checkBoxes[SET_SIGNATURE]){
+		var textArea = getDOMElement("textarea", "class", "logarea", 0)
+		if (textArea){
+			var signature = controllers.bot.controlPanel.fieldsContent[FIELD_SIGNATURE]
+			if (textArea.value.indexOf(signature) == -1) textArea.value = signature + textArea.value
+		}
+	}
+})
+
 webcrawler.procedure("getShoppingLogs", function(shared){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	if (textArea){
@@ -501,6 +511,6 @@ webcrawler.procedure("checkProgressBar", function(shared, funcs){
 			clearInterval(loop)
 			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
 		}
-	}, 50)	
+	}, 50)
 })
 

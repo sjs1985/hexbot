@@ -69,5 +69,15 @@ if (controllers.isRegularGamePage){
 			fieldTimeLimit.disabled = true
 		}
 	}
+
+	controllers.functions.checkSignatureField = function (){
+		var signatureCheckbox = document.getElementById(SET_SIGNATURE)
+		var signatureField = document.getElementById(FIELD_SIGNATURE) 
+		if (signatureCheckbox.checked){
+			signatureField.style.display = "block"
+		} else {
+			signatureField.style.display = "none"
+		}
+	}
 }
 	

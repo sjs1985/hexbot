@@ -14,6 +14,7 @@ function Bot(){
 	fieldsContent[REGEX_INPUT_DOM_ID] = ""
 	fieldsContent[FIELD_SOFTWARES_TO_INSTALL] = ""
 	fieldsContent[SET_TIME_LIMIT] = ""
+	fieldsContent[FIELD_SIGNATURE] = ""
 
 	var lists = {}
 	lists[FIELD_SUSPECT_LOGS] = []
@@ -22,6 +23,7 @@ function Bot(){
 	checkBoxes[SET_MISSIONS_MONITOR] = false
 	checkBoxes[SET_LOGS_MONITOR] = false
 	checkBoxes[SET_UPLOAD_MODE] = false
+	checkBoxes[SET_SIGNATURE] = false
 
 	this.controlPanel.fieldsContent = fieldsContent
 	this.controlPanel.lists = lists

@@ -49,6 +49,12 @@ if (controllers.isRegularGamePage){
 		controllers.functions.checkUploadSoftwareFields()
 	})
 
+	var signatureCheckbox = document.getElementById(SET_SIGNATURE)
+	controllers.functions.checkSignatureField()
+	signatureCheckbox.addEventListener("click", function(){
+		controllers.functions.checkSignatureField()
+	})
+
 	var checkBoxes = document.getElementsByClassName("checkBoxes")
 	for (var i = 0; i < checkBoxes.length; i++) {
 		checkBoxes[i].addEventListener("change", function(){

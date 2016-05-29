@@ -276,3 +276,13 @@ foo.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
 foo.procedure("clickOnTransferMoneyFinishButton", function(){
 	 getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
 })
+
+foo.procedure("checkProgressBar", function(shared, funcs){
+	var loop = setInterval(function(){
+		var progressBar = getDOMElement("div", "role", "progressbar", 0)
+		if(!progressBar){
+			clearInterval(loop)
+			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
+		}
+	}, 50)
+})

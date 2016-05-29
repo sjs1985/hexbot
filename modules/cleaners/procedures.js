@@ -79,3 +79,14 @@ cleanersMod.procedure("isAccessForbidden", function(){
 cleanersMod.procedure("signInTarget", function(){
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 })
+
+cleanersMod.procedure("checkProgressBar", function(shared, funcs){
+	var loop = setInterval(function(){
+		var progressBar = getDOMElement("div", "role", "progressbar", 0)
+		if(!progressBar){
+			clearInterval(loop)
+			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
+		}
+	}, 50)
+})
+

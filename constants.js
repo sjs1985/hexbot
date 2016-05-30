@@ -1,4 +1,4 @@
-const VERSION_BOT = "0.1.17"
+const VERSION_BOT = "0.1.18"
 const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const BOT_STORAGE_NAME = "HExBot-State"
 

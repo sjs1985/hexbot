@@ -21,8 +21,10 @@ cleanersMod.procedure("goToSoftwareTab", function(){
 })
 
 cleanersMod.procedure("goToTargetLogs", function(){
+	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
 	goToPage("/internet?view=logs")
 })
+
 
 cleanersMod.procedure("cleanMyIpClues", function(shared){
 	shared.myCluesFound = false
@@ -89,4 +91,10 @@ cleanersMod.procedure("checkProgressBar", function(shared, funcs){
 		}
 	}, 50)
 })
+
+cleanersMod.procedure("goToLoginPage", function(){
+	if (location.href.indexOf("/internet?action=login") == -1)
+	goToPage("/internet?action=login")
+})
+
 

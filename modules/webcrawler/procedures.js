@@ -368,6 +368,7 @@ webcrawler.procedure("hackTargetBruteForce", function(){
 })
 
 webcrawler.procedure("goToTargetLogs", function(){
+	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
 	goToPage("/internet?view=logs")
 })
 
@@ -390,6 +391,7 @@ webcrawler.procedure("isThereLogs", function(){
 })
 
 webcrawler.procedure("goToTargetSoftwares", function(){
+	if (location.href.indexOf("/internet?view=software") == -1)
 	goToPage("/internet?view=software")
 })
 
@@ -409,6 +411,11 @@ webcrawler.procedure("isSoftwareAlreadyThere", function(){
 
 webcrawler.procedure("goToOwnLogTab", function(){
 	goToPage("/log")
+})
+
+webcrawler.procedure("goToLoginPage", function(){
+	if (location.href.indexOf("/internet?action=login") == -1)
+	goToPage("/internet?action=login")
 })
 
 webcrawler.procedure("cleanTextAreaContent", function(shared){

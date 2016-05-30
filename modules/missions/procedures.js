@@ -165,6 +165,7 @@ foo.procedure("askPermissionToAbort", function(shared){
 })
 
 foo.procedure("startCheckBalance", function(shared){
+	shared.myAccountsInfo = getBankAccountsInfo()
 	shared.missionType = CHECK_BALANCE
 	shared.ips = []
 	shared.accounts = []
@@ -172,6 +173,7 @@ foo.procedure("startCheckBalance", function(shared){
 })
 
 foo.procedure("startTransferMoney", function(shared){
+	shared.myAccountsInfo = getBankAccountsInfo()
 	shared.missionType = TRANSFER_MONEY
 	shared.ips = []
 	shared.accounts = []
@@ -285,4 +287,69 @@ foo.procedure("checkProgressBar", function(shared, funcs){
 			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
 		}
 	}, 50)
+})
+
+foo.procedure("checkFunds", function(shared){
+	var fundsContainer = getDOMElement("ul", "class", "finance-box", 0)
+	var funds = fundsContainer.innerHTML.match(/\$[0-9,]+/)[0].replace(/[\$,]/gm, '')
+	shared.funds = Number(funds)
+	if (shared.funds > 0){
+		return true
+	} else {
+		return false
+	}
+})
+
+foo.procedure("transferRandomValueToTarget", function(shared){
+	if (shared.funds > 10){
+		shared.transferredValue = Math.floor(Math.random() * 10) + 1
+	} else {
+		shared.transferredValue = shared.funds
+	}
+	shared.rest = shared.funds - shared.transferredValue
+	getDOMElement("input", "name", "acc", 0).value = shared.accounts[1]
+	getDOMElement("input", "name", "ip", 1).value = shared.ips[1]
+	getDOMElement("input", "name", "money", 0).value = "$" + shared.transferredValue
+	getDOMElement("button", "class", "btn btn-success", 0).click()
+})
+
+foo.procedure("transferToMe", function(shared){
+	var myAccount = shared.myAccountsInfo[shared.ips[0]]
+	if(myAccount){
+		getDOMElement("input", "name", "acc", 0).value = myAccount
+		getDOMElement("input", "name", "ip", 1).value = shared.ips[0]
+		getDOMElement("button", "class", "btn btn-success", 0).click()
+	}
+})
+
+foo.procedure("transferTheRestToMe", function(shared){
+	var myAccount = shared.myAccountsInfo[shared.ips[1]]
+	if(myAccount){
+		getDOMElement("input", "name", "acc", 0).value = myAccount
+		getDOMElement("input", "name", "ip", 1).value = shared.ips[1]
+		getDOMElement("button", "class", "btn btn-success", 0).click()
+	}
+})
+
+foo.procedure("goToLoginPage", function(){
+	if (location.href.indexOf("/internet?action=login") == -1)
+	goToPage("/internet?action=login")
+})
+
+foo.procedure("waitForSubmitButton", function(shared, funcs){
+	var loop = setInterval(function(){
+		var button = getDOMElement("input", "type", "submit", 0)
+		var labels = ["Accept", "Aceitar", "Complete mission", "Completar Missão"]
+		if (button){
+			if ((!button.disabled) && (strposOfArray(button.value, labels) >= 0)){
+				clearInterval(loop)
+				funcs.sendSignal("Button is ready!")
+			}
+		}
+	}, 50)
+})
+
+foo.procedure("goToTargetLogs", function(){
+	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
+	goToPage("/internet?view=logs")
 })

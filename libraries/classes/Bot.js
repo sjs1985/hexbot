@@ -14,7 +14,7 @@ function Bot(){
 	fieldsContent[REGEX_INPUT_DOM_ID] = ""
 	fieldsContent[FIELD_SOFTWARES_TO_INSTALL] = ""
 	fieldsContent[SET_TIME_LIMIT] = ""
-	fieldsContent[FIELD_SIGNATURE] = ""
+	fieldsContent[FIELD_SIGNATURE] = "░▒███████ You gave me your data\n░██▓▒░░▒▓██ I give you my heart\n██▓▒░__░▒▓██___██████\n██▓▒░____░▓███▓__░▒▓██\n██▓▒░___░▓██▓_____░▒▓██\n██▓▒░_______________░▒▓██\n_██▓▒░______________░▒▓██\n__██▓▒░____________░▒▓██\n___██▓▒░__________░▒▓██\n____██▓▒░________░▒▓██\n_____██▓▒░_____░▒▓██\n______██▓▒░__░▒▓██\n_______█▓▒░░▒▓██\n_________░▒▓██\n_______░▒▓██\n_____░▒▓██\n"
 
 	var lists = {}
 	lists[FIELD_SUSPECT_LOGS] = []

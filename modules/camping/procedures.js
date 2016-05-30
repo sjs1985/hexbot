@@ -125,6 +125,7 @@ camping.procedure("extractDataFromLog", function(shared){
 })
 
 camping.procedure("goToTargetLogs", function(){
+	//if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
 	goToPage("/internet?view=logs")
 })
 
@@ -142,5 +143,21 @@ camping.procedure("checkProgressBar", function(shared, funcs){
 			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
 		}
 	}, 50)
+})
+
+camping.procedure("goToLoginPage", function(){
+	if (location.href.indexOf("/internet?action=login") == -1)
+	goToPage("/internet?action=login")
+})
+
+camping.procedure("checkFunds", function(shared){
+	var fundsContainer = getDOMElement("ul", "class", "finance-box", 0)
+	var funds = fundsContainer.innerHTML.match(/\$[0-9,]+/)[0].replace(/[\$,]/gm, '')
+	shared.funds = Number(funds)
+	if (shared.funds > 0){
+		return true
+	} else {
+		return false
+	}
 })
 

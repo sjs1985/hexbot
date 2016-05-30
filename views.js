@@ -33,7 +33,7 @@ var views = {
 				selectIpList + '<br /><br />' +
 				'<button id="' + SET_SEARCH_FOR_IPS + '" class="btn btn-success" data-toggle="tooltip" title="Browse the web and find information">Run webcrawler</button> starting by these<input id="' + FIELD_IPS_START_SEARCHING + '" class="controls fieldsContent" placeholder="Paste text containing ips" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;">hosts' + 
 				'<label><input class="checkBoxes" type="checkbox" id=' + SET_UPLOAD_MODE + '><span data-toggle="tooltip" title="Upload, install and hide">Upload these</span><input id="' + FIELD_SOFTWARES_TO_INSTALL + '" class="controls fieldsContent" placeholder="{software name}:{version}, ..." type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px; width:33%"">softwares. Wait until<input id="' + SET_TIME_LIMIT + '" class="controls fieldsContent" placeholder="seconds" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:10%"></label>' +
-				'<label><input class="checkBoxes" type="checkbox" id=' + SET_SIGNATURE + '>Leave my signature <textarea id="' + FIELD_SIGNATURE + '" class="controls fieldsContent" style="width: 98%; max-width: 98%;"></textarea></label>' +
+				'<label><input class="checkBoxes" type="checkbox" id=' + SET_SIGNATURE + '>Leave my signature <a href="http://www.symbols-n-emoticons.com/p/facebook-text-art-ascii.html" target="_blank"> (find other signature)</a><textarea id="' + FIELD_SIGNATURE + '" class="controls fieldsContent" style="width: 98%; max-width: 98%;"></textarea></label>' +
 				'<center><textarea id="' + FIELD_IP_SEARCH_RESULT + '" class="controls fieldsContent" style="width: 98%; max-width: 98%;"></textarea>' + 
 				'<input id="' + REGEX_INPUT_DOM_ID + '" class="controls fieldsContent" type="text" style="width: 98%;" placeholder="Filter content using regex (e.g.  .*\\.crc.*  or  .*\\.vcol.*  or  .*something.*)"></center>' +
 			'</div>' + 
@@ -51,7 +51,7 @@ var views = {
 				'<button id="back-to-main" class="btn btn-success">Back</button>'+
 			'</div>' + 
 			'<div class="modal-footer">' +
-				'<b>version ' + VERSION_BOT + '</b> check for new releases on <a href="https://github.com/perfilrobo/hexbot">official repository</a>' +
+				'<b>version ' + VERSION_BOT + '</b> check for new releases on <a href="https://github.com/perfilrobo/hexbot" target="_blank">official repository</a>' +
 			'</div>';
 		document.getElementsByTagName("BODY")[0].appendChild(divMain);
 	},

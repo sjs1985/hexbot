@@ -70,6 +70,16 @@ if (controllers.isRegularGamePage){
 		}
 	}
 
+	controllers.functions.checkIgnoreIPsField = function (){
+		var checkbox = document.getElementById(SET_IGNORE_LIST)
+		var field = document.getElementById(FIELD_HOSTS_TO_IGNORE)
+		if (checkbox.checked){
+			field.disabled = false
+		} else {
+			field.disabled = true
+		}
+	}
+
 	controllers.functions.checkSignatureField = function (){
 		var signatureCheckbox = document.getElementById(SET_SIGNATURE)
 		var signatureField = document.getElementById(FIELD_SIGNATURE) 

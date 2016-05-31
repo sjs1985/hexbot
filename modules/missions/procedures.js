@@ -339,7 +339,7 @@ foo.procedure("goToLoginPage", function(){
 foo.procedure("waitForSubmitButton", function(shared, funcs){
 	var loop = setInterval(function(){
 		var button = getDOMElement("input", "type", "submit", 0)
-		var labels = ["Accept", "Aceitar", "Complete mission", "Completar Missão"]
+		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão"]
 		if (button){
 			if ((!button.disabled) && (strposOfArray(button.value, labels) >= 0)){
 				clearInterval(loop)

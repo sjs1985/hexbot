@@ -15,10 +15,6 @@ if (controllers.isRegularGamePage){
 		controllers.functions.executeSequence("cleaners", "accessTargetAndCleanLogs")
 	})
 
-	document.getElementById(SOLVE_RIDDLE_DOM_ID).addEventListener("click", function(){
-	    window.alert("There is a red button on every UNSOLVED puzzle page. Just click on it. :)");
-	})
-
 	document.getElementById(PERFORM_CHECK_BALANCE_ID).addEventListener("click", function(){
 		controllers.functions.executeSequence("missions", "checkBalance")
 	})
@@ -36,7 +32,7 @@ if (controllers.isRegularGamePage){
 	})
 
 	document.getElementById(INFO_ALERT).addEventListener("click", function(){
-		window.alert("IMPORTANT!\n\n *Avoid to run the bot into an inactive tab. There are some timing event limitations when tab is inactive in most browsers. So, the bot may get slow if it's run into a inactive tab.\n\n* Use the notifiers carefully. The logs notifier sends a GET request every second uninterruptedly. The missions notifier sends a GET request every two seconds just when seconds to next missions are <= 1. Otherwise, it just waits. Big amounts of requests MAY be noticed by the game server. \'X-Requested-With\' header is not sent. :)\n\n* Abort the bot anytime. Just click over BOT button. \n\n* If bot suddendly stops, just try to reload the page. If it doesn't work, abort the bot. If you know how to access browser console, copy the error and/or jSpaghetti debug logs and report the problem on official repository.")
+		window.alert("IMPORTANT!\n\n *To solve puzzles, go to an UNSOLVED puzzle page and click over the red button that will appear.\n\n*Avoid to run the bot into an inactive tab. There are some timing event limitations when tab is inactive in most browsers. So, the bot may get slow if it's run into a inactive tab.\n\n* Use the notifiers carefully. The logs notifier sends a GET request every second uninterruptedly. The missions notifier sends a GET request every two seconds just when seconds to next missions are <= 1. Otherwise, it just waits. Big amounts of requests MAY be noticed by the game server. \'X-Requested-With\' header is not sent. :)\n\n* Abort the bot anytime. Just click over BOT button. \n\n* If bot suddendly stops, just try to reload the page. If it doesn't work, abort the bot. If you know how to access browser console, copy the error and/or jSpaghetti debug logs and report the problem on official repository.")
 	})
 
 	document.getElementById(CREDITS_INFO).addEventListener("click", function(){

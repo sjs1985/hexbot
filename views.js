@@ -20,22 +20,37 @@ var views = {
 				'<span id="' + INFO_ALERT + '" class="btn btn-warning hide1024" style="float: right">!</span>' +
 				'<span id="' + CREDITS_INFO + '" class="btn btn-info hide1024" style="float: right">:)</span>' +
 			'</div>' +
-			'<div id="' + MAIN_SCREEN_DOM_ID + '" class="modal-body">' +
-				'<button id="' + PERFORM_CHECK_BALANCE_ID + '" class="btn btn-warning">Perform check account status missions</button> ' +
-				'<button id="' + PERFORM_TRANSFER_MONEY_ID + '" class="btn btn-danger">Perform transfer money missions</button>'+
+			'<div id="' + MAIN_SCREEN_DOM_ID + '" class="modal-body" style="max-height:405px">' +
+				'<table class="table">' +
+				'<tbody>' +
+				'<tr class="warning"><td>' + 
+				'<button id="' + PERFORM_CHECK_BALANCE_ID + '" class="btn btn-warning">Perform medium missions</button> ' +
+				'<button id="' + PERFORM_TRANSFER_MONEY_ID + '" class="btn btn-danger">Perform hard missions</button>'+
 				'<label><input class="checkBoxes" type="checkbox" id=' + SET_MISSIONS_MONITOR + '><span>Notify about new missions</span></label>' +
+
+				'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-success">Intercept bank transactions on</button>' +
+				selectIpList +
+
+				//'<label><input type="checkbox"<span>Transfer the earned money to connected BTC wallet</span></label>' +
+				'</td></tr>' +
+
+				'<tr class="info"><td>' + 
 				'<button id="' + SET_CLEAN_OWN_LOGS_DOM_ID + '" class="btn btn-success"> Clean your logs </button> ' +
 				'<button id="' + SET_CLEAN_TARGET_LOGS_DOM_ID + '" class="btn btn-success" data-toggle="tooltip" title="Remove just your ip clues from the target"> Clean victim logs </button> ' +
 				'<button id="' + SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID + '" class="btn btn-success"> Access and clean </button> ' +
-				'<button id="' + SOLVE_RIDDLE_DOM_ID + '" class="btn btn-info"> Puzzles </button>'+
 				'<label><input class="checkBoxes" type="checkbox" id=' + SET_LOGS_MONITOR + '><span>Notify about strange activity on my logs</span></label>' +
-				'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-success">Intercept bank transactions on</button>' +
-				selectIpList + '<br /><br />' +
-				'<button id="' + SET_SEARCH_FOR_IPS + '" class="btn btn-success" data-toggle="tooltip" title="Browse the web and find information">Run webcrawler</button> starting by these<input id="' + FIELD_IPS_START_SEARCHING + '" class="controls fieldsContent" placeholder="Paste text containing ips" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px;">hosts' + 
-				'<label><input class="checkBoxes" type="checkbox" id=' + SET_UPLOAD_MODE + '><span data-toggle="tooltip" title="Upload, install and hide">Upload these</span><input id="' + FIELD_SOFTWARES_TO_INSTALL + '" class="controls fieldsContent" placeholder="{software name}:{version}, ..." type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px; width:33%"">softwares. Wait until<input id="' + SET_TIME_LIMIT + '" class="controls fieldsContent" placeholder="seconds" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:10%"></label>' +
-				'<label><input class="checkBoxes" type="checkbox" id=' + SET_SIGNATURE + '>Leave my signature <a href="http://www.symbols-n-emoticons.com/p/facebook-text-art-ascii.html" target="_blank"> (find other signature)</a><textarea id="' + FIELD_SIGNATURE + '" class="controls fieldsContent" style="width: 98%; max-width: 98%;"></textarea></label>' +
-				'<center><textarea id="' + FIELD_IP_SEARCH_RESULT + '" class="controls fieldsContent" style="width: 98%; max-width: 98%;"></textarea>' + 
-				'<input id="' + REGEX_INPUT_DOM_ID + '" class="controls fieldsContent" type="text" style="width: 98%;" placeholder="Filter content using regex (e.g.  .*\\.crc.*  or  .*\\.vcol.*  or  .*something.*)"></center>' +
+				'</td></tr>' +
+
+				'<tr class="success"><td>' + 
+				'<button id="' + SET_SEARCH_FOR_IPS + '" class="btn btn-success" data-toggle="tooltip" title="Browse the web and find information">Run webcrawler</button> starting by these<input id="' + FIELD_IPS_START_SEARCHING + '" class="controls fieldsContent" placeholder="Paste text containing ips" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 30%">hosts' + 
+				'<label><input type="checkbox" class="checkBoxes" id="' + SET_IGNORE_LIST + '">Ignore these<input id="' + FIELD_HOSTS_TO_IGNORE + '" class="controls fieldsContent" placeholder="Paste text containing ips" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:30%">ips</label>' +
+				'<label><input class="checkBoxes" type="checkbox" id=' + SET_UPLOAD_MODE + '><span data-toggle="tooltip" title="Upload, install and hide">Upload these</span><input id="' + FIELD_SOFTWARES_TO_INSTALL + '" class="controls fieldsContent" placeholder="{name:version},..." type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px; width:25%"">softwares. Wait until<input id="' + SET_TIME_LIMIT + '" class="controls fieldsContent" placeholder="seconds" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:10%"></label>' +
+				'<label><input class="checkBoxes" type="checkbox" id=' + SET_SIGNATURE + '>Leave my signature <a href="http://www.symbols-n-emoticons.com/p/facebook-text-art-ascii.html" target="_blank"> (find other signature)</a><textarea id="' + FIELD_SIGNATURE + '" class="controls fieldsContent" style="width: 98%; resize: vertical;"></textarea></label>' +
+				'<center><textarea id="' + FIELD_IP_SEARCH_RESULT + '" class="controls fieldsContent" style="width: 98%; resize: vertical;"></textarea>' + 
+				'<input id="' + REGEX_INPUT_DOM_ID + '" class="controls fieldsContent" type="search" style="width: 98%;" placeholder="Filter content using regex (e.g.  .*\\.crc.*  or  .*\\.vcol.*  or  .*something.*)"></center>' +
+				'</td></tr>' +
+				'<tbody>' +
+				'</table>' + 
 			'</div>' + 
 			'<div id="' + CREDITS_SCREEN_DOM_ID + '" class="modal-body">' +
 				'<h1>Credits</h1>' +

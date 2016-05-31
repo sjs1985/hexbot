@@ -49,6 +49,12 @@ if (controllers.isRegularGamePage){
 		controllers.functions.checkUploadSoftwareFields()
 	})
 
+	var ignoreListCheckbox = document.getElementById(SET_IGNORE_LIST)
+	controllers.functions.checkIgnoreIPsField()
+	ignoreListCheckbox.addEventListener("click", function(){
+		controllers.functions.checkIgnoreIPsField()
+	})
+
 	var signatureCheckbox = document.getElementById(SET_SIGNATURE)
 	controllers.functions.checkSignatureField()
 	signatureCheckbox.addEventListener("click", function(){

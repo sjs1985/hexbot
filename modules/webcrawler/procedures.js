@@ -4,14 +4,26 @@ webcrawler.config.debugMode = true
 webcrawler.procedure("startSearching", function(shared){
 	var inputIps = controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING].match(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/gm)
 	if ((inputIps) && (inputIps.length > 0)){
+		if (controllers.bot.controlPanel.checkBoxes[SET_IGNORE_LIST]){
+			shared.closedList = controllers.bot.controlPanel.fieldsContent[FIELD_HOSTS_TO_IGNORE].match(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/gm)
+			if (!shared.closedList)
+			shared.closedList = []
+		} else {
+			shared.closedList = []
+		}
 		shared.openList = inputIps
 		shared.openList = inputIps.filter(function(item, pos) {
-			return inputIps.indexOf(item) == pos;
+			return ((inputIps.indexOf(item) == pos) && (shared.closedList.indexOf(item) == -1))
 		})
+
+		if (shared.openList.length == 0)
+			return false
+
 		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = shared.openList.join(", ")
 		controllers.storage.set(controllers.bot)
 		shared.getSoftwareMode = true
-		shared.closedList = []
+
+		console.log(shared.closedList)
 		
 		shared.inaccessibleHostsList = {}
 		shared.accessibleHostsList = {}

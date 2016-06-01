@@ -1,8 +1,4 @@
-//-----------------------------------//
-//----SEQUENCE CALL------------------//
-//-----------------------------------//
-
-if (controllers.isRegularGamePage){
+function buttonToAction(){
 	document.getElementById(SET_CLEAN_OWN_LOGS_DOM_ID).addEventListener("click", function(){
 		controllers.functions.executeSequence("cleaners", "cleanOwnLogs")
 	})
@@ -39,6 +35,8 @@ if (controllers.isRegularGamePage){
 		views.switchToMainScreenToCreditsScreen()
 	})
 }
+
+	
 
 
 

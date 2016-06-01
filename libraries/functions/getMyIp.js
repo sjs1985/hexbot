@@ -7,7 +7,7 @@
 	@return: (String) It returns the player ip
 */
 function getMyIp(escaped){
-	var serverResponse = sendXMLHttpRequest("ajax.php", "POST", "func=getStatic", false)
+	var serverResponse = sendXMLHttpRequest("ajax.php", "POST", "func=getStatic", false, null, true)
 	var myIp = JSON.parse(JSON.parse(serverResponse).msg)[0].ip
 	if(!escaped){
 		return myIp 
@@ -15,3 +15,5 @@ function getMyIp(escaped){
 		return myIp.replace(/\./g, "\\.")
 	}
 }
+
+

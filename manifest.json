@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016)",
-	"version": "0.1.19",
+	"version": "0.1.20",
 	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
  		"default_popup": "popup.html"
@@ -17,7 +17,13 @@
 			"js":[
 				"libraries/jSpaghetti/jSpaghetti.min.js",
 
+				"libraries/jSpaghetti/Storage.js",
+
 				"constants.js",
+
+				"libraries/classes/Storage.js",
+				"libraries/classes/Sequence.js",
+				"libraries/classes/Bot.js",
 
 				"modules/riddleSolver/procedures.js",
 				"modules/riddleSolver/sequences/solvePuzzle.js",
@@ -38,10 +44,6 @@
 				"modules/monitor/sequences/checkMission.js",
 				"modules/monitor/sequences/checkMyOwnLogs.js",
 
-				"libraries/classes/Storage.js",
-				"libraries/classes/Sequence.js",
-				"libraries/classes/Bot.js",
-
 				"libraries/functions/strposOfArray.js",
 				"libraries/functions/getDOMElement.js",
 				"libraries/functions/goToPage.js",
@@ -53,14 +55,17 @@
 
 				"views.js",
 
-				"controllers/main.js",
+				"controllers/sequences.js",
 				"controllers/functions.js",
 				"controllers/controlPanel.js",
 				"controllers/buttonToAction.js",
 				"controllers/botButton.js",
-				
-				"index.js"
+				"controllers/main.js"
 			]
 		}
-	]
+	],
+	"background":{
+		"scripts":["background.js"],
+		"persistent": true
+	}
 }

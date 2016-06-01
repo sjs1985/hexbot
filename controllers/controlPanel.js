@@ -1,4 +1,4 @@
-if (controllers.isRegularGamePage){
+function controlPanel(){
 	views.appendControlPanel()
 
 	if (controllers.bot.controlPanel.isHidden){

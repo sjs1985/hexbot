@@ -1,4 +1,4 @@
-# HExBot
+# HExBot v0.1.20
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 This must be installed as a Google Chrome extension.

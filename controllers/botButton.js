@@ -1,4 +1,4 @@
-if (controllers.isRegularGamePage){
+function botButton(){
 	views.showBotButton()
 
 	//Show command panel

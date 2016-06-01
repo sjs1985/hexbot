@@ -232,7 +232,7 @@ foo.procedure("solvePuzzle", function(){
 					} else {
 						console.log(result)
 					}
-				})
+				}, true)
 			}
 			
 		} else {

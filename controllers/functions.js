@@ -1,4 +1,4 @@
-if (controllers.isRegularGamePage){
+function functions(){
 	controllers.functions = {}
 
 	controllers.functions.hidePanel = function(){

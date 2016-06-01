@@ -1,6 +1,5 @@
-//=========CONTENT SCRIPT============//
-
-if(controllers.isRegularGamePage){
+function sequences(){
+	$jSpaghetti.Storage = Storage
 	if(controllers.bot.currentSequence != null){ //Executes the current sequence
 		var moduleName = controllers.bot.currentSequence.moduleName
 		var sequenceName = controllers.bot.currentSequence.sequenceName
@@ -41,6 +40,6 @@ if(controllers.isRegularGamePage){
 			logsMonitor.reset()
 		})
 	}
-} else {
-	console.log("HExBot: running nothing. This is not a regular game page")
 }
+	
+

@@ -22,11 +22,8 @@ chrome.runtime.onMessage.addListener(
 				break
 			case "reset":
 				sendResponse({backMessage: "RESET request received by background script"})
-				var storagePosition = storage.indexOf(storage[request.item])
-				if (storagePosition > -1){
-					storage.splice(storagePosition, 1)
-				}
-				console.log("RESET request processed. \"" + request.item + "\" item removed")
+				storage[request.item] = null
+				console.log("RESET request processed. Item removed (\"" + request.item + "\")")
 				break
 			default: break
 		}

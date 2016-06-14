@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016)",
-	"version": "0.1.20.1",
+	"version": "0.1.21",
 	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
  		"default_popup": "popup.html"
@@ -51,7 +51,12 @@
 				"libraries/functions/getMyIp.js",
 				"libraries/functions/removeLinesFromText.js",
 				"libraries/functions/getSoftwareId.js",
-				"libraries/functions/getBankAccountsInfo.js",
+				"libraries/functions/getBankAccountAddr.js",
+				"libraries/functions/getBTCWalletInfo.js",
+				"libraries/functions/getBTCExchangeRate.js",
+				"libraries/functions/getBankAccountBalance.js",
+				"libraries/functions/sendMoneyToBTCWallet.js",
+				"libraries/functions/roundNumber.js",
 
 				"views.js",
 

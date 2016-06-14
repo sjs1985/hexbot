@@ -164,23 +164,6 @@ foo.procedure("askPermissionToAbort", function(shared){
 	shared.abortMissionAllowed = window.confirm("Allow bot to abort missions if necessary (Cancel to NO)?")
 })
 
-foo.procedure("startCheckBalance", function(shared){
-	shared.myAccountsInfo = getBankAccountsInfo()
-	shared.missionType = CHECK_BALANCE
-	shared.ips = []
-	shared.accounts = []
-	shared.nextIp = 0
-})
-
-foo.procedure("startTransferMoney", function(shared){
-	shared.myAccountsInfo = getBankAccountsInfo()
-	shared.missionType = TRANSFER_MONEY
-	shared.ips = []
-	shared.accounts = []
-	shared.cleanerCount = 0
-	shared.nextIp = 0
-})
-
 foo.procedure("getMissionInfo", function(shared){
 	//Get ips
 	try{
@@ -316,6 +299,7 @@ foo.procedure("transferRandomValueToTarget", function(shared){
 foo.procedure("transferToMe", function(shared){
 	var myAccount = shared.myAccountsInfo[shared.ips[0]]
 	if(myAccount){
+		shared.destinationAccount = myAccount
 		getDOMElement("input", "name", "acc", 0).value = myAccount
 		getDOMElement("input", "name", "ip", 1).value = shared.ips[0]
 		getDOMElement("button", "class", "btn btn-success", 0).click()
@@ -325,6 +309,7 @@ foo.procedure("transferToMe", function(shared){
 foo.procedure("transferTheRestToMe", function(shared){
 	var myAccount = shared.myAccountsInfo[shared.ips[1]]
 	if(myAccount){
+		shared.destinationAccount = myAccount
 		getDOMElement("input", "name", "acc", 0).value = myAccount
 		getDOMElement("input", "name", "ip", 1).value = shared.ips[1]
 		getDOMElement("button", "class", "btn btn-success", 0).click()
@@ -336,20 +321,112 @@ foo.procedure("goToLoginPage", function(){
 	goToPage("/internet?action=login")
 })
 
+foo.procedure("goToPageAccountLoginPage", function(shared){
+	if (location.href.indexOf("/internet?action=login&type=bank") == -1)
+	goToPage("/internet?action=hack&acc=" + shared.accounts[0])
+})
+
 foo.procedure("waitForSubmitButton", function(shared, funcs){
 	var loop = setInterval(function(){
 		var button = getDOMElement("input", "type", "submit", 0)
-		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão"]
+		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão", "Abort", "Abortar"]
 		if (button){
 			if ((!button.disabled) && (strposOfArray(button.value, labels) >= 0)){
 				clearInterval(loop)
+				var destinationAccountContainer = document.getElementById("s2id_select-bank-acc")
+				if(destinationAccountContainer){
+					var account = destinationAccountContainer.innerHTML.match(/#[0-9]+/gm)
+					if ((account) && (account.length > 0))
+					shared.destinationAccount = account[0].replace("#", "")
+				} else {
+					shared.destinationAccount = null
+				}
 				funcs.sendSignal("Button is ready!")
 			}
 		}
 	}, 50)
 })
 
+foo.procedure("sendMoneyToBTCWallet", function(shared){
+	if(shared.isBTCLogged){
+		var accountBalance = getBankAccountsBalance()[shared.destinationAccount]
+		var bitcoinsToBuy = roundNumber(accountBalance / getBTCExchangeRate())
+		if (bitcoinsToBuy >= 1){
+			sendMoneyToBTCWallet(shared.destinationAccount, bitcoinsToBuy)
+			console.log("Account " + shared.destinationAccount + ": $" + accountBalance + " - " + bitcoinsToBuy + " BTC bought")
+		} else {
+			console.log("Money is not enough to buy a bitcoin")
+		}
+	} else {
+		console.log("BTC wallet unavailable")
+	}
+})
+
 foo.procedure("goToTargetLogs", function(){
 	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
 	goToPage("/internet?view=logs")
+})
+
+foo.procedure("cancelLogProcesses", function(){
+	var processesPage = sendXMLHttpRequest("/processes", "GET", "", false)
+	var parser = new DOMParser()
+	var requestContentDOM = parser.parseFromString(processesPage, "text/html")
+	var container = requestContentDOM.getElementsByClassName("widget-content padding noborder")
+	var processesId = []
+	if((container) && (container.length > 0)){
+		var processes = container[0].getElementsByTagName("LI")
+		if ((processes) && (processes.length > 0)){
+			var labels = ["Edit log at", "Editar log at"]
+			for (var i = 0; i < processes.length; i++) {
+				if(strposOfArray(processes[i].innerHTML, labels) >= 0){
+					var pidContainer = processes[i].innerHTML.match(/processBlock[0-9]+/)
+					var pid = pidContainer[0].match(/[0-9]+/)
+					processesId.push(pid[0])
+				}
+			}
+		}
+	}
+	for (var i = 0; i < processesId.length; i++) {
+		sendXMLHttpRequest("/processes", "GET", "pid=" + processesId[i] + "&del=1", false)
+		console.log("HExBot webcrawler: Process " + processesId[i] + " is terminated")
+	}
+})
+
+foo.procedure("checkBTCWallet", function(shared){
+	shared.transferToBTC = controllers.bot.controlPanel.checkBoxes[SET_TRANSFER_TO_BTC]
+
+	if(shared.transferToBTC){
+		shared.BTCInfo = getBTCWalletInfo()
+		//console.log(shared.BTCInfo)
+		if(!shared.BTCInfo.isLogged){
+			shared.isBTCLogged = false
+			window.alert("You've chosen to transfer the earned money to your BTC wallet. But you need to login your BTC wallet before. Login your BTC wallet and try again.")
+			return false
+		} else {
+			shared.isBTCLogged = true
+			return true
+		}
+	} else {
+		return true
+	}
+
+})
+
+foo.procedure("startCheckBalance", function(shared){
+	shared.myAccountsInfo = getBankAccountAddr()
+	shared.missionType = CHECK_BALANCE
+	shared.ips = []
+	shared.accounts = []
+	shared.nextIp = 0
+	return true
+})
+
+foo.procedure("startTransferMoney", function(shared){
+	shared.myAccountsInfo = getBankAccountAddr()
+	shared.missionType = TRANSFER_MONEY
+	shared.ips = []
+	shared.accounts = []
+	shared.cleanerCount = 0
+	shared.nextIp = 0
+	return true
 })

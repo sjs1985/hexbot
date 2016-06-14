@@ -7,7 +7,7 @@ var views = {
 		divMain['aria-hidden'] = false
 		divMain.style.display = "none"
 
-		var bankInfo = getBankAccountsInfo()
+		var bankInfo = getBankAccountAddr()
 		var selectIpList = '<select id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent">'
 		for(ip in bankInfo){
 			selectIpList += '<option value="' + ip + '">' + ip + '</option>'
@@ -31,7 +31,7 @@ var views = {
 				'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-success">Intercept bank transactions on</button>' +
 				selectIpList +
 
-				//'<label><input type="checkbox"<span>Transfer the earned money to connected BTC wallet</span></label>' +
+				'<label><input class="checkBoxes" id="' + SET_TRANSFER_TO_BTC + '"type="checkbox"><span>Transfer the earned money to connected BTC wallet</span></label>' +
 				'</td></tr>' +
 
 				'<tr class="info"><td>' + 

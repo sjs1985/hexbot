@@ -2,11 +2,29 @@ var camping = $jSpaghetti.module("camping")
 camping.config.debugMode = true
 
 camping.procedure("startBankCamping", function(shared){
-	shared.myAccountsInfo = getBankAccountsInfo()
+	shared.myAccountsInfo = getBankAccountAddr()
 	shared.ip = controllers.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET]
 	shared.myAccount = shared.myAccountsInfo[shared.ip]
+	shared.transferToBTC = controllers.bot.controlPanel.checkBoxes[SET_TRANSFER_TO_BTC]
+
+	if(shared.transferToBTC){
+		shared.BTCInfo = getBTCWalletInfo()
+		//console.log(shared.BTCInfo)
+		if(!shared.BTCInfo.isLogged){
+			shared.isBTCLogged = false
+			window.alert("You've chosen to transfer the earned money to your BTC wallet. But you need to login your BTC wallet before. Login your BTC wallet and try again.")
+			return false
+		} else {
+			shared.isBTCLogged = true
+		}
+	}
+
 	if (shared.myAccount === undefined){
-		window.alert("There's no bank account vinculated to \"" + shared.ip + "\"")
+		if(shared.ip.length){
+			window.alert("There's no bank account vinculated to \"" + shared.ip + "\"")
+		} else {
+			window.alert("Choose a bank ip")
+		}
 		return false
 	}
 	shared.accounts = []
@@ -160,4 +178,45 @@ camping.procedure("checkFunds", function(shared){
 		return false
 	}
 })
+
+camping.procedure("sendMoneyToBTCWallet", function(shared){
+	if(shared.isBTCLogged){
+		var accountBalance = getBankAccountsBalance()[shared.myAccount]
+		var bitcoinsToBuy = roundNumber(accountBalance / getBTCExchangeRate())
+		if (bitcoinsToBuy >= 1){
+			sendMoneyToBTCWallet(shared.myAccount, bitcoinsToBuy)
+			console.log("Account " + shared.myAccount + ": $" + accountBalance + " - " + bitcoinsToBuy + " BTC bought")
+		} else {
+			console.log("Money is not enough to buy a bitcoin")
+		}
+	} else {
+		console.log("BTC wallet unavailable")
+	}
+})
+
+camping.procedure("cancelLogProcesses", function(){
+	var processesPage = sendXMLHttpRequest("/processes", "GET", "", false)
+	var parser = new DOMParser()
+	var requestContentDOM = parser.parseFromString(processesPage, "text/html")
+	var container = requestContentDOM.getElementsByClassName("widget-content padding noborder")
+	var processesId = []
+	if((container) && (container.length > 0)){
+		var processes = container[0].getElementsByTagName("LI")
+		if ((processes) && (processes.length > 0)){
+			var labels = ["Edit log at", "Editar log at"]
+			for (var i = 0; i < processes.length; i++) {
+				if(strposOfArray(processes[i].innerHTML, labels) >= 0){
+					var pidContainer = processes[i].innerHTML.match(/processBlock[0-9]+/)
+					var pid = pidContainer[0].match(/[0-9]+/)
+					processesId.push(pid[0])
+				}
+			}
+		}
+	}
+	for (var i = 0; i < processesId.length; i++) {
+		sendXMLHttpRequest("/processes", "GET", "pid=" + processesId[i] + "&del=1", false)
+		console.log("HExBot webcrawler: Process " + processesId[i] + " is terminated")
+	}
+})
+
 

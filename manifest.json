@@ -57,6 +57,7 @@
 				"libraries/functions/getBankAccountBalance.js",
 				"libraries/functions/sendMoneyToBTCWallet.js",
 				"libraries/functions/roundNumber.js",
+				"libraries/functions/getSoftwaresByExtension.js",
 
 				"views.js",
 

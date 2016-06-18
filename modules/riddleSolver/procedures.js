@@ -2,12 +2,6 @@ var foo = $jSpaghetti.module("riddleSolver")
 foo.config.debugMode = false
 
 foo.procedure("solvePuzzle", function(){
-	/*
-		Language constant ids
-	*/
-	const LANG_EN = "en";
-	const LANG_BR = "br";
-	const LANGUAGES = [LANG_EN, LANG_BR];
 
 	/*
 		Puzzle constant ids
@@ -204,8 +198,7 @@ foo.procedure("solvePuzzle", function(){
 						case LANG_BR:
 							text_answer = "Todo jogador que compra premium é lindo";
 							break;
-						default:
-							window.alert("I can't detect your language :( <br /> Try this: <br /> <b>Every player that buys premium is awesome</b> <br /> or this <br /> <b>Todo jogador que compra premium é lindo</b>");
+						default: text_answer = "Every player that buys premium is awesome";
 					}
 					break;
 				case PUZZLE_SHEEPS: //Sheeps
@@ -278,30 +271,12 @@ foo.procedure("solvePuzzle", function(){
 		}
 	}
 
-	/*
-		@prototype: detectAndSetLang();
-		@definition: This function detects the language defined on URL and set default_values.detected_lang;
-		@author: GRSa;
-		@parameters: none;
-		@return: void;
-	*/
-	function detectAndSetLang(){
-		for(var i = 0; i < LANGUAGES.length; i++){
-			var pattern = new RegExp("^" + LANGUAGES[i] + "\.");
-			if(pattern.test(window.location.host)){
-				environment_settings.detected_lang = LANGUAGES[i];
-				break;
-			} else {
-				continue;
-			}
-		}
-	}
-
 	//Puzzle handler controller
 	var puzzle_id = null
 	puzzle_id = getPuzzleId()
 	if ((puzzle_id != null) && (!getNextPuzzleIP())){
-		detectAndSetLang(); 
+		environment_settings.detected_lang = detectLang()
+		if (!environment_settings.detected_lang) environment_settings.detected_lang = LANG_EN
 		var button_content = null;
 		switch(environment_settings.detected_lang){
 			case LANG_EN:

@@ -7,6 +7,7 @@ function Bot(){
 		lists: {},
 		checkBoxes: {}
 	}
+	this.detected_lang = LANG_EN
 	var fieldsContent = {}
 	fieldsContent[FIELD_BANK_IP_TARGET] = ""
 	fieldsContent[FIELD_IPS_START_SEARCHING] = ""

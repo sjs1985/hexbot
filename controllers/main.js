@@ -7,6 +7,7 @@ var storageContent = controllers.storage.get(function(storageContent){
 	} else { 
 		controllers.bot = new Bot()
 	}
+
 	//It checks if the current page is a regular page game
 	var regularPageId = document.getElementById("header")
 	if ((regularPageId) && (regularPageId.innerHTML.indexOf('<a href="#">Hacker Experience</a>') >= 0)){ 
@@ -17,7 +18,7 @@ var storageContent = controllers.storage.get(function(storageContent){
 		botButton()
 		sequences()
 	} else {
-		console.log("HExBot: running nothing. This is not a regular game page")
+		console.log(LANG.NOT_REGULAR_PAGE)
 	}
 })
 

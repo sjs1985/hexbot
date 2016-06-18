@@ -13,31 +13,33 @@ function sequences(){
 		//----Put here the sequences that must be running while defined sequence is not running-----//
 		//------------------------------------------------------------------------------------------//
 		var puzzleSolver = $jSpaghetti.module("riddleSolver").sequence("solvePuzzle")
-		puzzleSolver.run()
-		puzzleSolver.events.addEventListener("terminated", function(){
-			puzzleSolver.reset()
+		puzzleSolver.reset(function(sequence){
+			sequence.run()
 		})
 	}
 	//------------------------------------------------------------------------------------------//
 	//----Put here the sequences that must be running every time-------------------------- -----//
 	//------------------------------------------------------------------------------------------//
 	var adRemover = $jSpaghetti.module("adRemover").sequence("removeAds")
-	adRemover.reset()
-	adRemover.events.addEventListener("reset", function(){
-		adRemover.run()
+	adRemover.reset(function(sequence){
+		sequence.run()
 	})
 	if(controllers.bot.controlPanel.checkBoxes[SET_MISSIONS_MONITOR]){
 		var missionMonitor = $jSpaghetti.module("monitor").sequence("checkMission")
-		missionMonitor.run()
-		missionMonitor.events.addEventListener("terminated", function(){
-			missionMonitor.reset()
+		missionMonitor.reset(function(sequence){
+			sequence.run()
 		})
 	}
 	if(controllers.bot.controlPanel.checkBoxes[SET_LOGS_MONITOR]){
 		var logsMonitor = $jSpaghetti.module("monitor").sequence("checkMyOwnLogs")
-		logsMonitor.run()
-		logsMonitor.events.addEventListener("terminated", function(){
-			logsMonitor.reset()
+		logsMonitor.reset(function(sequence){
+			sequence.run()
+		})
+	}
+	if(window.location.pathname.match(/\/list/)){
+		var ipFilter = $jSpaghetti.module("IPDBFilter").sequence("filterIP")
+		ipFilter.reset(function(sequence){
+			sequence.run()
 		})
 	}
 }

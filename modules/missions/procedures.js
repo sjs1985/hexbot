@@ -161,7 +161,7 @@ foo.procedure("isCrackerStrongEnough", function(){
 })
 
 foo.procedure("askPermissionToAbort", function(shared){
-	shared.abortMissionAllowed = window.confirm("Allow bot to abort missions if necessary (Cancel to NO)?")
+	shared.abortMissionAllowed = window.confirm(LANG.MISSIONS_PERMISSION_TO_ABORT)
 })
 
 foo.procedure("getMissionInfo", function(shared){
@@ -224,7 +224,7 @@ foo.procedure("cleanTextAreaContent", function(data){
 })
 
 foo.procedure("informBadCracker", function(){
-	alert("Your cracker is not strong enough to continue")
+	window.alert(LANG.MISSIONS_WEAK_CRACKER)
 })
 
 foo.procedure("goToOwnLogTab", function(){
@@ -255,7 +255,7 @@ foo.procedure("isAvailableMissionsPage", function(){
 })
 
 foo.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
-	alert("It seems there is another mission of another type already accepted. Finish it or abort it before trying again.")
+	window.alert(LANG.MISSION_ANOTHER_MISSION_KIND_ALREADY_ACCEPTED)
 })
 
 foo.procedure("clickOnTransferMoneyFinishButton", function(){
@@ -400,7 +400,7 @@ foo.procedure("checkBTCWallet", function(shared){
 		//console.log(shared.BTCInfo)
 		if(!shared.BTCInfo.isLogged){
 			shared.isBTCLogged = false
-			window.alert("You've chosen to transfer the earned money to your BTC wallet. But you need to login your BTC wallet before. Login your BTC wallet and try again.")
+			window.alert(LANG.DISCONNECTED_BTC_WALLET)
 			return false
 		} else {
 			shared.isBTCLogged = true

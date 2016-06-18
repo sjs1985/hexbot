@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016)",
-	"version": "0.1.21",
+	"version": "0.1.22",
 	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
  		"default_popup": "popup.html"
@@ -17,9 +17,12 @@
 			"js":[
 				"libraries/jSpaghetti/jSpaghetti.min.js",
 
-				"libraries/jSpaghetti/Storage.js",
-
 				"constants.js",
+
+				"libraries/functions/detectLang.js",
+				"lang/en.js",
+				"lang/br.js",
+				"lang/settings.js",
 
 				"libraries/classes/Storage.js",
 				"libraries/classes/Sequence.js",
@@ -43,6 +46,8 @@
 				"modules/monitor/procedures.js",
 				"modules/monitor/sequences/checkMission.js",
 				"modules/monitor/sequences/checkMyOwnLogs.js",
+				"modules/IPDBFilter/procedures.js",
+				"modules/IPDBFilter/sequences/filterIP.js",
 
 				"libraries/functions/strposOfArray.js",
 				"libraries/functions/getDOMElement.js",

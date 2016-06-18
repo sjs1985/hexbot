@@ -57,15 +57,15 @@ webcrawler.procedure("startSearching", function(shared){
 						}
 						shared.softwaresToUpload.push(softwareObj)
 					} else {
-						softwaresNotFound.push(software[0].trim() + " version " + software[1].trim())
+						softwaresNotFound.push(LANG.WEBCRAWLER_SOFTWARE_NOT_FOUND.replace('{CONTENT1}', software[0].trim()).replace('{CONTENT2}', software[1].trim()))
 					}
 				} else {
-					window.alert("Ops. Check the softwares field. \nMake sure software name and software version is being separated with \":\". \nUse \",\" to separate different softwares.")
+					window.alert(LANG.WEBCRAWLER_SINTAX_SOFTWARE_FIELD)
 					return false
 				}
 			}
 			if (softwaresNotFound.length > 0){
-				window.alert(softwaresNotFound.join(",\n") + "\nnot found")
+				window.alert(softwaresNotFound.join(",\n") + "\n")
 				return false
 			}
 			var timeLimit = controllers.bot.controlPanel.fieldsContent[SET_TIME_LIMIT]
@@ -255,11 +255,11 @@ webcrawler.procedure("getIpsFromLogs", function(shared){
 webcrawler.procedure("updateCrawlerLogs", function(data){
 	controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] = ""
 	if(data.newHostsList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## NEW IPS FOUND ## " + data.newHostsList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += LANG.WEBCRAWLER_RESULTS_IPS_FOUND + data.newHostsList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.newHostsList.join(", ") + "\n\n"
 	} 
 	if(Object.keys(data.accessibleHostsList).length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## ACCESSIBLE HOSTS ##" + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += LANG.WEBCRAWLER_RESULTS_ACCESSIBLE_HOSTS + "\n" 
 		for(var list in data.accessibleHostsList){
 			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += list + ": " + data.accessibleHostsList[list].length + "\n"
 			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.accessibleHostsList[list].join(", ") + "\n\n"
@@ -267,7 +267,7 @@ webcrawler.procedure("updateCrawlerLogs", function(data){
 	}
 
 	if(Object.keys(data.inaccessibleHostsList).length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## INACCESSIBLE HOSTS ##" + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += LANG.WEBCRAWLER_RESULTS_INACCESSIBLE_HOSTS + "\n" 
 		for(var list in data.inaccessibleHostsList){
 			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += list + ": " + data.inaccessibleHostsList[list].length + "\n"
 			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.inaccessibleHostsList[list].join(", ") + "\n\n"
@@ -275,7 +275,7 @@ webcrawler.procedure("updateCrawlerLogs", function(data){
 	}
 
 	if(data.NPCList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## noVPC LIST ## " + data.NPCList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += LANG.WEBCRAWLER_RESULTS_NOVPC + data.NPCList.length + "\n" 
 		for (var i = 0; i < data.NPCList.length; i++) {
 			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.NPCList[i].ip + ", " + data.NPCList[i].label
 			if (data.NPCList[i].name != null){
@@ -288,13 +288,13 @@ webcrawler.procedure("updateCrawlerLogs", function(data){
 	}
 
 	if(data.openList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## UNCHECKED HOSTS ## " + data.openList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += LANG.WEBCRAWLER_RESULTS_UNCHECKED_HOSTS + data.openList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.openList.join(", ") + "\n\n"	
 	}
 
 	if(data.uploadMode){
 		if(Object.keys(data.uploadRegister).length > 0){
-			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## UPLOADS ## \n" 
+			controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += LANG.WEBCRAWLER_RESULTS_UPLOADS + "\n" 
 			for(upload in data.uploadRegister){
 				controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += upload + " " + Object.keys(data.uploadRegister[upload]).length + "\n"
 				var list = []
@@ -308,15 +308,15 @@ webcrawler.procedure("updateCrawlerLogs", function(data){
 	}
 
 	if(data.BTCAccountList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## BTC LOGS ## " + data.BTCAccountList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += LANG.WEBCRAWLER_RESULTS_BTC + data.BTCAccountList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.BTCAccountList.join("\n") + "\n\n"		
 	}
 	if(data.shoppingLogList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## SHOPPING LOGS ## " + data.shoppingLogList.length + "\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += LANG.WEBCRAWLER_RESULTS_SHOPPING + data.shoppingLogList.length + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.shoppingLogList.join("\n") + "\n\n"	
 	}
 	if(data.softwareList.length > 0){
-		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += "## SOFTWARES FOUND ##\n" 
+		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += LANG.WEBCRAWLER_RESULTS_SOFTWARES + "\n" 
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.softwareList.join("\n")	
 	}
 	controllers.storage.set(controllers.bot)

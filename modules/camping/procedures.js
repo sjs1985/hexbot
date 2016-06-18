@@ -12,7 +12,7 @@ camping.procedure("startBankCamping", function(shared){
 		//console.log(shared.BTCInfo)
 		if(!shared.BTCInfo.isLogged){
 			shared.isBTCLogged = false
-			window.alert("You've chosen to transfer the earned money to your BTC wallet. But you need to login your BTC wallet before. Login your BTC wallet and try again.")
+			window.alert(LANG.DISCONNECTED_BTC_WALLET)
 			return false
 		} else {
 			shared.isBTCLogged = true
@@ -21,9 +21,10 @@ camping.procedure("startBankCamping", function(shared){
 
 	if (shared.myAccount === undefined){
 		if(shared.ip.length){
-			window.alert("There's no bank account vinculated to \"" + shared.ip + "\"")
+			LANG.CAMPING_WITHOUT_VINCULATED_ACCOUNT
+			window.alert(LANG.CAMPING_WITHOUT_VINCULATED_ACCOUNT.replace('{CONTENT}', ' "' + shared.ip + '"'))
 		} else {
-			window.alert("Choose a bank ip")
+			window.alert(LANG.CAMPING_CHOOSE_IP)
 		}
 		return false
 	}

@@ -1,4 +1,4 @@
-const VERSION_BOT = "0.1.21"
+const VERSION_BOT = "0.1.22"
 const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const BOT_STORAGE_NAME = "HExBot-State"
 
@@ -38,10 +38,9 @@ const FIELD_HOSTS_TO_IGNORE = 'field-hosts-ignore'
 const FIELD_SOFTWARES_TO_INSTALL = "set-softwares-to-install"
 const SET_TIME_LIMIT = "set-time-limit"
 
-
-//Language constants
-const LANG_BR = "br"
-const LANG_EN = "en"
+const LANG_EN = "en";
+const LANG_BR = "br";
+const LANGUAGES = [LANG_EN, LANG_BR];
 
 //Missions type
 const CHECK_BALANCE = "checkBalance"

@@ -15,18 +15,18 @@
 		{
 			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*", "http://localhost/*"],
 			"js":[
-				"libraries/jSpaghetti/jSpaghetti.min.js",
+				"core/libraries/vendor/jSpaghetti/jSpaghetti.min.js",
 
-				"constants.js",
+				"core/constants.js",
 
-				"libraries/functions/detectLang.js",
-				"lang/en.js",
-				"lang/br.js",
-				"lang/settings.js",
+				"core/libraries/helpers/functions/detectLang.js",
+				"core/lang/en.js",
+				"core/lang/br.js",
+				"core/lang/settings.js",
 
-				"libraries/classes/Storage.js",
-				"libraries/classes/Sequence.js",
-				"libraries/classes/Bot.js",
+				"core/libraries/helpers/classes/Storage.js",
+				"core/libraries/helpers/classes/Sequence.js",
+				"core/libraries/helpers/classes/Bot.js",
 
 				"modules/riddleSolver/procedures.js",
 				"modules/riddleSolver/sequences/solvePuzzle.js",
@@ -49,34 +49,35 @@
 				"modules/IPDBFilter/procedures.js",
 				"modules/IPDBFilter/sequences/filterIP.js",
 
-				"libraries/functions/strposOfArray.js",
-				"libraries/functions/getDOMElement.js",
-				"libraries/functions/goToPage.js",
-				"libraries/functions/sendXMLHttpRequest.js",
-				"libraries/functions/getMyIp.js",
-				"libraries/functions/removeLinesFromText.js",
-				"libraries/functions/getSoftwareId.js",
-				"libraries/functions/getBankAccountAddr.js",
-				"libraries/functions/getBTCWalletInfo.js",
-				"libraries/functions/getBTCExchangeRate.js",
-				"libraries/functions/getBankAccountBalance.js",
-				"libraries/functions/sendMoneyToBTCWallet.js",
-				"libraries/functions/roundNumber.js",
-				"libraries/functions/getSoftwaresByExtension.js",
+				"core/libraries/helpers/functions/strposOfArray.js",
+				"core/libraries/helpers/functions/getDOMElement.js",
+				"core/libraries/helpers/functions/goToPage.js",
+				"core/libraries/helpers/functions/sendXMLHttpRequest.js",
+				"core/libraries/helpers/functions/getMyIp.js",
+				"core/libraries/helpers/functions/removeLinesFromText.js",
+				"core/libraries/helpers/functions/getSoftwareId.js",
+				"core/libraries/helpers/functions/getBankAccountAddr.js",
+				"core/libraries/helpers/functions/getBTCWalletInfo.js",
+				"core/libraries/helpers/functions/getBTCExchangeRate.js",
+				"core/libraries/helpers/functions/getBankAccountBalance.js",
+				"core/libraries/helpers/functions/sendMoneyToBTCWallet.js",
+				"core/libraries/helpers/functions/roundNumber.js",
+				"core/libraries/helpers/functions/getSoftwaresByExtension.js",
 
-				"views.js",
+				"core/views.js",
 
-				"controllers/sequences.js",
-				"controllers/functions.js",
-				"controllers/controlPanel.js",
-				"controllers/buttonToAction.js",
-				"controllers/botButton.js",
-				"controllers/main.js"
-			]
+				"core/controllers/sequences.js",
+				"core/controllers/functions.js",
+				"core/controllers/controlPanel.js",
+				"core/controllers/buttonToAction.js",
+				"core/controllers/botButton.js",
+				"core/controllers/main.js"
+			],
+			"run_at": "document_start"
 		}
 	],
 	"background":{
-		"scripts":["background.js"],
+		"scripts":["core/background.js"],
 		"persistent": true
 	}
 }

@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016)",
-	"version": "0.1.22.1",
+	"version": "0.1.22.2",
 	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
- 		"default_popup": "popup.html"
+ 		"default_popup": "core/popup.html"
  	},
  	"author":"GRSa 2016",
 	"permissions": [
@@ -73,7 +73,7 @@
 				"core/controllers/botButton.js",
 				"core/controllers/main.js"
 			],
-			"run_at": "document_start"
+			"run_at": "document_end"
 		}
 	],
 	"background":{

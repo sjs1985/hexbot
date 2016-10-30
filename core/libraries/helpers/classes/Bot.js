@@ -1,6 +1,9 @@
 function Bot(){
 	this.currentSequence = null
+	this.lastExecutedSequence = null
+	this.cinfo = null
 	this.showMissionAlert = false
+	this.codename = "raw"
 	this.controlPanel = {
 		isHidden: false,
 		fieldsContent: {},

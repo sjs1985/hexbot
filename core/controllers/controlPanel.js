@@ -99,5 +99,7 @@ function controlPanel(){
 	document.getElementById(COMMAND_PANEL_CLOSE_BUTTON_DOM_ID).addEventListener("click", function(){
 		controllers.functions.hidePanel()
 	})
+
+	controllers.functions.activeButtons(false)
 }
 	

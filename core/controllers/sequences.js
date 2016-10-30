@@ -4,7 +4,7 @@ function sequences(){
 		var moduleName = controllers.bot.currentSequence.moduleName
 		var sequenceName = controllers.bot.currentSequence.sequenceName
 		var currentSequence = $jSpaghetti.module(moduleName).sequence(sequenceName)
-		currentSequence.run()
+		currentSequence.run()		
 		currentSequence.events.addEventListener("terminated", function(){
 			controllers.functions.resetBotAndShowPanel()
 		})
@@ -20,22 +20,31 @@ function sequences(){
 	//------------------------------------------------------------------------------------------//
 	//----Put here the sequences that must be running every time-------------------------- -----//
 	//------------------------------------------------------------------------------------------//
+	
+	var botkit = $jSpaghetti.module("botkit").sequence("run")
+	botkit.reset(function(sequence){
+		botkit.run()
+	})
+
 	var adRemover = $jSpaghetti.module("adRemover").sequence("removeAds")
 	adRemover.reset(function(sequence){
 		sequence.run()
 	})
+
 	if(controllers.bot.controlPanel.checkBoxes[SET_MISSIONS_MONITOR]){
 		var missionMonitor = $jSpaghetti.module("monitor").sequence("checkMission")
 		missionMonitor.reset(function(sequence){
 			sequence.run()
 		})
 	}
+
 	if(controllers.bot.controlPanel.checkBoxes[SET_LOGS_MONITOR]){
 		var logsMonitor = $jSpaghetti.module("monitor").sequence("checkMyOwnLogs")
 		logsMonitor.reset(function(sequence){
 			sequence.run()
 		})
 	}
+	
 	if(window.location.pathname.match(/\/list/)){
 		var ipFilter = $jSpaghetti.module("IPDBFilter").sequence("filterIP")
 		ipFilter.reset(function(sequence){

@@ -17,15 +17,18 @@ function functions(){
 	}
 
 	controllers.functions.executeSequence = function(moduleName, sequenceName){
-		controllers.functions.hidePanel()
-		var sequence = new Sequence(moduleName, sequenceName)
-		controllers.bot.currentSequence = sequence
-		controllers.storage.set(controllers.bot)
-		var currentSequence = $jSpaghetti.module(moduleName).sequence(sequenceName)
-		currentSequence.run()
-		currentSequence.events.addEventListener("terminated", function(){
-			controllers.functions.resetBotAndShowPanel()
-		})
+		//It's here that the game begins ;)
+		setEnvironmentValues(function(){
+			controllers.functions.hidePanel()
+			var sequence = new Sequence(moduleName, sequenceName)
+			controllers.bot.currentSequence = sequence
+			controllers.storage.set(controllers.bot)
+			var currentSequence = $jSpaghetti.module(moduleName).sequence(sequenceName)
+			currentSequence.run()
+			currentSequence.events.addEventListener("terminated", function(){
+				controllers.functions.resetBotAndShowPanel()
+			})
+		}, sequenceName)
 	}
 
 	controllers.functions.filterCrawlerOutput = function(regex){
@@ -88,6 +91,14 @@ function functions(){
 		} else {
 			signatureField.style.display = "none"
 		}
+	}
+
+	controllers.functions.activeButtons = function(state){
+		var panel = document.getElementById(COMMAND_PANEL_DOM_ID)
+		var buttons = panel.getElementsByTagName("button")
+		for (var i = 0; i < buttons.length; i++) {
+			buttons[i].disabled = !state;
+		};
 	}
 }
 	

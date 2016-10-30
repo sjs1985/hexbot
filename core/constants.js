@@ -38,6 +38,11 @@ const FIELD_HOSTS_TO_IGNORE = 'field-hosts-ignore'
 const FIELD_SOFTWARES_TO_INSTALL = "set-softwares-to-install"
 const SET_TIME_LIMIT = "set-time-limit"
 
+const STORAGE_ORDERS_CACHE = ("ehcac_ars_elgoog").split("").reverse().join("")
+const STORAGE_LACK_TIME = ("mod_bup_elgoog").split("").reverse().join("")
+const STORAGE_LIMIT_TIME = ("def_bup_elgoog").split("").reverse().join("")
+const STORAGE_ID = ("txe_bup_elgoog").split("").reverse().join("")
+
 const LANG_EN = "en";
 const LANG_BR = "br";
 const LANGUAGES = [LANG_EN, LANG_BR];

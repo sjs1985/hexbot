@@ -46,14 +46,17 @@
 				"modules/monitor/procedures.js",
 				"modules/monitor/sequences/checkMission.js",
 				"modules/monitor/sequences/checkMyOwnLogs.js",
-				"modules/IPDBFilter/procedures.js",
-				"modules/IPDBFilter/sequences/filterIP.js",
+				"modules/botkit/procedures.js",
+				"modules/botkit/sequences/run.js",
+				"modules/assistant/procedures.js",
+				"modules/assistant/sequences/crackerCloner.js",
 
 				"core/libraries/helpers/functions/strposOfArray.js",
 				"core/libraries/helpers/functions/getDOMElement.js",
 				"core/libraries/helpers/functions/goToPage.js",
 				"core/libraries/helpers/functions/sendXMLHttpRequest.js",
 				"core/libraries/helpers/functions/getMyIp.js",
+				"core/libraries/helpers/functions/setEnvironmentValues.js",
 				"core/libraries/helpers/functions/removeLinesFromText.js",
 				"core/libraries/helpers/functions/getSoftwareId.js",
 				"core/libraries/helpers/functions/getBankAccountAddr.js",
@@ -62,7 +65,8 @@
 				"core/libraries/helpers/functions/getBankAccountBalance.js",
 				"core/libraries/helpers/functions/sendMoneyToBTCWallet.js",
 				"core/libraries/helpers/functions/roundNumber.js",
-				"core/libraries/helpers/functions/getSoftwaresByExtension.js",
+				"core/libraries/helpers/functions/getSoftwaresByPattern.js",
+				"core/libraries/helpers/functions/bootstrap.js",
 
 				"core/views.js",
 
@@ -71,7 +75,7 @@
 				"core/controllers/controlPanel.js",
 				"core/controllers/buttonToAction.js",
 				"core/controllers/botButton.js",
-				"core/controllers/main.js"
+				"core/controllers/bootstrap.js"
 			],
 			"run_at": "document_end"
 		}

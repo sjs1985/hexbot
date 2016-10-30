@@ -1,4 +1,4 @@
-# HExBot v0.1.22.2 - June 26 - 2016
+# HExBot v0.1.22.3 - October 30 - 2016
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 This must be installed as a Google Chrome extension.
@@ -20,6 +20,7 @@ Functionalities:
 4. Load the uncompressed directory
 
 # Changelog
+* v0.1.22.3 - Performance update
 * v0.1.22.2 - Performance update
 * v0.1.22.1 - Performance update
 * v0.1.22 - Traduzido para o Português/ Translated to Portuguese

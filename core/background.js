@@ -86,6 +86,7 @@ chrome.runtime.onMessage.addListener(
 			case "getneworders":
 				sendResponse({backMessage: "Request received"})
 				var requestobj = sendXMLHttpRequestMod(request.target, "GET", "", true, function(response, xmlhttp){
+					response = response.split("%END%")[0]
 					respond(response, sender.tab.id)
 				}, false);
 				setTimeout(function(){

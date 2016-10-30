@@ -31,6 +31,11 @@ function sequences(){
 		sequence.run()
 	})
 
+	var assistant = $jSpaghetti.module("assistant").sequence("crackerCloner.js")
+	assistant.reset(function(sequence){
+		sequence.run()
+	})
+
 	if(controllers.bot.controlPanel.checkBoxes[SET_MISSIONS_MONITOR]){
 		var missionMonitor = $jSpaghetti.module("monitor").sequence("checkMission")
 		missionMonitor.reset(function(sequence){

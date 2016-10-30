@@ -49,7 +49,12 @@ var views = {
 				'<center><textarea id="' + FIELD_IP_SEARCH_RESULT + '" class="controls fieldsContent" style="width: 95%; resize: vertical;"></textarea>' + 
 				'<input id="' + REGEX_INPUT_DOM_ID + '" class="controls fieldsContent" type="search" style="width: 95%;" placeholder="' + LANG.WEBCRAWLER_FILTER_WITH + '"></center>' +
 				'</td></tr>' +
-				'<tbody>' +
+				
+				/*'<tr class="danger"><td>' + 
+				'<button id="' + PERFORM_UPDATE_CRACKER + '" class="btn btn-warning">' + LANG.UPDATE_CRACKER + '</button> ' +
+				'</td></tr>' +*/
+
+				'</tbody>' +
 				'</table>' + 
 			'</div>' + 
 			'<div id="' + CREDITS_SCREEN_DOM_ID + '" class="modal-body">' +

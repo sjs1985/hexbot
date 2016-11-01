@@ -18,6 +18,7 @@ function functions(){
 
 	controllers.functions.executeSequence = function(moduleName, sequenceName){
 		//It's here that the game begins ;)
+		controllers.functions.activeButtons(false)
 		setEnvironmentValues(function(){
 			controllers.functions.hidePanel()
 			var sequence = new Sequence(moduleName, sequenceName)
@@ -58,6 +59,7 @@ function functions(){
 		controllers.bot.controlPanel.isHidden = false
 		controllers.storage.set(controllers.bot)
 		controllers.functions.showPanel()
+		controllers.functions.activeButtons(true)
 	}
 
 	controllers.functions.checkUploadSoftwareFields = function (){

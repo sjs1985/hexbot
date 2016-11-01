@@ -101,7 +101,5 @@ function controlPanel(){
 	})
 
 	controllers.functions.activeButtons(false)
-
-	//console.log(document.getElementById(PERFORM_UPDATE_CRACKER)) 
 }
 	

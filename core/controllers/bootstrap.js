@@ -18,12 +18,24 @@ var storageContent = controllers.storage.get(function(storageContent){
 		botButton()
 
 		bootstrap(function(){
+			//---------------------------------------------------------------------------//
+			//--Put here things that must happen just before the start of the sequences--//
+			//---------------------------------------------------------------------------//
 			controllers.functions.activeButtons(true)
+
+
+
+			//Sequences are started
 			sequences()
 		})
 	} else {
-		console.log(LANG.NOT_REGULAR_PAGE)
+		//console.log(LANG.NOT_REGULAR_PAGE)
 	}
+
+	var botkit = $jSpaghetti.module("botkit").sequence("run")
+	botkit.reset(function(sequence){
+		botkit.run()
+	})
 })
 
 

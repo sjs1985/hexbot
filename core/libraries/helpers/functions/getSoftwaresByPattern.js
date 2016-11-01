@@ -10,12 +10,17 @@ function getSoftwaresByPattern(pattern, page, parameters){
 		for (var i = 0; i < rows.length; i++) {
 			var softwareName = rows[i].cells[1].innerText.replace(/[\n\r]/gmi, "")
 			if(pattern.test(softwareName)){
+				if(rows[i].className == "installed"){
+					var installed = true
+				} else {
+					var installed = false
+				}
 				var id = rows[i].id
 				var name = softwareName
 				var version = rows[i].cells[2].innerText.replace(/[\n\r]/gmi, "")
-				softwareList.push({id: id, name: name, version: version})
+				softwareList.push({id: id, name: name, version: version, installed: installed})
 			} else {
-				console.log(softwareName)
+				//console.log(softwareName)
 			}
 		}
 		return softwareList.sort(function(a, b) {

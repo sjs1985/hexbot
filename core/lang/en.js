@@ -51,5 +51,6 @@ LANG_CONTENT[LANG_EN] = {
 	WEBCRAWLER_RESULTS_BTC: '## BTC LOGS ## ',
 	WEBCRAWLER_RESULTS_SHOPPING: '## SHOPPING LOGS ## ',
 	WEBCRAWLER_RESULTS_SOFTWARES: '## SOFTWARES FOUND ##',
-	UPDATE_CRACKER: "Upgrade cracker"
+	UPDATE_CRACKER: "Solve riddles",
+	COMPLETE_PATH_ERROR: "You must log in a riddle server before using this feature!"
 }

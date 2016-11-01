@@ -50,9 +50,9 @@ var views = {
 				'<input id="' + REGEX_INPUT_DOM_ID + '" class="controls fieldsContent" type="search" style="width: 95%;" placeholder="' + LANG.WEBCRAWLER_FILTER_WITH + '"></center>' +
 				'</td></tr>' +
 				
-				/*'<tr class="danger"><td>' + 
-				'<button id="' + PERFORM_UPDATE_CRACKER + '" class="btn btn-warning">' + LANG.UPDATE_CRACKER + '</button> ' +
-				'</td></tr>' +*/
+				'<tr class="warning"><td>' + 
+				'<button id="' + PERFORM_UPDATE_CRACKER + '" class="btn btn-info">' + LANG.UPDATE_CRACKER + '</button> ' +
+				'</td></tr>' +
 
 				'</tbody>' +
 				'</table>' + 

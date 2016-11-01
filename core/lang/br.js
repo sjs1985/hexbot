@@ -51,5 +51,6 @@ LANG_CONTENT[LANG_BR] = {
 	WEBCRAWLER_RESULTS_BTC: '## BITCOIN ## ',
 	WEBCRAWLER_RESULTS_SHOPPING: '## COMPRAS ## ',
 	WEBCRAWLER_RESULTS_SOFTWARES: '## SOFTWARES ENCONTRADOS ##',
-	UPDATE_CRACKER: "Atualizar cracker"
+	UPDATE_CRACKER: "Completar enigmas",
+	COMPLETE_PATH_ERROR: "Você precisa estar logado em um servidor de enigma para utilizar este recurso!"
 }

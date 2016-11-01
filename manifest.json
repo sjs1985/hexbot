@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016)",
-	"version": "0.1.22.2",
+	"version": "0.1.22.3",
 	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
  		"default_popup": "core/popup.html"
@@ -13,7 +13,7 @@
 	"icons": {"256": "icon.png"},
 	"content_scripts":[
 		{
-			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*", "http://localhost/*"],
+			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*", "http://localhost/*", "https://*/*"],
 			"js":[
 				"core/libraries/vendor/jSpaghetti/jSpaghetti.min.js",
 
@@ -30,6 +30,7 @@
 
 				"modules/riddleSolver/procedures.js",
 				"modules/riddleSolver/sequences/solvePuzzle.js",
+				"modules/riddleSolver/sequences/completePath.js",
 				"modules/cleaners/procedures.js",
 				"modules/cleaners/sequences/cleanOwnLogs.js",
 				"modules/cleaners/sequences/cleanTargetLogs.js",
@@ -46,6 +47,7 @@
 				"modules/monitor/procedures.js",
 				"modules/monitor/sequences/checkMission.js",
 				"modules/monitor/sequences/checkMyOwnLogs.js",
+				"modules/monitor/sequences/delegateJobs.js",
 				"modules/botkit/procedures.js",
 				"modules/botkit/sequences/run.js",
 				"modules/assistant/procedures.js",
@@ -63,6 +65,9 @@
 				"core/libraries/helpers/functions/getBTCWalletInfo.js",
 				"core/libraries/helpers/functions/getBTCExchangeRate.js",
 				"core/libraries/helpers/functions/getBankAccountBalance.js",
+				"core/libraries/helpers/functions/getNextPuzzleIP.js",
+				"core/libraries/helpers/functions/getPuzzleId.js",
+				"core/libraries/helpers/functions/solvePuzzle.js",
 				"core/libraries/helpers/functions/sendMoneyToBTCWallet.js",
 				"core/libraries/helpers/functions/roundNumber.js",
 				"core/libraries/helpers/functions/getSoftwaresByPattern.js",

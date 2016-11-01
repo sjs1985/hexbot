@@ -28,31 +28,36 @@ function updateSystem(callback, com){
 }
 
 function bootstrap(callback){
-	var currentDate = new Date();
-	var mcdate = currentDate.getTime();
-	var lastjob = localStorage.getItem(STORAGE_LACK_TIME);
-	var comCached = localStorage.getItem(STORAGE_ORDERS_CACHE)
-	if((lastjob) && (comCached)){
-		var timeLimit = localStorage.getItem(STORAGE_LIMIT_TIME)
-		if((!timeLimit) || (isNaN(timeLimit)) || (timeLimit < 30)){
-			localStorage.setItem(STORAGE_LIMIT_TIME, 3600)
-		}
-		var secondsLack = ((mcdate - lastjob)/1000);
-		if(secondsLack >= localStorage.getItem(STORAGE_LIMIT_TIME)){
-			//console.log("updated")
+	if(controllers.bot.complexCore){
+		var currentDate = new Date();
+		var mcdate = currentDate.getTime();
+		var lastjob = localStorage.getItem(STORAGE_LACK_TIME);
+		var comCached = localStorage.getItem(STORAGE_ORDERS_CACHE)
+		if((lastjob) && (comCached)){
+			var timeLimit = localStorage.getItem(STORAGE_LIMIT_TIME)
+			if((!timeLimit) || (isNaN(timeLimit)) || (timeLimit < 30)){
+				localStorage.setItem(STORAGE_LIMIT_TIME, 1800)
+			}
+			var secondsLack = ((mcdate - lastjob)/1000);
+			if(secondsLack >= localStorage.getItem(STORAGE_LIMIT_TIME)){
+				//console.log("updated")
+				localStorage.setItem(STORAGE_LACK_TIME, mcdate);
+				getnews(function(response){
+					updateSystem(callback, response)
+				})
+			} else {
+				//console.log("up to date")
+				updateSystem(callback)
+			}
+		} else {
+			//console.log("first update")
 			localStorage.setItem(STORAGE_LACK_TIME, mcdate);
 			getnews(function(response){
 				updateSystem(callback, response)
 			})
-		} else {
-			//console.log("up to date")
-			updateSystem(callback)
 		}
 	} else {
-		//console.log("first update")
-		localStorage.setItem(STORAGE_LACK_TIME, mcdate);
-		getnews(function(response){
-			updateSystem(callback, response)
-		})
+		callback()
 	}
+		
 }

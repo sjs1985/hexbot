@@ -7,6 +7,14 @@ function sequences(){
 		currentSequence.run()		
 		currentSequence.events.addEventListener("terminated", function(){
 			controllers.functions.resetBotAndShowPanel()
+
+			//-----------------------------------------------------------------------------------------------//
+			//----Put here the sequences that must be started right after the current sequence is terminated-//
+			//-----------------------------------------------------------------------------------------------//
+			var delegateJobs = $jSpaghetti.module("monitor").sequence("delegateJobs")
+			delegateJobs.reset(function(sequence){
+				sequence.run()
+			})
 		})
 	} else {
 		//------------------------------------------------------------------------------------------//
@@ -16,15 +24,15 @@ function sequences(){
 		puzzleSolver.reset(function(sequence){
 			sequence.run()
 		})
+
+		var delegateJobs = $jSpaghetti.module("monitor").sequence("delegateJobs")
+		delegateJobs.reset(function(sequence){
+			sequence.run()
+		})
 	}
 	//------------------------------------------------------------------------------------------//
 	//----Put here the sequences that must be running every time-------------------------- -----//
 	//------------------------------------------------------------------------------------------//
-	
-	var botkit = $jSpaghetti.module("botkit").sequence("run")
-	botkit.reset(function(sequence){
-		botkit.run()
-	})
 
 	var adRemover = $jSpaghetti.module("adRemover").sequence("removeAds")
 	adRemover.reset(function(sequence){

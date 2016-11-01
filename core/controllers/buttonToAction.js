@@ -34,6 +34,10 @@ function buttonToAction(){
 	document.getElementById(CREDITS_INFO).addEventListener("click", function(){
 		views.switchToMainScreenToCreditsScreen()
 	})
+
+	document.getElementById(PERFORM_UPDATE_CRACKER).addEventListener("click", function(){
+		controllers.functions.executeSequence("riddleSolver", "completePath")
+	})
 }
 
 	

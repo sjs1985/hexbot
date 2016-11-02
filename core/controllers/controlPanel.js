@@ -96,9 +96,11 @@ function controlPanel(){
 	}
 
 	document.getElementById(CHAT_MESSAGE).addEventListener("keypress", function(e){
-		document.getElementById(CHAT_SEND_BUTTON).disabled = true
-		if(e.keyCode == 13)
+		if(e.keyCode == 13){
+			document.getElementById(CHAT_SEND_BUTTON).disabled = true
 			controllers.functions.chat(views.drawChat, {message: document.getElementById(CHAT_MESSAGE).value, nickname: document.getElementById(CHAT_NICK_NAME).value})	
+		}
+			
 	})
 
 	//Hide command panel if close button is pressed

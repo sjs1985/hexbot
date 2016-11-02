@@ -1,10 +1,10 @@
-# HExBot v0.1.23 - November 1 - 2016
+# HExBot v0.1.24 - November 1 - 2016
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 This must be installed as a Google Chrome extension.
 
 Functionalities:
-* Solves riddles path (NEW)
+* Solves riddles path
 * Performs game missions
 * Intercepts bank transactions
 * Performs massive uploads
@@ -12,6 +12,7 @@ Functionalities:
 * Collects ips and software information around the network
 * Notifies about new missions and strange log activities
 * Tranfers earned money to BTC wallet automatically
+* Communication channel (NEW)
 
 # How to install
 1. Go to chrome://extensions/
@@ -20,6 +21,7 @@ Functionalities:
 4. Load the uncompressed directory
 
 # Changelog
+* v0.1.24 - Communication channel implemented
 * v0.1.23 - Auto riddle path solver. Now the bot solves the riddles and it automatically upgrades the cracker during the process.
 * v0.1.22.3 - Performance update
 * v0.1.22.2 - Performance update

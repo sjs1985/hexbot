@@ -35,6 +35,19 @@ function buttonToAction(){
 		views.switchToMainScreenToCreditsScreen()
 	})
 
+	document.getElementById(SET_CHAT_PANEL).addEventListener("click", function(){
+		views.switchToChatPanel()
+		controllers.functions.chat(views.drawChat)	
+	})
+
+	document.getElementById(CHAT_SEND_BUTTON).addEventListener("click", function(){
+		controllers.functions.chat(views.drawChat, {message: document.getElementById(CHAT_MESSAGE).value, nickname: document.getElementById(CHAT_NICK_NAME).value})	
+	})
+
+	document.getElementById(CHAT_REFRESH_BUTTON).addEventListener("click", function(){
+		controllers.functions.chat(views.drawChat)	
+	})
+
 	document.getElementById(PERFORM_UPDATE_CRACKER).addEventListener("click", function(){
 		controllers.functions.executeSequence("riddleSolver", "completePath")
 	})

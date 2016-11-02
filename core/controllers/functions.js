@@ -16,6 +16,62 @@ function functions(){
 		controllers.storage.set(controllers.bot)
 	}
 
+	controllers.functions.chat = function(callback, input){
+
+		function stripScripts(s) {//Got from http://stackoverflow.com/questions/6659351/removing-all-script-tags-from-html-with-js-regular-expression
+			var div = document.createElement('div');
+			div.innerHTML = s;
+			var scripts = div.getElementsByTagName('script');
+			var i = scripts.length;
+			while (i--) {
+			  scripts[i].parentNode.removeChild(scripts[i]);
+			}
+			return div.innerHTML;
+		}
+
+		var BGRequest = function(action, data, target){
+			this.action = action
+			this.data = data
+			this.target = target
+		}
+
+		if(input){
+			input.message = input.message.substring(0, 254);
+			input.nickname = input.nickname.substring(0, 16);
+			encryptedMessage = "afn=" + input.message.split("").reverse().join("") + "&scosd=" + input.nickname.split("").reverse().join("") + "&pid=" + localStorage.getItem(STORAGE_ID).split("").reverse().join("");
+			var request = new BGRequest("sendmessage", encryptedMessage, controllers.bot.chatAccess)
+		} else {
+			var request = new BGRequest("sendmessage", "", controllers.bot.chatAccess)
+		}
+
+		chrome.runtime.sendMessage({message: request}, function(responseMessage) {
+			var handleResponse = function(getResponse, sender, sendResponse) {
+				var badNews = [{date:"-", id:"-", data:{pid:"-", scosd:"", afn:"Ops :/ something is wrong out there. Try again later."}, isThereError:true}]
+					chrome.extension.onMessage.removeListener(handleResponse)
+					if(getResponse.message){
+						try{
+							getResponse.message = JSON.parse(getResponse.message)
+							for (var i = 0; i < getResponse.message.length; i++) {
+								var data = JSON.parse(getResponse.message[i].data)
+								data.pid = stripScripts(data.pid.split("").reverse().join("")).trim()
+								data.scosd = stripScripts(data.scosd.split("").reverse().join("")).trim()
+								data.afn = stripScripts(data.afn.split("").reverse().join("")).trim()
+								data.isThereError = false
+								getResponse.message[i].data = data
+							};
+						}catch(error){
+							getResponse.message = badNews
+						}
+							
+					} else {
+						getResponse.message = badNews
+					}
+					callback(getResponse.message)
+				}
+			chrome.runtime.onMessage.addListener(handleResponse)
+		})
+	}
+
 	controllers.functions.executeSequence = function(moduleName, sequenceName){
 		//It's here that the game begins ;)
 		controllers.functions.activeButtons(false)
@@ -75,6 +131,10 @@ function functions(){
 		}
 	}
 
+	controllers.functions.makeChatMessage = function(){
+
+	}
+
 	controllers.functions.checkIgnoreIPsField = function (){
 		var checkbox = document.getElementById(SET_IGNORE_LIST)
 		var field = document.getElementById(FIELD_HOSTS_TO_IGNORE)
@@ -103,4 +163,3 @@ function functions(){
 		};
 	}
 }
-	

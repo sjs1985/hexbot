@@ -95,6 +95,12 @@ function controlPanel(){
 		})
 	}
 
+	document.getElementById(CHAT_MESSAGE).addEventListener("keypress", function(e){
+		console.log("foi")
+		if(e.keyCode == 13)
+			controllers.functions.chat(views.drawChat, {message: document.getElementById(CHAT_MESSAGE).value, nickname: document.getElementById(CHAT_NICK_NAME).value})	
+	})
+
 	//Hide command panel if close button is pressed
 	document.getElementById(COMMAND_PANEL_CLOSE_BUTTON_DOM_ID).addEventListener("click", function(){
 		controllers.functions.hidePanel()

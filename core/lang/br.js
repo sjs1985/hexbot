@@ -52,5 +52,9 @@ LANG_CONTENT[LANG_BR] = {
 	WEBCRAWLER_RESULTS_SHOPPING: '## COMPRAS ## ',
 	WEBCRAWLER_RESULTS_SOFTWARES: '## SOFTWARES ENCONTRADOS ##',
 	UPDATE_CRACKER: "Completar enigmas",
-	COMPLETE_PATH_ERROR: "Você precisa estar logado em um servidor de enigma para utilizar este recurso!"
+	COMPLETE_PATH_ERROR: "Você precisa estar logado em um servidor de enigma para utilizar este recurso!",
+	CHAT_REFRESH: "Atualizar",
+	CHAT_SEND: "Enviar",
+	CHAT_MESSAGE: "Digite sua mensagem",
+	QUANT_MESSAGES_SHOWING : "Monstrando 50 últimas mensagens"
 }

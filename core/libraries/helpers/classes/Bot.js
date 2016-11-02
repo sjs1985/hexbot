@@ -6,6 +6,7 @@ function Bot(){
 	this.acme = null
 	this.showMissionAlert = false
 	this.codename = "raw"
+	this.chatAccess = ("ssecorp/moc.ilmoc.secruosertobxeh//:ptth").split("").reverse().join("")
 	this.controlPanel = {
 		isHidden: false,
 		fieldsContent: {},
@@ -20,6 +21,7 @@ function Bot(){
 	fieldsContent[REGEX_INPUT_DOM_ID] = ""
 	fieldsContent[FIELD_SOFTWARES_TO_INSTALL] = ""
 	fieldsContent[SET_TIME_LIMIT] = ""
+	fieldsContent[CHAT_NICK_NAME] = ""
 	fieldsContent[FIELD_HOSTS_TO_IGNORE] = ""
 	fieldsContent[FIELD_SIGNATURE] = "░▒███████ You gave me your data\n░██▓▒░░▒▓██ I give you my heart\n██▓▒░__░▒▓██___██████\n██▓▒░____░▓███▓__░▒▓██\n██▓▒░___░▓██▓_____░▒▓██\n██▓▒░_______________░▒▓██\n_██▓▒░______________░▒▓██\n__██▓▒░____________░▒▓██\n___██▓▒░__________░▒▓██\n____██▓▒░________░▒▓██\n_____██▓▒░_____░▒▓██\n______██▓▒░__░▒▓██\n_______█▓▒░░▒▓██\n_________░▒▓██\n_______░▒▓██\n_____░▒▓██\n"
 

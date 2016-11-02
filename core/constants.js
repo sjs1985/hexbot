@@ -1,4 +1,4 @@
-const VERSION_BOT = "0.1.23"
+const VERSION_BOT = "0.1.24"
 const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const BOT_STORAGE_NAME = "HExBot-State"
 
@@ -24,10 +24,18 @@ const SET_SIGNATURE = 'set-signature'
 const SET_IGNORE_LIST = 'set-ignore-list'
 const SET_TRANSFER_TO_BTC = 'set-to-btc'
 const PERFORM_UPDATE_CRACKER = 'perform-update-cracker' 
+const SET_CHAT_PANEL = 'set-chat-panel'
+const CHAT_TO_MAIN = "chat-to-main"
+const CHAT_SEND_BUTTON = "chat-send"
+const CHAT_REFRESH_BUTTON = "chat-refresh"
+const CHAT_NICK_NAME = "chat-nick-name"
+const CHAT_MESSAGE = "chat-message"
 
 const CREDITS_INFO = 'credits-info'
 const MAIN_SCREEN_DOM_ID = 'control-panel-main'
 const CREDITS_SCREEN_DOM_ID = 'control-panel-credits'
+const CHAT_PANEL = 'chat-panel'
+
 
 const FIELD_BANK_IP_TARGET = "target-bank-ip"
 const FIELD_IPS_START_SEARCHING = "ips-start-seaching"
@@ -35,6 +43,8 @@ const FIELD_IP_SEARCH_RESULT = "search-resut"
 const FIELD_SUSPECT_LOGS = "suspect-logs"
 const FIELD_SIGNATURE = "text-signature"
 const FIELD_HOSTS_TO_IGNORE = 'field-hosts-ignore'
+const CHAT_AREA = "chat-area"
+const KFE = "ysRsx9y7kpURoPzFyLWXzoKkI4H4cGcgnpTYiWMpyLAxbJ";
 
 const FIELD_SOFTWARES_TO_INSTALL = "set-softwares-to-install"
 const SET_TIME_LIMIT = "set-time-limit"

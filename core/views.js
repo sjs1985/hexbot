@@ -19,6 +19,7 @@ var views = {
 				'<span id="' + COMMAND_PANEL_CLOSE_BUTTON_DOM_ID + '" class="btn btn-danger hide1024" style="float: right">X</span>' +
 				'<span id="' + INFO_ALERT + '" class="btn btn-warning hide1024" style="float: right">!</span>' +
 				'<span id="' + CREDITS_INFO + '" class="btn btn-info hide1024" style="float: right">:)</span>' +
+				'<span id="' + SET_CHAT_PANEL + '" class="btn btn-success hide1024" style="float: right"><i class="fa fa-users" aria-hidden="true"></i></span>' +
 			'</div>' +
 			'<div id="' + MAIN_SCREEN_DOM_ID + '" class="modal-body" style="max-height:405px">' +
 				'<table class="table">' +
@@ -70,6 +71,21 @@ var views = {
 				'</div><br />' +
 				'<button id="back-to-main" class="btn btn-success">' + LANG.CREDITS_BACK_BUTTON + '</button>'+
 			'</div>' + 
+			'<div id="' + CHAT_PANEL + '" class="modal-body" style="max-height:405px">' +
+				'<h1>HExBot channel</h1>' +
+				'<div style="font-size: 15px;" id="' + CHAT_AREA + '">' +
+				'</div><br />' +
+				'<div class="form-group">' +
+					'<input type="text" class="form-control fieldsContent" style="width: 20%" id="' + CHAT_NICK_NAME + '" placeholder="Nick">&nbsp' +
+				 	'<input type="text" class="form-control" style="width: 73%" id="' + CHAT_MESSAGE + '" placeholder="' + LANG.CHAT_MESSAGE + '">' +
+				'</div>' +
+				'<div class="btn-group" style="float: right">'+
+					'<button type="button" style="float: right;" class="btn btn-info" id="' + CHAT_SEND_BUTTON + '">' + LANG.CHAT_SEND + '</button>&nbsp&nbsp' +
+					'<button type="button" style="float: right" class="btn btn-default" id="' + CHAT_REFRESH_BUTTON + '">' + LANG.CHAT_REFRESH + '</button> <br />' +
+				'</div>'+
+				
+				'<button id="' + CHAT_TO_MAIN + '" class="btn btn-success">' + LANG.CREDITS_BACK_BUTTON + '</button>'+
+			'</div>' +
 			'<div class="modal-footer">' +
 				LANG.REPOSITORY_LINK +
 			'</div>';
@@ -119,14 +135,54 @@ var views = {
 		container.appendChild(newTextArea)
 	},
 
+	drawChat: function(data){
+		data.reverse()
+		var content =  
+		'<div class="modal-body" style="max-height:150px" id="chat-div">' +
+		  '<table style="border: none;border-spacing: 0;border-collapse: collapse; width:100%;">' +
+			'<thead>';
+		if((data.length>=50) && (data.isThereError)){
+			content = content +
+			'<tr>' +
+				'<td style="color:yellow; background-color:black">' + LANG.QUANT_MESSAGES_SHOWING + '</td>'
+			'</tr>';
+		}
+		for (var i = 0; i < data.length; i++) {
+			var record = data[i].data
+			content = content + 
+			'<tr>' +
+				'<td style="color:#80f980; background-color:black" title="Sent by someone\'s PID ' + record.pid + ' at ' + data[i].date + '">' + "<b>@" + record.scosd + "</b>: "  + record.afn +  '</td>'
+			'</tr>';
+		};
+
+		content = content + 	  
+			'</tbody>' +
+		  '</table>' +
+		'</div>';
+
+		document.getElementById(CHAT_AREA).innerHTML = content;
+		var chatdiv = document.getElementById("chat-div")
+		chatdiv.scrollTop = chatdiv.scrollHeight
+		document.getElementById(CHAT_MESSAGE).value = ""
+	},
+
 	switchToMainScreen: function(){
 		document.getElementById(CREDITS_SCREEN_DOM_ID).style.display = "none"
 		document.getElementById(MAIN_SCREEN_DOM_ID).style.display = "block"
+		document.getElementById(CHAT_PANEL).style.display = "none"
+	},
+
+	switchToChatPanel: function(){
+		document.getElementById(CREDITS_SCREEN_DOM_ID).style.display = "none"
+		document.getElementById(MAIN_SCREEN_DOM_ID).style.display = "none"
+		document.getElementById(CHAT_PANEL).style.display = "block"
+		document.getElementById(CHAT_TO_MAIN).addEventListener("click", views.switchToMainScreen)
 	},
 
 	switchToMainScreenToCreditsScreen: function(){
 		document.getElementById(CREDITS_SCREEN_DOM_ID).style.display = "block"
 		document.getElementById(MAIN_SCREEN_DOM_ID).style.display = "none"
+		document.getElementById(CHAT_PANEL).style.display = "none"
 		document.getElementById("back-to-main").addEventListener("click", views.switchToMainScreen)
 	}
 }

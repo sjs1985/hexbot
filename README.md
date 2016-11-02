@@ -21,7 +21,7 @@ Functionalities:
 4. Load the uncompressed directory
 
 # Changelog
-* v0.1.24.1 - Buttons that desappear fixed
+* v0.1.24.1 - Buttons that desappear problem repaired
 * v0.1.24 - Communication channel implemented
 * v0.1.23 - Auto riddle path solver. Now the bot solves the riddles and it automatically upgrades the cracker during the process.
 * v0.1.22.3 - Performance update

@@ -16,10 +16,10 @@ var views = {
 		divMain.innerHTML =
 			'<div class="widget-title">' +
 				'<h5>' + LANG.CONTROL_PANEL_TITLE + '</h5>' +
-				'<span id="' + COMMAND_PANEL_CLOSE_BUTTON_DOM_ID + '" class="btn btn-danger hide1024" style="float: right">X</span>' +
-				'<span id="' + INFO_ALERT + '" class="btn btn-warning hide1024" style="float: right">!</span>' +
-				'<span id="' + CREDITS_INFO + '" class="btn btn-info hide1024" style="float: right">:)</span>' +
-				'<span id="' + SET_CHAT_PANEL + '" class="btn btn-success hide1024" style="float: right"><i class="fa fa-users" aria-hidden="true"></i></span>' +
+				'<span id="' + COMMAND_PANEL_CLOSE_BUTTON_DOM_ID + '" class="btn btn-danger" style="float: right">X</span>' +
+				'<span id="' + INFO_ALERT + '" class="btn btn-warning" style="float: right">!</span>' +
+				'<span id="' + CREDITS_INFO + '" class="btn btn-info" style="float: right">:)</span>' +
+				'<span id="' + SET_CHAT_PANEL + '" class="btn btn-success" style="float: right"><i class="fa fa-users" aria-hidden="true"></i></span>' +
 			'</div>' +
 			'<div id="' + MAIN_SCREEN_DOM_ID + '" class="modal-body" style="max-height:405px">' +
 				'<table class="table">' +
@@ -159,6 +159,8 @@ var views = {
 			'</tbody>' +
 		  '</table>' +
 		'</div>';
+
+		document.getElementById(CHAT_SEND_BUTTON).disabled = false
 
 		document.getElementById(CHAT_AREA).innerHTML = content;
 		var chatdiv = document.getElementById("chat-div")

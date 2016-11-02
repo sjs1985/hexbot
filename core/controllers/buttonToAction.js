@@ -41,6 +41,7 @@ function buttonToAction(){
 	})
 
 	document.getElementById(CHAT_SEND_BUTTON).addEventListener("click", function(){
+		document.getElementById(CHAT_SEND_BUTTON).disabled = true
 		controllers.functions.chat(views.drawChat, {message: document.getElementById(CHAT_MESSAGE).value, nickname: document.getElementById(CHAT_NICK_NAME).value})	
 	})
 

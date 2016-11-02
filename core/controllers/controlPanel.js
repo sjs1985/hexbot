@@ -96,7 +96,7 @@ function controlPanel(){
 	}
 
 	document.getElementById(CHAT_MESSAGE).addEventListener("keypress", function(e){
-		console.log("foi")
+		document.getElementById(CHAT_SEND_BUTTON).disabled = true
 		if(e.keyCode == 13)
 			controllers.functions.chat(views.drawChat, {message: document.getElementById(CHAT_MESSAGE).value, nickname: document.getElementById(CHAT_NICK_NAME).value})	
 	})

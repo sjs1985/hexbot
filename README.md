@@ -1,4 +1,4 @@
-# HExBot v0.1.24 - November 1 - 2016
+# HExBot v0.1.24 - November 2 - 2016
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 This must be installed as a Google Chrome extension.

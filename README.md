@@ -1,4 +1,4 @@
-# HExBot v0.1.24.1 - November 2 - 2016
+# HExBot v0.1.25 - November 3 - 2016
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 This must be installed as a Google Chrome extension.
@@ -21,6 +21,9 @@ Functionalities:
 4. Load the uncompressed directory
 
 # Changelog
+* v0.1.25 - Added two checkboxes relating to the webcrawler and its uploads
+    * A checkbox to skip the log hide after upload (Straight to install after checking that it was uploaded successfully)
+    * A checkbox to skip hiding the uploaded software (As well as the log hide since there is nothing to hide) after a successful install
 * v0.1.24.1 - Buttons that desappear problem repaired
 * v0.1.24 - Communication channel implemented
 * v0.1.23 - Auto riddle path solver. Now the bot solves the riddles and it automatically upgrades the cracker during the process.

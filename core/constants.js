@@ -1,4 +1,4 @@
-const VERSION_BOT = "0.1.24.1.1"
+const VERSION_BOT = "0.1.25"
 const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const BOT_STORAGE_NAME = "HExBot-State"
 
@@ -23,6 +23,8 @@ const SET_UPLOAD_MODE = 'set-upload-mode'
 const SET_SIGNATURE = 'set-signature'
 const SET_IGNORE_LIST = 'set-ignore-list'
 const SET_TRANSFER_TO_BTC = 'set-to-btc'
+const SET_SKIP_AFTER_UPLOAD = 'set-skip-after-upload'
+const SET_HIDE_MODE = 'set-hide-mode'
 const PERFORM_UPDATE_CRACKER = 'perform-update-cracker' 
 const SET_CHAT_PANEL = 'set-chat-panel'
 const CHAT_TO_MAIN = "chat-to-main"

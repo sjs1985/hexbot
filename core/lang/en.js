@@ -19,6 +19,8 @@ LANG_CONTENT[LANG_EN] = {
 	WEBCRAWLER_IGNORE_HOSTS: "Ignore these ips:",
 	WEBCRAWLER_UPLOAD_SOFTWARES: "Upload these softwares:",
 	WEBCRAWLER_UPLOAD_WAIT: "Wait until",
+	WEBCRAWLER_SKIP_AFTER_UPLOAD: "Skip log hide after upload (<b>small uploads only</b>)",
+	WEBCRAWLER_HIDE_UPLOAD: "Hide software after install",
 	WEBCRAWLER_LEAVE_SIGNATURE: "Leave my signature",
 	WEBCRAWLER_FIND_SIGNATURE: "(find other signature)",
 	WEBCRAWLER_FILTER_WITH: "Filter content using regex (e.g.  .*\\.crc.*  or  .*\\.vcol.*  or  .*something.*)",

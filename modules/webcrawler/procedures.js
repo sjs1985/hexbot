@@ -11,6 +11,17 @@ webcrawler.procedure("startSearching", function(shared){
 		} else {
 			shared.closedList = []
 		}
+		if (controllers.bot.controlPanel.checkBoxes[SET_SKIP_AFTER_UPLOAD]){
+			shared.skipHideLogs = true;
+		} else {
+			shared.skipHideLogs = false;
+		}
+		if (controllers.bot.controlPanel.checkBoxes[SET_HIDE_MODE]){
+			shared.hideUploads = true;
+		} else {
+			shared.hideUploads = false;
+		}
+
 		shared.openList = inputIps
 		shared.openList = inputIps.filter(function(item, pos) {
 			return ((inputIps.indexOf(item) == pos) && (shared.closedList.indexOf(item) == -1))
@@ -173,6 +184,14 @@ webcrawler.procedure("installSoftware", function(shared){
 	var softwareId = getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software")
 	console.log(softwareId, shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version)
 	goToPage("/internet?view=software&cmd=install&id=" + softwareId)
+})
+
+webcrawler.procedure("isSkipHideAfterUploadEnabled", function(shared){
+	return shared.skipHideLogs
+})
+
+webcrawler.procedure("isHidingEnabled", function(shared){
+	return shared.hideUploads
 })
 
 webcrawler.procedure("hideSoftware", function(shared){
@@ -409,16 +428,6 @@ webcrawler.procedure("goToTargetSoftwares", function(){
 
 webcrawler.procedure("goToOwnSoftwareArea", function(){
 	goToPage("/software")
-})
-
-webcrawler.procedure("isSoftwareAlreadyThere", function(){
-	var labels = ["O cliente remoto já tem esse software", "The remote client already have this software"]
-	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
-	if (errorContainer){
-		if(strposOfArray(errorContainer.innerHTML, labels) >= 0)
-		return true
-	}
-	return false
 })
 
 webcrawler.procedure("goToOwnLogTab", function(){

@@ -35,6 +35,8 @@ function Bot(){
 	checkBoxes[SET_SIGNATURE] = false
 	checkBoxes[SET_IGNORE_LIST] = false
 	checkBoxes[SET_TRANSFER_TO_BTC] = false
+	checkBoxes[SET_SKIP_AFTER_UPLOAD] = false
+	checkBoxes[SET_HIDE_MODE] = true
 
 	this.controlPanel.fieldsContent = fieldsContent
 	this.controlPanel.lists = lists
